@@ -54,20 +54,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-    private void FixedUpdate() 
+    void FixedUpdate() 
     {
         Movement();
     }
 
-    private void Update() 
+    void Update() 
     {
         MyInput();
         Look();
     }
 
-    /// <summary>
-    /// Find user input
-    /// </summary>
+    // Handling user input
     private void MyInput() 
     {
         x = Input.GetAxisRaw("Horizontal");
@@ -84,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void StartCrouch() 
     {
+        // Scales the player down
         transform.localScale = crouchScale;
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
         if (rb.velocity.magnitude > 0.5f) {
@@ -95,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void StopCrouch() 
     {
+        // Scales player back to normal
         transform.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
     private void Movement() 
     {
         //Extra gravity
-        rb.AddForce(Vector3.down * Time.deltaTime * 10);
+        // rb.AddForce(Vector3.down * Time.deltaTime * 10);
         
         //Find actual velocity relative to where player is looking
         Vector2 mag = FindVelRelativeToLook();

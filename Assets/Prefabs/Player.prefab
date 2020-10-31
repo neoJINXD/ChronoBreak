@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 2069203678988874330}
   - component: {fileID: 2069203678988874334}
   - component: {fileID: 2069203678988874331}
+  - component: {fileID: 1537961855}
   m_Layer: 0
   m_Name: PLayer
   m_TagString: Player
@@ -388,7 +389,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069203678988874308}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -418,9 +419,25 @@ MonoBehaviour:
     m_Bits: 256
   counterMovement: 0.175
   maxSlopeAngle: 35
-  slideForce: 400
+  slideForce: 500
   slideCounterMovement: 0.2
   jumpForce: 550
+--- !u!114 &1537961855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069203678988874308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f75a0075f8985b44a061b745949ea81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallRunUpForce: 5
+  wallRunPushForce: 5
+  cam: {fileID: 2069203677252986645}
+  orientation: {fileID: 2069203677412642303}
 --- !u!1 &5646445542102079940
 GameObject:
   m_ObjectHideFlags: 0
