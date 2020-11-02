@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    
     [SerializeField] Transform playerCam;
     [SerializeField] Transform orientation;
     private Rigidbody rb;
@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private float sensMultiplier = 1f;
     
     //Movement
+    [Header("Movement Settings")]
     [SerializeField] float moveSpeed = 4500;
     [SerializeField] float maxSpeed = 20;
     [SerializeField] bool grounded;
@@ -26,24 +27,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxSlopeAngle = 35f;
 
     //Crouch & Slide
-    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
-    private Vector3 playerScale;
+    [Header("Sliding Settings")]
     [SerializeField] float slideForce = 400;
     [SerializeField] float slideCounterMovement = 0.2f;
-
-    //Jumping
-    private bool readyToJump = true;
-    private float jumpCooldown = 0.25f;
-    [SerializeField] float jumpForce = 550f;
-    
-    //Input
-    float x, y;
-    bool jumping, sprinting, crouching;
-    
-    //Sliding
+    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
+    private Vector3 playerScale;
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
+    //Jumping
+    [Header("Jumping Settings")] 
+    [SerializeField] float jumpForce = 550f;
+    private bool readyToJump = true;
+    private float jumpCooldown = 0.25f;
+    
+    //Input References
+    float x, y;
+    bool jumping, sprinting, crouching;
+    
     
     void Start() 
     {

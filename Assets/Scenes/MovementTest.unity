@@ -1002,6 +1002,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
+      propertyPath: wallRunForce
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
+      propertyPath: maxWallRunCamTilt
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
+      propertyPath: wallRunUpForce
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 5646445542102079940, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
       propertyPath: m_Name
