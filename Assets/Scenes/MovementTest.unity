@@ -307,12 +307,6 @@ Transform:
   m_Father: {fileID: 1613830363}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &718472775 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2069203678988874335, guid: 5017b2e0e92efdd47818b6830d7bd482,
-    type: 3}
-  m_PrefabInstance: {fileID: 2069203677977177483}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &728720066
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,36 +586,6 @@ Transform:
   m_Father: {fileID: 1613830363}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 18.472, y: 0, z: 0}
---- !u!1 &1172602927
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1172602928}
-  m_Layer: 0
-  m_Name: Direction
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1172602928
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172602927}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 718472775}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1377224906
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,12 +717,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1731977051 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2069203677252986645, guid: 5017b2e0e92efdd47818b6830d7bd482,
-    type: 3}
-  m_PrefabInstance: {fileID: 2069203677977177483}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1733321385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,26 +1002,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
-      propertyPath: wallRunForce
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
-      propertyPath: maxWallRunCamTilt
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
-      propertyPath: wallRunUpForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
-      propertyPath: wallDirection
-      value: 
-      objectReference: {fileID: 1172602928}
-    - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 1731977051}
     - target: {fileID: 5646445542102079940, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
       propertyPath: m_Name
