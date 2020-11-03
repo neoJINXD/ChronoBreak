@@ -34,6 +34,7 @@ public class WallRunning : MonoBehaviour
 
         // TODO this way of sticking to wall doesnt allow free movement of cam while running
         // maybe change which object is taking the right from
+
         if(isRightWall && isWallRunning)
         {
             rb.AddForce(wallDirection.right * wallRunForce * Time.deltaTime);
@@ -94,7 +95,7 @@ public class WallRunning : MonoBehaviour
         if (collision.transform.CompareTag("WallRunnable"))
         {
             isWallRunning = true;
-            rb.useGravity = false;
+            // rb.useGravity = false;
         }
     }
     void OnCollisionStay(Collision collision)
