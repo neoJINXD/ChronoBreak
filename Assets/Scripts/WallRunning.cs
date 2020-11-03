@@ -6,15 +6,17 @@ using UnityEngine;
 public class WallRunning : MonoBehaviour
 {
     [SerializeField] float wallRunUpForce; // Staying up
-    [SerializeField] float wallRunForce; // Staying Stuck to wall
+    [SerializeField] float wallRunHoldForce; // Staying Stuck to wall
     [SerializeField] float wallRunPushForce; // Jumping off force
-    [SerializeField] float wallRunCamTilt; // 
-    [SerializeField] float maxWallRunCamTilt; // 
-    [SerializeField] Transform mainCamera;
+    [SerializeField]private float wallRunCamTilt;
+    [SerializeField] float maxWallRunCamTilt; // Angle for the camera while wallrunning
 
-    [SerializeField] bool isRightWall, isLeftWall, isWallRunning;
+    private bool isRightWall, isLeftWall, isWallRunning;
 
     private Rigidbody rb;
+
+    // Assignables
+    [SerializeField] Transform mainCamera;
     [SerializeField] Transform cam; // is Main Camera
     [SerializeField] Transform orientation; // is Orientation
 
@@ -37,11 +39,11 @@ public class WallRunning : MonoBehaviour
 
         if(isRightWall && isWallRunning)
         {
-            rb.AddForce(wallDirection.right * wallRunForce * Time.deltaTime);
+            rb.AddForce(wallDirection.right * wallRunHoldForce * Time.deltaTime);
         }
         if(isLeftWall && isWallRunning)
         {
-            rb.AddForce(-wallDirection.right * wallRunForce * Time.deltaTime);
+            rb.AddForce(-wallDirection.right * wallRunHoldForce * Time.deltaTime);
         }  
 
 
@@ -95,6 +97,7 @@ public class WallRunning : MonoBehaviour
         if (collision.transform.CompareTag("WallRunnable"))
         {
             isWallRunning = true;
+            print("brr");
             // rb.useGravity = false;
         }
     }

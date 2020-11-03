@@ -436,14 +436,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallRunUpForce: 10
-  wallRunForce: 3000
+  wallRunHoldForce: 500
   wallRunPushForce: 5
   wallRunCamTilt: 0
   maxWallRunCamTilt: 10
   mainCamera: {fileID: 2069203677252986645}
-  isRightWall: 0
-  isLeftWall: 0
-  isWallRunning: 0
   cam: {fileID: 2069203677252986645}
   orientation: {fileID: 2069203677412642303}
   wallDirection: {fileID: 5284086687246754648}
