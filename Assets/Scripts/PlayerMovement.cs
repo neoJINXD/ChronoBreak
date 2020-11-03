@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] float moveSpeed = 4500;
     [SerializeField] float maxSpeed = 20;
+
     [SerializeField] bool grounded;
     [SerializeField] LayerMask whatIsGround;
     
@@ -46,12 +47,17 @@ public class PlayerMovement : MonoBehaviour
     bool jumping, sprinting, crouching;
     
 
+    //Dashing
+    private static Vector3 orientationDirection;
+    private GameObject obj;
+    
     void Start() 
     {
         rb = GetComponent<Rigidbody>();
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        obj = GameObject.Find("test");
     }
 
     
@@ -64,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
     {
         MyInput();
         Look();
+        orientationDirection = orientation.transform.forward;
     }
 
     // Handling user input
@@ -79,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
             StartCrouch();
         if (Input.GetKeyUp(KeyCode.LeftControl))
             StopCrouch();
+
     }
 
     private void StartCrouch() 
@@ -275,5 +283,23 @@ public class PlayerMovement : MonoBehaviour
     {
         grounded = false;
     }
-    
+
+    public Vector3 getOrientationDirection()
+    {
+        //returns the orientation forward
+        return orientationDirection;
+    }
+
+    //getPlayerCameraForward
+    public Transform getPlayerCam()
+    {
+        return playerCam;
+    }
+
+    public bool isGrounded()
+    {
+        //returns the grounded bool variable
+        return grounded;
+    }
+
 }
