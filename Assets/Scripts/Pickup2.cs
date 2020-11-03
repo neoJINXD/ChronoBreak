@@ -30,6 +30,7 @@ public class Pickup2 : MonoBehaviour
             rb.isKinematic = true;
             coll.isTrigger = true;
         }
+
     }
     private void Update()
     {
@@ -42,6 +43,7 @@ public class Pickup2 : MonoBehaviour
 
         //Throw if equipped and "R" is pressed
         if (equipped && Input.GetKeyDown(KeyCode.R)) Throw();
+
     }
 
     private void PickUp()
@@ -104,8 +106,7 @@ public class Pickup2 : MonoBehaviour
         rb.AddForce(fpsCam.forward * throwForwardForce, ForceMode.Impulse);
         rb.AddForce(fpsCam.up * throwUpwardForce, ForceMode.Impulse);
         //Add random rotation
-        float random = Random.Range(-1f, 1f);
-        rb.AddTorque(new Vector3(random, random, random) * 10);
+        rb.AddTorque(new Vector3(0.4f, 0.4f, 0.4f) * 10);
 
     }
 }

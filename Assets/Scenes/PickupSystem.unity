@@ -615,11 +615,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c8934126fd9131249a579eeadd5f60a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.91
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c8934126fd9131249a579eeadd5f60a5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.8999996
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c8934126fd9131249a579eeadd5f60a5, type: 3}
       propertyPath: m_LocalRotation.x
@@ -749,9 +749,40 @@ MonoBehaviour:
   pickUpTime: 0.5
   dropForwardForce: 2
   dropUpwardForce: 2
-  throwForwardForce: 10
-  throwUpwardForce: 8
+  throwForwardForce: 9
+  throwUpwardForce: 6
   equipped: 1
+--- !u!95 &1663695719
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663695714}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 359a89b445bc8b6478364fdf46304288, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1663695722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663695714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1c285cdbae6b84091679b7d0518adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1733321385
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,9 +937,28 @@ MonoBehaviour:
   pickUpTime: 0.5
   dropForwardForce: 2
   dropUpwardForce: 2
-  throwForwardForce: 10
-  throwUpwardForce: 8
+  throwForwardForce: 9
+  throwUpwardForce: 6
   equipped: 0
+--- !u!95 &1962116709
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962116702}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 359a89b445bc8b6478364fdf46304288, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2031465729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5646445542102079940, guid: 5017b2e0e92efdd47818b6830d7bd482,
@@ -927,11 +977,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a9d42dc05539a45844fb2366a10fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EquipPosition: {fileID: 1264674199}
-  distance: 10
-  currentWeapon: {fileID: 0}
-  wp: {fileID: 0}
-  canGrab: 0
 --- !u!4 &2091436786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2069203678988874335, guid: 5017b2e0e92efdd47818b6830d7bd482,
