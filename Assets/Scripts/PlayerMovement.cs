@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         // Extra gravity
         // rb.AddForce(Vector3.down * Time.deltaTime * 10);
         
-        //Find actual velocity relative to where player is looking
+        // Find actual velocity relative to where player is looking
         Vector2 mag = FindVelRelativeToLook();
         float xMag = mag.x, yMag = mag.y;
 
@@ -126,11 +126,8 @@ public class PlayerMovement : MonoBehaviour
         }
         
         // If speed is larger than maxspeed, cancel out the input so you don't go over max speed
-        //TODO should prob clamp it instead
-        if (x > 0 && xMag > maxSpeed) x = 0;
-        if (x < 0 && xMag < -maxSpeed) x = 0;
-        if (y > 0 && yMag > maxSpeed) y = 0;
-        if (y < 0 && yMag < -maxSpeed) y = 0;
+        if (x > 0 && xMag > maxSpeed || x < 0 && xMag < -maxSpeed) x = 0;
+        if (y > 0 && yMag > maxSpeed || y < 0 && yMag < -maxSpeed) y = 0;
 
         // Some multipliers
         float multiplier = 1f, multiplierV = 1f;
@@ -156,11 +153,11 @@ public class PlayerMovement : MonoBehaviour
         {
             readyToJump = false;
 
-            //Add jump forces
+            // Add jump forces
             rb.AddForce(Vector2.up * jumpForce * 1.5f);
             // rb.AddForce(normalVector * jumpForce * 0.5f);
             
-            //If jumping while falling, reset y velocity.
+            // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
             if (rb.velocity.y < 0.5f)
                 rb.velocity = new Vector3(vel.x, 0, vel.z);
@@ -182,15 +179,15 @@ public class PlayerMovement : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 
-        //Find current look rotation
+        // Find current look rotation
         Vector3 rot = playerCam.transform.localRotation.eulerAngles;
         desiredX = rot.y + mouseX;
         
-        //Rotate, and also make sure we dont over- or under-rotate.
+        // Rotate, and also make sure we dont over- or under-rotate.
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        //Perform the rotations
+        // Perform the rotations
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
     }
@@ -199,27 +196,28 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!grounded || jumping) return;
 
-        //Slow down sliding
+        // Slow down sliding
         if (crouching) 
         {
             rb.AddForce(moveSpeed * Time.deltaTime * -rb.velocity.normalized * slideCounterMovement);
             return;
         }
 
-        //Counter movement
-        if (Math.Abs(mag.x) > threshold && Math.Abs(x) < 0.05f || (mag.x < -threshold && x > 0) || (mag.x > threshold && x < 0)) {
+        // Counter movement
+        if (Math.Abs(mag.x) > threshold && Math.Abs(x) < 0.05f || (mag.x < -threshold && x > 0) || (mag.x > threshold && x < 0)) 
+        {
             rb.AddForce(moveSpeed * orientation.transform.right * Time.deltaTime * -mag.x * counterMovement);
         }
-        if (Math.Abs(mag.y) > threshold && Math.Abs(y) < 0.05f || (mag.y < -threshold && y > 0) || (mag.y > threshold && y < 0)) {
+        if (Math.Abs(mag.y) > threshold && Math.Abs(y) < 0.05f || (mag.y < -threshold && y > 0) || (mag.y > threshold && y < 0)) 
+        {
             rb.AddForce(moveSpeed * orientation.transform.forward * Time.deltaTime * -mag.y * counterMovement);
         }
         
     }
 
-    /// <summary>
+
     /// Find the velocity relative to where the player is looking
     /// Useful for vectors calculations regarding movement and limiting movement
-    /// </summary>
     public Vector2 FindVelRelativeToLook() 
     {
         float lookAngle = orientation.transform.eulerAngles.y;
@@ -243,20 +241,18 @@ public class PlayerMovement : MonoBehaviour
 
     private bool cancellingGrounded;
     
-    /// <summary>
-    /// Handle ground detection
-    /// </summary>
+
     private void OnCollisionStay(Collision other) 
     {
-        //Make sure we are only checking for walkable layers
+        // Make sure we are only checking for walkable layers
         int layer = other.gameObject.layer;
         if (whatIsGround != (whatIsGround | (1 << layer))) return;
 
-        //Iterate through every collision in a physics update
+        // Iterate through every collision in a physics update
         for (int i = 0; i < other.contactCount; i++) 
         {
             Vector3 normal = other.contacts[i].normal;
-            //FLOOR
+            // FLOOR
             if (IsFloor(normal)) 
             {
                 grounded = true;
@@ -266,7 +262,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        //Invoke ground/wall cancel, since we can't check normals with CollisionExit
+        // Invoke ground/wall cancel, since we can't check normals with CollisionExit
         float delay = 3f;
         if (!cancellingGrounded) 
         {
