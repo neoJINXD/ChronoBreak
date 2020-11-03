@@ -23,6 +23,8 @@ public class Timer : MonoBehaviour
     [SerializeField] GameObject levelFinishedPanel; // Panel shown when level is finished (after showing the time summary panel)
     [SerializeField] Text finalTimeText; // Timer label shown after the level has ended
 
+    [SerializeField] GameObject dashIcon; // UI element for dash (cooldown)
+
     [SerializeField] GameObject pausePanel; // Panel shown when menu is paused
 
     // Time bonus and penalties
@@ -66,6 +68,7 @@ public class Timer : MonoBehaviour
         levelFinishedPanel.SetActive(false);
         pausePanel.SetActive(false);
         timeSummaryPanel.SetActive(false);
+        dashIcon.SetActive(true);
     }
 
     // Update is called once per frame
@@ -182,6 +185,8 @@ public class Timer : MonoBehaviour
         Cursor.visible = true;
         timerPanel.SetActive(false);
         pausePanel.SetActive(false);
+        eventPanel.SetActive(false);
+        dashIcon.SetActive(false);
         ShowTimeSummaryPanel();
     }
 
