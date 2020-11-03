@@ -39,13 +39,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jumping Settings")] 
     [SerializeField] float jumpForce = 550f;
     private bool readyToJump = true;
-    private float jumpCooldown = 0.25f;
+    private const float jumpCooldown = 0.25f;
     
     //Input References
     float x, y;
     bool jumping, sprinting, crouching;
     
-    
+
     void Start() 
     {
         rb = GetComponent<Rigidbody>();
@@ -102,36 +102,37 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement() 
     {
-        //Extra gravity
+        // Extra gravity
         // rb.AddForce(Vector3.down * Time.deltaTime * 10);
         
         //Find actual velocity relative to where player is looking
         Vector2 mag = FindVelRelativeToLook();
         float xMag = mag.x, yMag = mag.y;
 
-        //Counteract sliding and sloppy movement
+        // Counteract sliding and sloppy movement
         CounterMovement(x, y, mag);
         
-        //If holding jump && ready to jump, then jump
+        // If holding jump && ready to jump, then jump
         if (jumping) Jump();
 
-        //Set max speed
+        // Set max speed
         // float maxSpeed = this.maxSpeed;
         
-        //If sliding down a ramp, add force down so player stays grounded and also builds speed
+        // If sliding down a ramp, add force down so player stays grounded and also builds speed
         if (crouching && grounded && readyToJump) 
         {
             rb.AddForce(Vector3.down * Time.deltaTime * 3000);
             return;
         }
         
-        //If speed is larger than maxspeed, cancel out the input so you don't go over max speed
+        // If speed is larger than maxspeed, cancel out the input so you don't go over max speed
+        //TODO should prob clamp it instead
         if (x > 0 && xMag > maxSpeed) x = 0;
         if (x < 0 && xMag < -maxSpeed) x = 0;
         if (y > 0 && yMag > maxSpeed) y = 0;
         if (y < 0 && yMag < -maxSpeed) y = 0;
 
-        //Some multipliers
+        // Some multipliers
         float multiplier = 1f, multiplierV = 1f;
         
         // Movement in air
@@ -144,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
         // Movement while sliding
         if (grounded && crouching) multiplierV = 0f;
 
-        //Apply forces to move player
+        // Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
     }
