@@ -11,6 +11,7 @@ public class AbilityCoolDown : MonoBehaviour
 
     [SerializeField] private Ability ability;
     [SerializeField] private GameObject player;
+    [SerializeField] private Timer timer;
     private Image myButtonImage;
     private AudioSource abilitySource;
     private float coolDownDuration;
@@ -76,5 +77,7 @@ public class AbilityCoolDown : MonoBehaviour
         abilitySource.clip = ability.aSound;
         abilitySource.Play();
         ability.TriggerAbility();
+
+        timer.CountEvent("dash");
     }
 }
