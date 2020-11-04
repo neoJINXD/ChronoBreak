@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - WallRunnable
+  - Wall
   - Cube
   - Ramp
   layers:
@@ -16,8 +18,8 @@ TagManager:
   - 
   - 
   - Ground
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
