@@ -235,6 +235,7 @@ public class Timer : MonoBehaviour
     {
         switch (ev)
         {
+            //TODO add falling off stage event
             case "Dash": 
                 dashCounter++;
                 PopUpEventPanel("Dash", dashTimePenalty);
