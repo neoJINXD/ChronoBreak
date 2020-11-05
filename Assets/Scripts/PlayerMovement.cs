@@ -50,6 +50,10 @@ public class PlayerMovement : MonoBehaviour
     //Dashing
     private static Vector3 orientationDirection;
     private GameObject obj;
+
+
+    //Resetting
+    private Vector3 lastSafePos;
     
     void Start() 
     {
@@ -64,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate() 
     {
         Movement();
+        if (grounded) SavePos();
     }
 
     void Update() 
@@ -301,6 +306,17 @@ public class PlayerMovement : MonoBehaviour
     {
         //returns the grounded bool variable
         return grounded;
+    }
+
+    private void SavePos()
+    {
+        lastSafePos = transform.position;
+    }
+
+    public void LoadSafePos()
+    {
+        transform.position = lastSafePos;
+        rb.velocity = Vector3.zero;
     }
 
 }
