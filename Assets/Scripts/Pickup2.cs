@@ -5,19 +5,23 @@ using UnityEngine;
 public class Pickup2 : MonoBehaviour
 {
 
-    public Rigidbody rb;
-    public BoxCollider coll;
-    public Transform player, gunContainer, fpsCam;
+    [SerializeField] Rigidbody rb;
+    [SerializeField] BoxCollider coll;
+    [SerializeField] Transform player, gunContainer, fpsCam;
 
-    public float pickUpRange, pickUpTime;
-    public float dropForwardForce, dropUpwardForce;
-    public float throwForwardForce, throwUpwardForce;
+    [SerializeField] LayerMask pickupable;    
 
-    public bool equipped;
-    public static bool slotFull;
+    [SerializeField] float pickUpRange, pickUpTime;
+    [SerializeField] float dropForwardForce, dropUpwardForce;
+    [SerializeField] float throwForwardForce, throwUpwardForce;
 
-    private void Start()
+    [SerializeField] bool equipped;
+    [SerializeField] static bool slotFull;
+
+    void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        coll = GetComponent<BoxCollider>();
         if (!equipped)
         {
  
@@ -29,20 +33,30 @@ public class Pickup2 : MonoBehaviour
             slotFull = true;
             rb.isKinematic = true;
             coll.isTrigger = true;
+
+            // makes sure is attached to player
+            Grab();
         }
 
     }
-    private void Update()
+    void Update()
     {
+
+
         //Check if player is in range and "E" is pressed
-        Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
+        // TODO Should to move this to the player
+        if (Physics.Raycast(fpsCam.position, fpsCam.forward, 5f, pickupable) && 
+                !equipped && !slotFull && Input.GetKeyDown(KeyCode.E))
+            PickUp();
+        // if (!equipped && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
 
         //Drop if equipped and "Q" is pressed
         if (equipped && Input.GetKeyDown(KeyCode.Q)) Drop();
 
         //Throw if equipped and "R" is pressed
         if (equipped && Input.GetKeyDown(KeyCode.R)) Throw();
+
+        //TODO animate to the pickup position
 
     }
 
@@ -51,11 +65,7 @@ public class Pickup2 : MonoBehaviour
         equipped = true;
         slotFull = true;
 
-        //Make weapon a child of the camera and move it to the equippedPosition
-        transform.SetParent(gunContainer);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = Vector3.one;
+        Grab();
 
         //Make Rigidbody Kinematic and BoxCollider a trigger
         rb.isKinematic = true;
@@ -69,10 +79,11 @@ public class Pickup2 : MonoBehaviour
         equipped = false;
         slotFull = false;
 
-        //Set parent to null
+        // transform.position = gunContainer.position;
+        // Detach from player
         transform.SetParent(null);
 
-        //Make Rigidbody and BoxCollider normal
+        // Make Rigidbody and BoxCollider normal
         rb.isKinematic = false;
         coll.isTrigger = false;
 
@@ -81,6 +92,7 @@ public class Pickup2 : MonoBehaviour
         //Add force
         rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
         rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
+
         //Add random rotation
         float random = Random.Range(-1f, 1f);
         rb.AddTorque(new Vector3(random, random, random) * 10);
@@ -108,5 +120,21 @@ public class Pickup2 : MonoBehaviour
         //Add random rotation
         rb.AddTorque(new Vector3(0.4f, 0.4f, 0.4f) * 10);
 
+    }
+
+
+    private void Grab()
+    {
+        //Make weapon a child of the camera and move it to the equippedPosition
+        transform.SetParent(gunContainer);
+        
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
+        transform.localScale = Vector3.one;
+    }
+
+    public bool GetEquipped()
+    {
+        return equipped;
     }
 }
