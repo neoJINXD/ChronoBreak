@@ -12,6 +12,8 @@ public class enemyStanding : MonoBehaviour
     [SerializeField]
     float angularSpeed = 1f;
     Rigidbody rb;
+
+    [SerializeField] Timer timer;
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -46,6 +48,15 @@ public class enemyStanding : MonoBehaviour
         {
             //increase time
             Debug.Log("Hit Player");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if (other.CompareTag("CanGrab")) // if is sword
+        {
+            Destroy(gameObject);
+            timer.CountEvent("standing enemy kill");
         }
     }
 }
