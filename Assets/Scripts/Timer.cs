@@ -235,7 +235,7 @@ public class Timer : MonoBehaviour
     {
         switch (ev)
         {
-            case "dash": 
+            case "Dash": 
                 dashCounter++;
                 PopUpEventPanel("Dash", dashTimePenalty);
                 break;

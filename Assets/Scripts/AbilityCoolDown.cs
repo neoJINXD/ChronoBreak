@@ -78,6 +78,6 @@ public class AbilityCoolDown : MonoBehaviour
         abilitySource.Play();
         ability.TriggerAbility();
 
-        timer.CountEvent("dash");
+        timer.CountEvent(abilityButtonAxisName);
     }
 }
