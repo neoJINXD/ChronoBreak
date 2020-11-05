@@ -103,10 +103,10 @@ public class Timer : MonoBehaviour
 
         // Restart level if restart button is pressed
         // TODO Change controls
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetLevel();
-        }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     ResetLevel();
+        // }
 
     }
 
