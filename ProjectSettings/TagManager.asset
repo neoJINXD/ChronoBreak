@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - CanGrab
   - WallRunnable
   - Wall
   - Cube
@@ -18,6 +19,8 @@ TagManager:
   - 
   - 
   - Ground
+  - Sword
+  - 
   - Player
   - Enemy
   - 
