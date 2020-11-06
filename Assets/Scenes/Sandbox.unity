@@ -5090,6 +5090,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 125192020}
+    - target: {fileID: 1562932158, guid: a3ccbfdd3b7f7e145bd5fe95cbcc2319, type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 2084315756}
     - target: {fileID: 6016945333251249841, guid: a3ccbfdd3b7f7e145bd5fe95cbcc2319,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5801,6 +5805,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 125192020}
+    - target: {fileID: 1485807780424309192, guid: 67a425b4ff6a05a4f83e2361fd13f406,
+        type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 2084315756}
     - target: {fileID: 1485807780424309194, guid: 67a425b4ff6a05a4f83e2361fd13f406,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7704,6 +7713,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 125192020}
+    - target: {fileID: 1691426613, guid: f7ee59bb587f9ce44a958ca9c0685349, type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 2084315756}
     - target: {fileID: 925682358742414336, guid: f7ee59bb587f9ce44a958ca9c0685349,
         type: 3}
       propertyPath: m_Name
