@@ -48,6 +48,7 @@ public class enemyStanding : MonoBehaviour
         {
             //increase time
             Debug.Log("Hit Player");
+            timer.CountEvent("standing enemy touched");
         }
     }
 

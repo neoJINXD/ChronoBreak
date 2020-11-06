@@ -46,6 +46,7 @@ public class EnemyNavMovement : MonoBehaviour
         {
             //increase time
             Debug.Log("Hit Player");
+            timer.CountEvent("chasing enemy touched");
         }
     }
 
