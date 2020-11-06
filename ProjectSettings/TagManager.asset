@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CanGrab
+  - WallRunnable
+  - Wall
+  - Cube
+  - Ramp
   layers:
   - Default
   - TransparentFX
@@ -13,6 +18,11 @@ TagManager:
   - UI
   - 
   - 
+  - Ground
+  - Sword
+  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -21,12 +31,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Sandbox
   - 
   - 
   - 
