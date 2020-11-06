@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: aafd62ddaee5d44928d5e50ad28d3ba8
   - enabled: 1
-    path: Assets/Scenes/TimerTest.unity
-    guid: 615c3efc41aad4d169c534af8fc5c870
+    path: Assets/Scenes/Sandbox.unity
+    guid: 7e91274adee64374b90efacd592dd4e2
   m_configObjects: {}

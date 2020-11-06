@@ -103,10 +103,10 @@ public class Timer : MonoBehaviour
 
         // Restart level if restart button is pressed
         // TODO Change controls
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetLevel();
-        }
+        // if (Input.GetKeyDown(KeyCode.R))
+        // {
+        //     ResetLevel();
+        // }
 
     }
 
@@ -235,6 +235,7 @@ public class Timer : MonoBehaviour
     {
         switch (ev)
         {
+            //TODO add falling off stage event
             case "Dash": 
                 dashCounter++;
                 PopUpEventPanel("Dash", dashTimePenalty);

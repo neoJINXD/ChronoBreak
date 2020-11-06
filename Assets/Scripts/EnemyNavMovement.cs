@@ -13,6 +13,8 @@ public class EnemyNavMovement : MonoBehaviour
     [SerializeField]
     float followRadius = 100f;
 
+    [SerializeField] Timer timer;
+
     
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,16 @@ public class EnemyNavMovement : MonoBehaviour
         {
             //increase time
             Debug.Log("Hit Player");
+            timer.CountEvent("chasing enemy touched");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if (other.CompareTag("CanGrab")) // if is sword
+        {
+            Destroy(gameObject);
+            timer.CountEvent("chasing enemy kill");
         }
     }
 }

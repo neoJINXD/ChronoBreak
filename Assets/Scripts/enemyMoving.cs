@@ -18,6 +18,8 @@ public class enemyMoving : MonoBehaviour
     bool freeMove = true;
     LinkedList<Vector3> positions;
     Vector3 pos;
+
+    [SerializeField] Timer timer;
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -87,6 +89,15 @@ public class enemyMoving : MonoBehaviour
             positions = new LinkedList<Vector3>();
             positions.AddLast(pos);
             this.transform.position = pos;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if (other.CompareTag("CanGrab")) // if is sword
+        {
+            Destroy(gameObject);
+            timer.CountEvent("shooting enemy kill");
         }
     }
 
