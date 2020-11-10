@@ -41,6 +41,7 @@ public class Timer : MonoBehaviour
     [SerializeField] float enemy1TouchedTimePenalty = 5f;
     [SerializeField] float enemy2TouchedTimePenalty = 5f;
     [SerializeField] float enemy3TouchedTimePenalty = 5f;
+    [SerializeField] float fallingOffPenalty = 5f;
 
     private int dashCounter = 0;
     private int enemy1KilledCounter = 0;
@@ -49,6 +50,7 @@ public class Timer : MonoBehaviour
     private int enemy2TouchedCounter = 0; 
     private int enemy3KilledCounter = 0;
     private int enemy3TouchedCounter = 0;
+    private int fallingOffCounter = 0;
 
     private float timeElapsed; // Actual time elapsed since the level has started
     private float totalTime; // Cumulative time since level has started
@@ -129,6 +131,8 @@ public class Timer : MonoBehaviour
 
         totalTime += enemy3KilledCounter * enemy3KilledTimeBonus;
         totalTime += enemy3TouchedCounter * enemy3TouchedTimePenalty;
+
+        totalTime += fallingOffCounter * fallingOffPenalty;
 
         // Transform total time in to minutes, seconds and ms (2 digits)
         min = (int) (totalTime / 60);
@@ -224,6 +228,8 @@ public class Timer : MonoBehaviour
         summary += "Chasing enemies killed: " + enemy3KilledCounter.ToString() + " x " + enemy3KilledTimeBonus.ToString() + " sec -----> " + (enemy3KilledCounter * enemy3KilledTimeBonus).ToString() + " sec\n";
         summary += "Chasing enemies touched: " + enemy3TouchedCounter.ToString() + " x " + enemy3TouchedTimePenalty.ToString() + " sec -----> " + (enemy3TouchedCounter * enemy3TouchedTimePenalty).ToString() + " sec\n\n";
 
+        // Show times the player fell off
+        summary += "Times fallen off: " + fallingOffCounter.ToString() + " x " + fallingOffPenalty.ToString() + " sec -----> " + (fallingOffCounter * fallingOffPenalty).ToString() + " sec\n\n";
 
         // Show final time
         summary += "Total time -----> " + timerText.text;
@@ -266,6 +272,10 @@ public class Timer : MonoBehaviour
             case "chasing enemy touched":
                 enemy3TouchedCounter++;
                 PopUpEventPanel("Chasing enemy touched", enemy3TouchedTimePenalty);
+                break;
+            case "falling":
+                fallingOffCounter++;
+                PopUpEventPanel("Resetting position", fallingOffPenalty);
                 break;
 
         }
