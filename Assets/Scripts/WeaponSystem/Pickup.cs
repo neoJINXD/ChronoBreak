@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // TODO breaking when restartign level, cant pickup
 public class Pickup : MonoBehaviour
