@@ -2,55 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyMoving : MonoBehaviour
+public class EnemyMoving : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField]
-    GameObject player;
-    [SerializeField]
-    float speed = 5f;
-    [SerializeField]
-    float followRadius = 15f;
-    [SerializeField]
-    float angularSpeed = 1f;
-    float distance;
-    Rigidbody rb;
-    bool freeMove = true;
-    LinkedList<Vector3> positions;
-    Vector3 pos;
-
+    // Assignables
+    [SerializeField] GameObject player;
+    [SerializeField] float speed = 5f;
+    [SerializeField] float followRadius = 15f;
+    [SerializeField] float angularSpeed = 1f;
     [SerializeField] Timer timer;
+
+    // References
+    private Rigidbody rb;
+    private bool freeMove = true;
+    private LinkedList<Vector3> positions;
+    private Vector3 pos;
+
     void Start()
     {
-        rb = this.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         positions = new LinkedList<Vector3>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        distance = Vector3.Distance(this.transform.position, player.transform.position);
+        float distance = Vector3.Distance(transform.position, player.transform.position);
         if ((distance < followRadius))
         {
             if(freeMove)
             {
                 rb.constraints = RigidbodyConstraints.None;
-                //rb.constraints = constraints;
-                //Debug.Log("NOne");
 
-                this.transform.position = Vector3.MoveTowards(this.transform.position, player.transform.position, speed);
-                Vector3 rel = (player.transform.position - this.transform.position).normalized;
+                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+
+                Vector3 rel = (player.transform.position - transform.position).normalized;
                 rel.y = 0;
                 Quaternion desiredRotation = Quaternion.LookRotation(rel, Vector3.up);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, angularSpeed);
-                positions.AddLast(this.transform.position);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, angularSpeed); //TODO should use Time.deltaTime
+
+                positions.AddLast(transform.position);
                 if(positions.Count > 20)
                 {
                     positions.RemoveFirst();
                 }
             }
-
-            
         }
         else
         {
@@ -58,17 +53,12 @@ public class enemyMoving : MonoBehaviour
             {
                 rb.constraints = RigidbodyConstraints.FreezeAll;
             }
-
-            //Debug.Log("All");
         }
 
         if(rb.velocity.magnitude > 0f)
         {
             freeMove = true;
         }
-
-        Debug.Log(rb.velocity.magnitude);
-        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -77,7 +67,6 @@ public class enemyMoving : MonoBehaviour
         {
             //increase time
             Debug.Log("Hit Player");
-            
         }
 
         if (collision.collider.tag == "Wall")
@@ -88,7 +77,7 @@ public class enemyMoving : MonoBehaviour
             positions = null;
             positions = new LinkedList<Vector3>();
             positions.AddLast(pos);
-            this.transform.position = pos;
+            transform.position = pos;
         }
     }
 

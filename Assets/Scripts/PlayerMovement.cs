@@ -41,16 +41,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpForce = 550f;
     private bool readyToJump = true;
     private const float jumpCooldown = 0.25f;
-    
+
+    private bool cancellingGrounded;
+
     //Input References
-    float x, y;
-    bool jumping, sprinting, crouching;
+    private float x, y;
+    private bool jumping, sprinting, crouching;
     
 
     //Dashing
     private static Vector3 orientationDirection;
     private GameObject obj;
-
 
     //Resetting
     private Vector3 lastSafePos;
@@ -68,7 +69,10 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate() 
     {
         Movement();
-        if (grounded) SavePos();
+        if (grounded) 
+        {
+            SavePos();
+        }
     }
 
     void Update() 
@@ -89,10 +93,13 @@ public class PlayerMovement : MonoBehaviour
       
         //Crouching
         if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
             StartCrouch();
+        }
         if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
             StopCrouch();
-
+        }
     }
 
     private void StartCrouch() 
@@ -100,8 +107,10 @@ public class PlayerMovement : MonoBehaviour
         // Scales the player down
         transform.localScale = crouchScale;
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-        if (rb.velocity.magnitude > 0.5f) {
-            if (grounded) {
+        if (rb.velocity.magnitude > 0.5f) 
+        {
+            if (grounded) 
+            {
                 rb.AddForce(orientation.transform.forward * slideForce);
             }
         }
@@ -127,7 +136,10 @@ public class PlayerMovement : MonoBehaviour
         CounterMovement(x, y, mag);
         
         // If holding jump && ready to jump, then jump
-        if (jumping) Jump();
+        if (jumping) 
+        {
+            Jump();
+        }
 
         // Set max speed
         // float maxSpeed = this.maxSpeed;
@@ -140,8 +152,14 @@ public class PlayerMovement : MonoBehaviour
         }
         
         // If speed is larger than maxspeed, cancel out the input so you don't go over max speed
-        if (x > 0 && xMag > maxSpeed || x < 0 && xMag < -maxSpeed) x = 0;
-        if (y > 0 && yMag > maxSpeed || y < 0 && yMag < -maxSpeed) y = 0;
+        if (x > 0 && xMag > maxSpeed || x < 0 && xMag < -maxSpeed) 
+        {
+            x = 0;
+        }
+        if (y > 0 && yMag > maxSpeed || y < 0 && yMag < -maxSpeed) 
+        {
+            y = 0;
+        }
 
         // Some multipliers
         float multiplier = 1f, multiplierV = 1f;
@@ -154,7 +172,10 @@ public class PlayerMovement : MonoBehaviour
         }
         
         // Movement while sliding
-        if (grounded && crouching) multiplierV = 0f;
+        if (grounded && crouching) 
+        {
+            multiplierV = 0f;
+        }
 
         // Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
@@ -174,9 +195,13 @@ public class PlayerMovement : MonoBehaviour
             // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
             if (rb.velocity.y < 0.5f)
+            {
                 rb.velocity = new Vector3(vel.x, 0, vel.z);
+            }
             else if (rb.velocity.y > 0) 
+            {
                 rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
+            }
             
             Invoke(nameof(ResetJump), jumpCooldown);
         }
@@ -208,7 +233,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void CounterMovement(float x, float y, Vector2 mag) 
     {
-        if (!grounded || jumping) return;
+        if (!grounded || jumping) 
+        {
+            return;
+        }
 
         // Slow down sliding
         if (crouching) 
@@ -252,15 +280,15 @@ public class PlayerMovement : MonoBehaviour
         float angle = Vector3.Angle(Vector3.up, v);
         return angle < maxSlopeAngle;
     }
-
-    private bool cancellingGrounded;
     
-
     private void OnCollisionStay(Collision other) 
     {
         // Make sure we are only checking for walkable layers
         int layer = other.gameObject.layer;
-        if (whatIsGround != (whatIsGround | (1 << layer))) return;
+        if (whatIsGround != (whatIsGround | (1 << layer))) 
+        {
+            return;
+        }
 
         // Iterate through every collision in a physics update
         for (int i = 0; i < other.contactCount; i++) 

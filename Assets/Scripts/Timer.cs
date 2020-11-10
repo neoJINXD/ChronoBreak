@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
+    [Header("UI")]
     [SerializeField] GameObject timerPanel; // Panel showing any UI elements related to the timer 
     [SerializeField] Text timerText; // Timer label shown in UI
 
@@ -29,7 +30,11 @@ public class Timer : MonoBehaviour
 
     // Time bonus and penalties
     // TODO add more fields
+    [Header("Time Penalties")]
+    //TODO should probably have these fields in the ability
     [SerializeField] float dashTimePenalty = 3f;
+
+    //TODO should probably have these fields in the enemies
     [SerializeField] float enemy1KilledTimeBonus = -2f; // Enemies that are standing still
     [SerializeField] float enemy2KilledTimeBonus = -2f; // Enemies that are throw projectiles
     [SerializeField] float enemy3KilledTimeBonus = -2f; // Enemies that chases the player in a pre-defined radius 
@@ -37,27 +42,26 @@ public class Timer : MonoBehaviour
     [SerializeField] float enemy2TouchedTimePenalty = 5f;
     [SerializeField] float enemy3TouchedTimePenalty = 5f;
 
-    int dashCounter = 0;
-    int enemy1KilledCounter = 0;
-    int enemy1TouchedCounter = 0;
-    int enemy2KilledCounter = 0;
-    int enemy2TouchedCounter = 0; 
-    int enemy3KilledCounter = 0;
-    int enemy3TouchedCounter = 0;
+    private int dashCounter = 0;
+    private int enemy1KilledCounter = 0;
+    private int enemy1TouchedCounter = 0;
+    private int enemy2KilledCounter = 0;
+    private int enemy2TouchedCounter = 0; 
+    private int enemy3KilledCounter = 0;
+    private int enemy3TouchedCounter = 0;
 
-    float timeElapsed; // Actual time elapsed since the level has started
-    float totalTime; // Cumulative time since level has started
-    int ms = 0; // Centiseconds
-    int sec = 0; // Seconds
-    int min = 0; // Minutes
+    private float timeElapsed; // Actual time elapsed since the level has started
+    private float totalTime; // Cumulative time since level has started
+    private int ms = 0; // Centiseconds
+    private int sec = 0; // Seconds
+    private int min = 0; // Minutes
 
     // Booleans for checking current state of the game
-    bool isCompleted = false;
-    bool hasStarted = false;
-    bool isPaused = false;
-    bool hasStopped = false;
+    private bool isCompleted = false;
+    private bool hasStarted = false;
+    private bool isPaused = false;
+    private bool hasStopped = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
@@ -71,7 +75,6 @@ public class Timer : MonoBehaviour
         dashIcon.SetActive(true);
     }
 
-    // Update is called once per frame
     void Update()
     {
 

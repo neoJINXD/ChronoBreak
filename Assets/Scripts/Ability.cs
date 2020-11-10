@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Ability : ScriptableObject
 {
-    public string ability_Name = "New Ability";
-    public Sprite aSprite;
-    public AudioClip aSound;
-    public float aBaseCoolDown;
+    // Assignables
+    [SerializeField] protected string abilityName;
+
+    // TODO should probably have a way to make them exposed in the editor while lesser access modifier
+    [SerializeField] public Sprite abilitySprite;
+    [SerializeField] public AudioClip abilitySound;
+    [SerializeField] public float abilityCoolDown;
 
     public abstract void Initialize(GameObject obj);
     public abstract void TriggerAbility();

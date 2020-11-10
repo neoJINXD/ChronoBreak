@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityButtonAxisName: Dash
   darkMask: {fileID: 1419858850}
-  coolDownTextDisplay: {fileID: 1174608057}
+  cooldownTextDisplay: {fileID: 1174608057}
   ability: {fileID: 11400000, guid: 1aecec77a6340b64d987c64b3972af24, type: 2}
   player: {fileID: 0}
   timer: {fileID: 3845197221393624966}

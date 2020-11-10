@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0df9e1a800dc544eab5bceaf39d3ddd, type: 3}
+  m_Script: {fileID: 11500000, guid: 65a113749de3735489f6f359d415e1c0, type: 3}
   m_Name: Dash
   m_EditorClassIdentifier: 
-  ability_Name: Dash Ability
-  aSprite: {fileID: 21300000, guid: 02b6075b5bed4bb4c8d388ae12a741ca, type: 3}
-  aSound: {fileID: 8300000, guid: 88e458ce93a94bf42adbf4414b604533, type: 3}
-  aBaseCoolDown: 3
+  abilityName: Dash
+  abilitySprite: {fileID: 21300000, guid: 02b6075b5bed4bb4c8d388ae12a741ca, type: 3}
+  abilitySound: {fileID: 8300000, guid: 88e458ce93a94bf42adbf4414b604533, type: 3}
+  abilityCoolDown: 3
   dashDistance: 10

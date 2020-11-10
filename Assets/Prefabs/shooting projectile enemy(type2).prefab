@@ -43,9 +43,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 0.007
+  speed: 1
   followRadius: 15
   angularSpeed: 7
+  timer: {fileID: 0}
 --- !u!1001 &9221474438860549385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,7 +117,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 320b1c2af77554f99a1658df4a6d3d5c,
         type: 3}
       propertyPath: m_Name
-      value: Robot Kyle
+      value: shooting projectile enemy(type2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}

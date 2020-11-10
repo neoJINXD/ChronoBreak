@@ -5,22 +5,25 @@ using UnityEngine;
 
 public class WallRunning : MonoBehaviour
 {
+    // Assignables
+    [Header("Wallrun Forces")]
     [SerializeField] float wallRunUpForce; // Staying up
     [SerializeField] float wallRunHoldForce; // Staying Stuck to wall
     [SerializeField] float wallRunPushForce; // Jumping off force
-    [SerializeField]private float wallRunCamTilt;
+    
+    [Header("Camera Settings")]
     [SerializeField] float maxWallRunCamTilt; // Angle for the camera while wallrunning
-
-    private bool isRightWall, isLeftWall, isWallRunning;
-
-    private Rigidbody rb;
-
-    // Assignables
     [SerializeField] Transform mainCamera;
-    [SerializeField] Transform cam; // is Main Camera
-    [SerializeField] Transform orientation; // is Orientation
+    // [SerializeField] Transform cam; // is Main Camera
+    private float wallRunCamTilt;
 
+    [Header("Other")]
+    [SerializeField] Transform orientation; // is Orientation
     [SerializeField] Transform wallDirection;
+    
+    // References
+    private Rigidbody rb;
+    private bool isRightWall, isLeftWall, isWallRunning;
 
     void Start()
     {
@@ -32,10 +35,11 @@ public class WallRunning : MonoBehaviour
         CheckWall();
         
         if (!isWallRunning)
+        {
             wallDirection.rotation = orientation.rotation;
+        }
 
         // TODO this way of sticking to wall doesnt allow free movement of cam while running
-        // maybe change which object is taking the right from
 
         if(isRightWall && isWallRunning)
         {
@@ -49,21 +53,28 @@ public class WallRunning : MonoBehaviour
 
         // Camera Rotations 
         if (Math.Abs(wallRunCamTilt) < maxWallRunCamTilt && isWallRunning && isRightWall)
+        {
             wallRunCamTilt += Time.deltaTime * maxWallRunCamTilt * 10;
+        }
         if (Math.Abs(wallRunCamTilt) < maxWallRunCamTilt && isWallRunning && isLeftWall)
+        {
             wallRunCamTilt -= Time.deltaTime * maxWallRunCamTilt * 10;
+        }
 
         if (wallRunCamTilt > 0 && !isRightWall && !isLeftWall)
+        {
             wallRunCamTilt -= Time.deltaTime * maxWallRunCamTilt * 10;
+        }
         if (wallRunCamTilt < 0 && !isRightWall && !isLeftWall)
+        {
             wallRunCamTilt += Time.deltaTime * maxWallRunCamTilt * 10;
+        }
 
         Vector3 currentAngles = mainCamera.transform.rotation.eulerAngles;
         currentAngles.z = wallRunCamTilt;
 
         mainCamera.transform.rotation = Quaternion.Euler(currentAngles);
 
-        // print(wallRunCamTilt);
     }
 
     private void CheckWall()
@@ -97,12 +108,13 @@ public class WallRunning : MonoBehaviour
         if (collision.transform.CompareTag("WallRunnable"))
         {
             isWallRunning = true;
-            print("brr");
+            // print("brr");
             // rb.useGravity = false;
         }
     }
     void OnCollisionStay(Collision collision)
     {
+        //TODO might be able to optimize the if's here, dont wanna end up like YandereDev
         if (collision.transform.CompareTag("WallRunnable"))
         {
             if (Input.GetKey(KeyCode.Space) && isLeftWall)
@@ -131,8 +143,8 @@ public class WallRunning : MonoBehaviour
 
     private void EndWallRun()
     {
-        cam.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+        // cam.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
         isWallRunning = false;
-        rb.useGravity = true;
+        // rb.useGravity = true;
     }
 }

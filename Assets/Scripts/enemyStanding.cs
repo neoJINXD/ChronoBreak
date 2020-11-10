@@ -2,34 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyStanding : MonoBehaviour
+public class EnemyStanding : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField]
-    GameObject player;
-    [SerializeField]
-    float followRadius = 15f;
-    [SerializeField]
-    float angularSpeed = 1f;
-    Rigidbody rb;
-
+    // Assignables
+    [SerializeField] GameObject player;
+    [SerializeField] float followRadius = 15f;
+    [SerializeField] float angularSpeed = 1f;
     [SerializeField] Timer timer;
+    
+    // References
+    private Rigidbody rb;
+
     void Start()
     {
-        rb = this.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(this.transform.position, player.transform.position) < followRadius)
+        if (Vector3.Distance(transform.position, player.transform.position) < followRadius)
         {
             rb.constraints = RigidbodyConstraints.None;
-            //this.transform.position = Vector3.MoveTowards(this.transform.position, player.transform.position, speed);
-            Vector3 rel = (player.transform.position - this.transform.position).normalized;
+            //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed);
+            Vector3 rel = (player.transform.position - transform.position).normalized;
             rel.y = 0;
             Quaternion desiredRotation = Quaternion.LookRotation(rel, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, angularSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, angularSpeed * Time.deltaTime);
 
             //Debug.Log(rel);
         }

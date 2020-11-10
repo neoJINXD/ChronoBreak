@@ -1,42 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class AbilityCoolDown : MonoBehaviour
+public class AbilityCooldown : MonoBehaviour
 {
-    public string abilityButtonAxisName;
-    public Image darkMask;
-    public Text coolDownTextDisplay;
-
+    // Assignables
+    [SerializeField] string abilityButtonAxisName;
+    [SerializeField] Image darkMask;
+    [SerializeField] Text cooldownTextDisplay;
     [SerializeField] private Ability ability;
     [SerializeField] private GameObject player;
     [SerializeField] private Timer timer;
-    private Image myButtonImage;
+
+    // References
+    private Image buttonImage;
     private AudioSource abilitySource;
-    private float coolDownDuration;
+    private float cooldownDuration;
     private float nextReadyTime;
-    private float coolDownTimeLeft;
+    private float cooldownTimeLeft;
 
 
     void Start()
     {
-       Intialize(ability, player);
-    }
-    //pulling data out of scriptable obj
-    public void Intialize(Ability selectedAbility, GameObject obj)
-    {
-        ability = selectedAbility;
-        myButtonImage = GetComponent<Image>();
-        abilitySource = GetComponent<AudioSource>();
-        myButtonImage.sprite = ability.aSprite;
-        darkMask.sprite = ability.aSprite;
-        coolDownDuration = ability.aBaseCoolDown;
-        ability.Initialize(obj);
-        AbilityReady();
+       Initialize(ability, player);
     }
 
-    // Update is called once per frame
     void Update()
     {
         bool coolDownComplete = (Time.time > nextReadyTime);
@@ -53,28 +40,42 @@ public class AbilityCoolDown : MonoBehaviour
             CoolDown();
         }
     }
+   
+    public void Initialize(Ability selectedAbility, GameObject obj)
+    {
+        //pulling data out of scriptable obj
+        ability = selectedAbility;
+        buttonImage = GetComponent<Image>();
+        abilitySource = GetComponent<AudioSource>();
+        buttonImage.sprite = ability.abilitySprite;
+        darkMask.sprite = ability.abilitySprite;
+        cooldownDuration = ability.abilityCoolDown;
+        ability.Initialize(obj);
+        AbilityReady();
+    }
 
     private void AbilityReady()
     {
-        coolDownTextDisplay.enabled = false;
+        cooldownTextDisplay.enabled = false;
         darkMask.enabled = false;
     }
 
     private void CoolDown()
     {
-        coolDownTimeLeft -= Time.deltaTime;
-        float roundedCd = Mathf.Round(coolDownTimeLeft);
-        coolDownTextDisplay.text = roundedCd.ToString();
-        darkMask.fillAmount = (coolDownTimeLeft / coolDownDuration);
+        cooldownTimeLeft -= Time.deltaTime;
+        darkMask.fillAmount = (cooldownTimeLeft / cooldownDuration);
+        
+        float roundedCd = Mathf.Round(cooldownTimeLeft);
+        cooldownTextDisplay.text = roundedCd.ToString();
     }
 
     private void ButtonTriggered()
     {
-        nextReadyTime = coolDownDuration + Time.time;
-        coolDownTimeLeft = coolDownDuration;
+        nextReadyTime = cooldownDuration + Time.time;
+        cooldownTimeLeft = cooldownDuration;
         darkMask.enabled = true;
-        coolDownTextDisplay.enabled = true;
-        abilitySource.clip = ability.aSound;
+        cooldownTextDisplay.enabled = true;
+        abilitySource.clip = ability.abilitySound;
         abilitySource.Play();
         ability.TriggerAbility();
 

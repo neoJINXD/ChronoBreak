@@ -4,25 +4,17 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class EnemyNavMovement : MonoBehaviour
 {
-    public NavMeshAgent agent;
+    // Assignables
+    [SerializeField] NavMeshAgent agent;
 
-    public GameObject player;
+    [SerializeField] GameObject player;
 
-    public ThirdPersonCharacter character;
+    [SerializeField] ThirdPersonCharacter character;
 
-    [SerializeField]
-    float followRadius = 100f;
+    [SerializeField] float followRadius = 100f;
 
     [SerializeField] Timer timer;
 
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if(Vector3.Distance(this.transform.position, player.transform.position) < followRadius)
