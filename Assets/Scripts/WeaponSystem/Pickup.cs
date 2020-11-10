@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Pickup2 : MonoBehaviour
+// TODO breaking when restartign level, cant pickup
+public class Pickup : MonoBehaviour
 {
-
-    [SerializeField] Rigidbody rb;
-    [SerializeField] BoxCollider coll;
+    // Assignables
     [SerializeField] Transform player, gunContainer, fpsCam;
 
     [SerializeField] LayerMask pickupable;    
@@ -17,6 +14,10 @@ public class Pickup2 : MonoBehaviour
 
     [SerializeField] bool equipped;
     [SerializeField] static bool slotFull;
+    
+    // References
+    private Rigidbody rb;
+    private BoxCollider coll;
 
     void Start()
     {
@@ -24,7 +25,6 @@ public class Pickup2 : MonoBehaviour
         coll = GetComponent<BoxCollider>();
         if (!equipped)
         {
- 
             rb.isKinematic = false;
             coll.isTrigger = false;
         }
@@ -33,16 +33,12 @@ public class Pickup2 : MonoBehaviour
             slotFull = true;
             rb.isKinematic = true;
             coll.isTrigger = true;
-
-            // makes sure is attached to player
             Grab();
         }
 
     }
     void Update()
     {
-
-
         //Check if player is in range and "E" is pressed
         // TODO Should to move this to the player
         if (Physics.Raycast(fpsCam.position, fpsCam.forward, 5f, pickupable) && 
@@ -57,7 +53,6 @@ public class Pickup2 : MonoBehaviour
         if (equipped && Input.GetKeyDown(KeyCode.R)) Throw();
 
         //TODO animate to the pickup position
-
     }
 
     private void PickUp()
@@ -70,8 +65,6 @@ public class Pickup2 : MonoBehaviour
         //Make Rigidbody Kinematic and BoxCollider a trigger
         rb.isKinematic = true;
         coll.isTrigger = true;
-
-    
     }
 
     private void Drop()
@@ -96,8 +89,6 @@ public class Pickup2 : MonoBehaviour
         //Add random rotation
         float random = Random.Range(-1f, 1f);
         rb.AddTorque(new Vector3(random, random, random) * 10);
-   
-
     }
 
     private void Throw()
@@ -119,7 +110,6 @@ public class Pickup2 : MonoBehaviour
         rb.AddForce(fpsCam.up * throwUpwardForce, ForceMode.Impulse);
         //Add random rotation
         rb.AddTorque(new Vector3(0.4f, 0.4f, 0.4f) * 10);
-
     }
 
 

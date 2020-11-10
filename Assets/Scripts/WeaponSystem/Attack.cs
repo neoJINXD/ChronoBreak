@@ -1,21 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    // References
     private Animator sword;
-
-    private Pickup2 pickup;
+    private Pickup pickup;
     
-    // Start is called before the first frame update
     void Start()
     {
         sword = GetComponent<Animator>();
-        pickup = GetComponent<Pickup2>();
+        pickup = GetComponent<Pickup>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetButtonDown("Fire1") && pickup.GetEquipped())

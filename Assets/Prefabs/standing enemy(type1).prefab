@@ -42,9 +42,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede071b9859e8ef4aa3ec26dd5c5c1e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: standing enemy
+  timer: {fileID: 0}
   player: {fileID: 0}
   followRadius: 15
-  angularSpeed: 7
+  angularSpeed: 100
 --- !u!1001 &1655863584875036075
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,7 +117,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 320b1c2af77554f99a1658df4a6d3d5c,
         type: 3}
       propertyPath: m_Name
-      value: Robot Kyle standing
+      value: standing enemy(type1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}

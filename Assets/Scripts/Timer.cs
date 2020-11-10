@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
+    [Header("UI")]
     [SerializeField] GameObject timerPanel; // Panel showing any UI elements related to the timer 
     [SerializeField] Text timerText; // Timer label shown in UI
 
@@ -29,35 +28,40 @@ public class Timer : MonoBehaviour
 
     // Time bonus and penalties
     // TODO add more fields
+    [Header("Time Penalties")]
+    //TODO should probably have these fields in the ability
     [SerializeField] float dashTimePenalty = 3f;
+
+    //TODO should probably have these fields in the enemies
     [SerializeField] float enemy1KilledTimeBonus = -2f; // Enemies that are standing still
     [SerializeField] float enemy2KilledTimeBonus = -2f; // Enemies that are throw projectiles
     [SerializeField] float enemy3KilledTimeBonus = -2f; // Enemies that chases the player in a pre-defined radius 
     [SerializeField] float enemy1TouchedTimePenalty = 5f;
     [SerializeField] float enemy2TouchedTimePenalty = 5f;
     [SerializeField] float enemy3TouchedTimePenalty = 5f;
+    [SerializeField] float fallingOffPenalty = 5f;
 
-    int dashCounter = 0;
-    int enemy1KilledCounter = 0;
-    int enemy1TouchedCounter = 0;
-    int enemy2KilledCounter = 0;
-    int enemy2TouchedCounter = 0; 
-    int enemy3KilledCounter = 0;
-    int enemy3TouchedCounter = 0;
+    private int dashCounter = 0;
+    private int enemy1KilledCounter = 0;
+    private int enemy1TouchedCounter = 0;
+    private int enemy2KilledCounter = 0;
+    private int enemy2TouchedCounter = 0; 
+    private int enemy3KilledCounter = 0;
+    private int enemy3TouchedCounter = 0;
+    private int fallingOffCounter = 0;
 
-    float timeElapsed; // Actual time elapsed since the level has started
-    float totalTime; // Cumulative time since level has started
-    int ms = 0; // Centiseconds
-    int sec = 0; // Seconds
-    int min = 0; // Minutes
+    private float timeElapsed; // Actual time elapsed since the level has started
+    private float totalTime; // Cumulative time since level has started
+    private int ms = 0; // Centiseconds
+    private int sec = 0; // Seconds
+    private int min = 0; // Minutes
 
     // Booleans for checking current state of the game
-    bool isCompleted = false;
-    bool hasStarted = false;
-    bool isPaused = false;
-    bool hasStopped = false;
+    private bool isCompleted = false;
+    private bool hasStarted = false;
+    private bool isPaused = false;
+    private bool hasStopped = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
@@ -71,7 +75,6 @@ public class Timer : MonoBehaviour
         dashIcon.SetActive(true);
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -126,6 +129,8 @@ public class Timer : MonoBehaviour
 
         totalTime += enemy3KilledCounter * enemy3KilledTimeBonus;
         totalTime += enemy3TouchedCounter * enemy3TouchedTimePenalty;
+
+        totalTime += fallingOffCounter * fallingOffPenalty;
 
         // Transform total time in to minutes, seconds and ms (2 digits)
         min = (int) (totalTime / 60);
@@ -221,6 +226,8 @@ public class Timer : MonoBehaviour
         summary += "Chasing enemies killed: " + enemy3KilledCounter.ToString() + " x " + enemy3KilledTimeBonus.ToString() + " sec -----> " + (enemy3KilledCounter * enemy3KilledTimeBonus).ToString() + " sec\n";
         summary += "Chasing enemies touched: " + enemy3TouchedCounter.ToString() + " x " + enemy3TouchedTimePenalty.ToString() + " sec -----> " + (enemy3TouchedCounter * enemy3TouchedTimePenalty).ToString() + " sec\n\n";
 
+        // Show times the player fell off
+        summary += "Times fallen off: " + fallingOffCounter.ToString() + " x " + fallingOffPenalty.ToString() + " sec -----> " + (fallingOffCounter * fallingOffPenalty).ToString() + " sec\n\n";
 
         // Show final time
         summary += "Total time -----> " + timerText.text;
@@ -263,6 +270,10 @@ public class Timer : MonoBehaviour
             case "chasing enemy touched":
                 enemy3TouchedCounter++;
                 PopUpEventPanel("Chasing enemy touched", enemy3TouchedTimePenalty);
+                break;
+            case "falling":
+                fallingOffCounter++;
+                PopUpEventPanel("Resetting position", fallingOffPenalty);
                 break;
 
         }

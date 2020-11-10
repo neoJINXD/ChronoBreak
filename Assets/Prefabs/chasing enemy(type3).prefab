@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1485807780424309196}
   - component: {fileID: 1485807780424309199}
   m_Layer: 10
-  m_Name: EnemyNavMesh
+  m_Name: chasing enemy(type3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,6 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e776a259fb213408335861fb07400a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: chasing enemy
+  timer: {fileID: 0}
   agent: {fileID: 1485807780424309195}
   player: {fileID: 0}
   character: {fileID: 1485807780424309199}
