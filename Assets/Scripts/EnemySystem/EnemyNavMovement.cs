@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class EnemyNavMovement : MonoBehaviour
+public class EnemyNavMovement : EnemyBase
 {
     // Assignables
     [SerializeField] NavMeshAgent agent;
@@ -13,7 +13,6 @@ public class EnemyNavMovement : MonoBehaviour
 
     [SerializeField] float followRadius = 100f;
 
-    [SerializeField] Timer timer;
 
     void Update()
     {
@@ -29,25 +28,6 @@ public class EnemyNavMovement : MonoBehaviour
         else
         {
             character.Move(Vector3.zero, false, true);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.tag == "Player")
-        {
-            //increase time
-            Debug.Log("Hit Player");
-            timer.CountEvent("chasing enemy touched");
-        }
-    }
-
-    private void OnTriggerEnter(Collider other) 
-    {
-        if (other.CompareTag("CanGrab")) // if is sword
-        {
-            Destroy(gameObject);
-            timer.CountEvent("chasing enemy kill");
         }
     }
 }

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStanding : MonoBehaviour
+public class EnemyStanding : EnemyBase
 {
     // Assignables
     [SerializeField] GameObject player;
     [SerializeField] float followRadius = 15f;
     [SerializeField] float angularSpeed = 1f;
-    [SerializeField] Timer timer;
     
     // References
     private Rigidbody rb;
@@ -37,25 +36,6 @@ public class EnemyStanding : MonoBehaviour
             {
                 rb.constraints = RigidbodyConstraints.FreezeAll;
             }
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.tag == "Player")
-        {
-            //increase time
-            Debug.Log("Hit Player");
-            timer.CountEvent("standing enemy touched");
-        }
-    }
-
-    private void OnTriggerEnter(Collider other) 
-    {
-        if (other.CompareTag("CanGrab")) // if is sword
-        {
-            Destroy(gameObject);
-            timer.CountEvent("standing enemy kill");
         }
     }
 }

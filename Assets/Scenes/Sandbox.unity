@@ -5094,10 +5094,6 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 2084315756}
-    - target: {fileID: 1562932158, guid: a3ccbfdd3b7f7e145bd5fe95cbcc2319, type: 3}
-      propertyPath: angularSpeed
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 6016945333251249841, guid: a3ccbfdd3b7f7e145bd5fe95cbcc2319,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14477,6 +14473,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845197222779944482, guid: 87ebd8ae71ffe407bad47656314a49f6,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3845197222779944482, guid: 87ebd8ae71ffe407bad47656314a49f6,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 275.37323
       objectReference: {fileID: 0}
     - target: {fileID: 3845197223120215437, guid: 87ebd8ae71ffe407bad47656314a49f6,
         type: 3}
