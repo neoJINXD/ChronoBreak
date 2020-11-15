@@ -47,10 +47,14 @@ public class AbilityCooldown : MonoBehaviour
         ability = selectedAbility;
         buttonImage = GetComponent<Image>();
         abilitySource = GetComponent<AudioSource>();
-        buttonImage.sprite = ability.abilitySprite;
-        darkMask.sprite = ability.abilitySprite;
-        cooldownDuration = ability.abilityCoolDown;
+
+        buttonImage.sprite = ability.GetAbilitySprite();
+        darkMask.sprite = ability.GetAbilitySprite();
+        cooldownDuration = ability.GetAbilityCoolDown();
+        abilitySource.clip = ability.GetAudioClip();
+        
         ability.Initialize(obj);
+        
         AbilityReady();
     }
 
@@ -73,12 +77,13 @@ public class AbilityCooldown : MonoBehaviour
     {
         nextReadyTime = cooldownDuration + Time.time;
         cooldownTimeLeft = cooldownDuration;
+
         darkMask.enabled = true;
         cooldownTextDisplay.enabled = true;
-        abilitySource.clip = ability.abilitySound;
+        
         abilitySource.Play();
         ability.TriggerAbility();
 
-        timer.CountEvent(abilityButtonAxisName);
+       // timer.CountEvent(abilityButtonAxisName);
     }
 }

@@ -972,6 +972,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1711138507435578725, guid: cb531781dfb49d043970efb6c8bf962d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5646445542102079940, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
       propertyPath: m_Name
@@ -1031,11 +1036,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1711138507435578725, guid: cb531781dfb49d043970efb6c8bf962d,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb531781dfb49d043970efb6c8bf962d, type: 3}
@@ -1944,7 +1944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityButtonAxisName: Dash
   darkMask: {fileID: 552197082}
-  coolDownTextDisplay: {fileID: 577728406}
+  cooldownTextDisplay: {fileID: 577728406}
   ability: {fileID: 11400000, guid: 1aecec77a6340b64d987c64b3972af24, type: 2}
   player: {fileID: 1356218510}
   timer: {fileID: 0}
