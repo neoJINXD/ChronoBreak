@@ -42,7 +42,7 @@ public class EnemyMoving : EnemyBase
         }
         else
         {
-            character.Move(Vector3.zero, false, true);
+            character.Move(Vector3.zero, false, false);
             isFollowing = true;
         }
     }

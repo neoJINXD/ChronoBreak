@@ -47,8 +47,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 6.5
-  m_Acceleration: 11
+  m_Speed: 6
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 400
   m_StoppingDistance: 7.5
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e20637367110ff45974cbeb020f3cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: shooting/projectile enemy
+  type: shooting enemy
   timer: {fileID: 0}
   player: {fileID: 0}
   followRadius: 15
