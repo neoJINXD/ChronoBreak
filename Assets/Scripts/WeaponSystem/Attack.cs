@@ -16,9 +16,14 @@ public class Attack : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1") && pickup.GetEquipped())
         {
+            
             sword.enabled = true;
             sword.SetBool("Attack", true);
+
+            FindObjectOfType<AudioManager>().Play("Slice");
+
             Invoke("DisableAnimator", 1.0f); // TODO fix to disable right when the animation ends
+            
         }
         else if (Input.GetButtonUp("Fire1"))
         {

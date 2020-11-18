@@ -61,6 +61,7 @@ public class Pickup : MonoBehaviour
         slotFull = true;
 
         Grab();
+        FindObjectOfType<AudioManager>().Play("Pickup");
 
         //Make Rigidbody Kinematic and BoxCollider a trigger
         rb.isKinematic = true;

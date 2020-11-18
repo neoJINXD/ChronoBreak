@@ -178,6 +178,9 @@ public class PlayerMovement : MonoBehaviour
         // Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
+ 
+
+
     }
 
     private void Jump() 
@@ -185,11 +188,13 @@ public class PlayerMovement : MonoBehaviour
         if (grounded && readyToJump) 
         {
             readyToJump = false;
-
             // Add jump forces
             rb.AddForce(Vector2.up * jumpForce * 1.5f);
             // rb.AddForce(normalVector * jumpForce * 0.5f);
-            
+
+            //Add jumo sound effect
+            FindObjectOfType<AudioManager>().Play("Jumping");
+
             // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
             if (rb.velocity.y < 0.5f)
