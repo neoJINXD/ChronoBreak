@@ -64,7 +64,11 @@ public class Pickup : MonoBehaviour
         } 
 
         //Throw if equipped and "R" is pressed
-        if (equipped && Input.GetKeyDown(KeyCode.R)) 
+        if (equipped && Input.GetKey(KeyCode.R)) 
+        {
+            weapon.Predict(swordContainer.position);
+        }
+        if (equipped && Input.GetKeyUp(KeyCode.R)) 
         {
             weapon.Throw();//TODO maybe pass player.velocity in here instead of reference in weapon
 
@@ -77,6 +81,7 @@ public class Pickup : MonoBehaviour
         {
             weapon.Attack();
         }
+        
 
         //TODO animate to the pickup position
     }

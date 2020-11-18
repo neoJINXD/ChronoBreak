@@ -17,6 +17,7 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField]protected Transform cam;
 
     private bool thrown = false;
+    private Vector3 force;
 
     protected Animation anim;
 
@@ -81,8 +82,9 @@ public abstract class WeaponBase : MonoBehaviour
         rb.velocity = playerRb.GetComponent<Rigidbody>().velocity;
 
         //Add force
-        rb.AddForce(cam.forward * throwForwardForce, ForceMode.Impulse);
-        rb.AddForce(cam.up * throwUpwardForce, ForceMode.Impulse);
+        // rb.AddForce(cam.forward * throwForwardForce, ForceMode.Impulse);
+        // rb.AddForce(cam.up * throwUpwardForce, ForceMode.Impulse);
+        rb.AddForce(force, ForceMode.Impulse);
         
         //Add random rotation
         // rb.AddTorque(new Vector3(0.4f, 0.4f, 0.4f) * randomForce);
@@ -95,5 +97,13 @@ public abstract class WeaponBase : MonoBehaviour
     void OnCollisionEnter(Collision other) 
     {
         thrown = false;    
+    }
+
+    public void Predict(Vector3 pos)
+    {
+        force = cam.forward * throwForwardForce + cam.up * throwUpwardForce;
+        // Instantiate(gameObject, transform.position, Quaternion.identity);
+        // Trajectory.instance.Predict(gameObject, transform.position, force);
+        Trajectory.instance.Predict(gameObject, pos, force);
     }
 }
