@@ -91,6 +91,7 @@ public abstract class WeaponBase : MonoBehaviour
         thrown = true;
         
         coll.enabled = true;
+        Trajectory.instance.ResetLine();
     }
 
 

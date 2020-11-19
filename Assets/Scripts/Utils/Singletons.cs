@@ -55,7 +55,7 @@ public class Singleton<T> : MonoBehaviour where T: MonoBehaviour
         {
             if (verbose)
             {
-                print($"Singleton>{typeof(T).Name}> Instance is null");
+                print($"Singleton<{typeof(T).Name}> Instance is null");
             }
             return;
         }

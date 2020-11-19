@@ -100,71 +100,14 @@ public class Trajectory : Singleton<Trajectory>
         }
     }
 
+    public void ResetLine()
+    {
+        line.positionCount = 0;
+    }
+
     void OnDestroy() 
     {
         KillAllObstacles();    
     }
 
-
-    /*
-    [SerializeField] LineRenderer line;
-    [SerializeField] int res;
-
-    [SerializeField] Vector3 velocity;
-    [SerializeField] float Limit;
-    [SerializeField] float g;
-    
-    void Start()
-    {
-        g = Mathf.Abs(Physics.gravity.y);
-    }
-    
-    void Update()
-    {
-        StartCoroutine(RenderArc());
-    }
-
-    private IEnumerator RenderArc()
-    {
-        line.positionCount = res + 1;
-        line.SetPositions(CalculateLineArray());
-        yield return null;
-    }
-
-    private Vector3[] CalculateLineArray()
-    {
-        Vector3[] lineArray = new Vector3[res + 1];
-
-        for (int i = 0; i < lineArray.Length; i++)
-        {
-            float t = i / lineArray.Length;
-            lineArray[i] = CalculateLinePoint(t);
-        }
-
-        return lineArray;
-    }
-
-    private Vector3 CalculateLinePoint(float t)
-    {
-        // float x = velocity.x * t;
-        float x = FindHorizontal(velocity.x, velocity.z) * t;
-        float y = (velocity.y * t) - (g * t * t) / 2;
-        return new Vector3(x + transform.position.x, y + transform.position.y);
-    }
-
-    private float ProjectileMotion1(float x0, float vx, float t)
-    {
-        return x0 + (vx * t);
-    }
-
-    private float ProjectileMotion2(float y0, float vy, float t)
-    {
-        return y0 + (vy * t) - (g * t * t)/2;
-    }
-
-    private float FindHorizontal(float x, float z)
-    {
-        return Mathf.Sqrt(x * x + z * z);
-    }
-    */
 }   
