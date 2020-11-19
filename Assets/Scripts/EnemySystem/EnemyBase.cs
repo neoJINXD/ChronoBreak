@@ -14,6 +14,13 @@ public abstract class EnemyBase : MonoBehaviour
             // Debug.Log("Hit Player");
             timer.CountEvent(type + " touched");
         }
+
+        // For thrown weapon
+        if (collision.collider.CompareTag("CanGrab"))
+        {
+            Destroy(gameObject);
+            timer.CountEvent(type + " kill");
+        }
     }
 
     private void OnTriggerEnter(Collider other) 
