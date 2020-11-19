@@ -2,6 +2,7 @@
 
 public class Sword : WeaponBase
 {
+    
     public override void Attack()
     {
         //plays animation clip here

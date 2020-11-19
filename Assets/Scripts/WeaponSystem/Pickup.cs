@@ -19,6 +19,7 @@ public class Pickup : MonoBehaviour
     private WeaponBase weapon;
     private Transform player, cam;
 
+    //TODO Might have to move the guard colider somehow
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,7 +31,6 @@ public class Pickup : MonoBehaviour
     void Update()
     {
         //Check if player is in range and "E" is pressed
-        // TODO Should to move this to the player
         RaycastHit hit;
         Physics.Raycast(cam.position, cam.forward, out hit, pickUpRange, pickupable);
         
@@ -38,8 +38,8 @@ public class Pickup : MonoBehaviour
         if (hit.collider && !equipped && Input.GetKeyDown(KeyCode.E))
         {
             equipped = true;
+            print($"yes {hit.collider.gameObject.name}");
             
-            //TODO not ideal to use get component in update?
             weapon = hit.collider.GetComponent<WeaponBase>();
             weapon.Pickup();
 
@@ -51,18 +51,18 @@ public class Pickup : MonoBehaviour
             else
             {
                 weapon.transform.SetParent(swordContainer);
+                weapon.transform.localScale = Vector3.one;
             }
         
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
-            // weapon.transform.localScale = Vector3.one;
             //PickUp();
         }
 
         //Drop if equipped and "Q" is pressed
         if (equipped && Input.GetKeyDown(KeyCode.Q))
         {
-            weapon.Drop(rb.velocity);//TODO maybe pass player.velocity in here instead of reference in weapon
+            weapon.Drop(rb.velocity);
 
             weapon.transform.SetParent(null);
             weapon = null;
@@ -76,7 +76,7 @@ public class Pickup : MonoBehaviour
         }
         if (equipped && Input.GetKeyUp(KeyCode.R)) 
         {
-            weapon.Throw(rb.velocity);//TODO maybe pass player.velocity in here instead of reference in weapon
+            weapon.Throw(rb.velocity);
 
             weapon.transform.SetParent(null);
             weapon = null;
@@ -92,76 +92,4 @@ public class Pickup : MonoBehaviour
         //TODO animate to the pickup position
     }
 
-    // private void PickUp()
-    // {
-    //     equipped = true;
-    //     slotFull = true;
-
-    //     Grab();
-
-    //     //Make Rigidbody Kinematic and BoxCollider a trigger
-    //     rb.isKinematic = true;
-    //     coll.isTrigger = true;
-    // }
-
-    // private void Drop()
-    // {
-    //     equipped = false;
-    //     slotFull = false;
-
-    //     // transform.position = gunContainer.position;
-    //     // Detach from player
-    //     transform.SetParent(null);
-
-    //     // Make Rigidbody and BoxCollider normal
-    //     rb.isKinematic = false;
-    //     coll.isTrigger = false;
-
-    //     rb.velocity = player.GetComponent<Rigidbody>().velocity;
-
-    //     //Add force
-    //     rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
-    //     rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
-
-    //     //Add random rotation
-    //     float random = Random.Range(-1f, 1f);
-    //     rb.AddTorque(new Vector3(random, random, random) * 10);
-    // }
-
-    // private void Throw()
-    // {
-    //     equipped = false;
-    //     slotFull = false;
-
-    //     //Set parent to null
-    //     transform.SetParent(null);
-
-    //     //Make Rigidbody and BoxCollider normal
-    //     rb.isKinematic = false;
-    //     coll.isTrigger = false;
-
-    //     rb.velocity = player.GetComponent<Rigidbody>().velocity;
-
-    //     //Add force
-    //     rb.AddForce(fpsCam.forward * throwForwardForce, ForceMode.Impulse);
-    //     rb.AddForce(fpsCam.up * throwUpwardForce, ForceMode.Impulse);
-    //     //Add random rotation
-    //     rb.AddTorque(new Vector3(0.4f, 0.4f, 0.4f) * 10);
-    // }
-
-
-    // private void Grab()
-    // {
-    //     //Make weapon a child of the camera and move it to the equippedPosition
-    //     transform.SetParent(gunContainer);
-        
-    //     transform.localPosition = Vector3.zero;
-    //     transform.localRotation = Quaternion.Euler(Vector3.zero);
-    //     transform.localScale = Vector3.one;
-    // }
-
-    // public bool GetEquipped()
-    // {
-    //     return equipped;
-    // }
 }

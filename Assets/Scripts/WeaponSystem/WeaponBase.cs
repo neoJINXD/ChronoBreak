@@ -8,6 +8,7 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField] float dropForwardForce, dropUpwardForce;
     [SerializeField] float throwForwardForce, throwUpwardForce;
     [SerializeField] Vector3 offset; //TODO need to set this per model cuz reeeeeee
+    [SerializeField] Vector3 defaultSize;
 
     // References
     protected Collider coll;
@@ -66,6 +67,7 @@ public abstract class WeaponBase : MonoBehaviour
         rb.isKinematic = false;
         coll.isTrigger = false;
         
+        transform.localScale = defaultSize;
         rb.velocity = vel;
 
         //Add force
@@ -86,6 +88,7 @@ public abstract class WeaponBase : MonoBehaviour
 
         
         transform.localRotation = Quaternion.Euler(offset);
+        transform.localScale = defaultSize;
         rb.velocity = vel;
 
         //Add force
