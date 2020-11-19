@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 
-// TODO breaking when restartign level, cant pickup
 public class Pickup : MonoBehaviour
 {
     // Assignables
     [SerializeField] Transform swordContainer, gunContainer;
-    //TODO player and cam can prob be private
     [SerializeField] LayerMask pickupable;    
 
     [SerializeField] float pickUpRange, pickUpTime;
@@ -45,6 +43,7 @@ public class Pickup : MonoBehaviour
             weapon = hit.collider.GetComponent<WeaponBase>();
             weapon.Pickup();
 
+            // if (hit.collider.CompareTag(""))
             weapon.transform.SetParent(swordContainer);
         
             weapon.transform.localPosition = Vector3.zero;
@@ -56,7 +55,7 @@ public class Pickup : MonoBehaviour
         //Drop if equipped and "Q" is pressed
         if (equipped && Input.GetKeyDown(KeyCode.Q))
         {
-            weapon.Drop();//TODO maybe pass player.velocity in here instead of reference in weapon
+            weapon.Drop(rb.velocity);//TODO maybe pass player.velocity in here instead of reference in weapon
 
             weapon.transform.SetParent(null);
             weapon = null;
@@ -70,7 +69,7 @@ public class Pickup : MonoBehaviour
         }
         if (equipped && Input.GetKeyUp(KeyCode.R)) 
         {
-            weapon.Throw();//TODO maybe pass player.velocity in here instead of reference in weapon
+            weapon.Throw(rb.velocity);//TODO maybe pass player.velocity in here instead of reference in weapon
 
             weapon.transform.SetParent(null);
             weapon = null;

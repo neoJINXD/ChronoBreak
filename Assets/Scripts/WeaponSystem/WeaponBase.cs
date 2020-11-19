@@ -7,22 +7,18 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField] float randomForce;
     [SerializeField] float dropForwardForce, dropUpwardForce;
     [SerializeField] float throwForwardForce, throwUpwardForce;
-
-    [SerializeField] Rigidbody playerRb;
-
     [SerializeField] Vector3 offset; //TODO need to set this per model cuz reeeeeee
 
     // References
-    [SerializeField]protected Collider coll;
-    [SerializeField]protected Rigidbody rb;
-    [SerializeField]protected Transform cam;
-    [SerializeField]protected Transform orientation;
+    protected Collider coll;
+    protected Animation anim;
+    protected Rigidbody rb;
+    protected Transform cam;
+    private Vector3 force;
 
 
     private bool thrown = false;
-    private Vector3 force;
 
-    protected Animation anim;
 
     virtual protected void Start()
     {
@@ -65,12 +61,12 @@ public abstract class WeaponBase : MonoBehaviour
         // anim.enabled = true;
     }
 
-    public void Drop()
+    public void Drop(Vector3 vel)
     {
         rb.isKinematic = false;
         coll.isTrigger = false;
         
-        rb.velocity = playerRb.velocity;
+        rb.velocity = vel;
 
         //Add force
         rb.AddForce(cam.forward * dropForwardForce, ForceMode.Impulse);
@@ -83,14 +79,14 @@ public abstract class WeaponBase : MonoBehaviour
         coll.enabled = true;
     }
 
-    public void Throw()
+    public void Throw(Vector3 vel)
     {
         rb.isKinematic = false;
         coll.isTrigger = false;
 
         
         transform.localRotation = Quaternion.Euler(offset);
-        rb.velocity = playerRb.GetComponent<Rigidbody>().velocity;
+        rb.velocity = vel;
 
         //Add force
         // rb.AddForce(cam.forward * throwForwardForce, ForceMode.Impulse);

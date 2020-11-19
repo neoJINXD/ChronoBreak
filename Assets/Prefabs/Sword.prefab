@@ -143,9 +143,6 @@ MonoBehaviour:
   randomForce: 10
   dropForwardForce: 2
   dropUpwardForce: 2
-  throwForwardForce: 9
+  throwForwardForce: 15
   throwUpwardForce: 1
-  playerRb: {fileID: 0}
-  coll: {fileID: 0}
-  rb: {fileID: 0}
-  cam: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
