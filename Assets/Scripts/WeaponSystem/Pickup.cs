@@ -44,11 +44,18 @@ public class Pickup : MonoBehaviour
             weapon.Pickup();
 
             // if (hit.collider.CompareTag(""))
-            weapon.transform.SetParent(swordContainer);
+            if (hit.collider.gameObject.name.Contains("Gun"))
+            {
+                weapon.transform.SetParent(gunContainer);
+            }
+            else
+            {
+                weapon.transform.SetParent(swordContainer);
+            }
         
             weapon.transform.localPosition = Vector3.zero;
             weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
-            weapon.transform.localScale = Vector3.one;
+            // weapon.transform.localScale = Vector3.one;
             //PickUp();
         }
 
@@ -76,7 +83,7 @@ public class Pickup : MonoBehaviour
             equipped = false;
         }
 
-        if (equipped && Input.GetMouseButtonDown(0))
+        if (equipped && Input.GetMouseButton(0))
         {
             weapon.Attack();
         }

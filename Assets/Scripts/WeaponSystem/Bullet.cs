@@ -6,14 +6,22 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] float speed;
 
+    // private Vector3 _dir ;
+    public Vector3 dir { get; set; }
+
     void FixedUpdate()
     {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        transform.position += dir * speed * Time.deltaTime;
     }
 
     void OnCollisionEnter(Collision other)
     {
         Destroy(gameObject);
-        //TODO dmg eney if enemy        
+        //TODO Add enemy tag to enemy prefabs   
+        if (other.collider.CompareTag("Enemy"))
+        {
+            Destroy(other.collider.gameObject);
+            
+        }   
     }
 }
