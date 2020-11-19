@@ -130,7 +130,10 @@ public class DashAbility : Ability
 
         }
 
-        
+        //Trigger Dash sound effect
+        FindObjectOfType<AudioManager>().Play("dash_sound");
+
+
     }
 
 }

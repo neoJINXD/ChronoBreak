@@ -20,6 +20,8 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (other.CompareTag("CanGrab")) // if is sword
         {
+            //Trigger enemy death sound effect
+            FindObjectOfType<AudioManager>().Play("EnemyDying");
             Destroy(gameObject);
             timer.CountEvent(type + " kill");
         }

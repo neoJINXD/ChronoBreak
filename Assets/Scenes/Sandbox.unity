@@ -5219,7 +5219,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: MainMusic
     clip: {fileID: 8300000, guid: 176d5e2d05fe12e41b2dfda742387cf3, type: 3}
-    volume: 0.09
+    volume: 0.02
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -5230,7 +5230,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Death
-    clip: {fileID: 8300000, guid: aab84883af160944499bca8f679c40e5, type: 3}
+    clip: {fileID: 8300000, guid: 0232500139ac29a49bb40c63747cb32f, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -5243,12 +5243,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Jumping
     clip: {fileID: 8300000, guid: 8479831e0684b6d4ba95b090406b7d35, type: 3}
-    volume: 1
+    volume: 0.26
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Pickup
     clip: {fileID: 8300000, guid: c1689a528652f7c43883972aa7face71, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyDying
+    clip: {fileID: 8300000, guid: 0244a393c19e70d439fcf6b5ef1c4a9d, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -5350,7 +5356,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73272
+  m_Name: pb_Mesh14972
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7602,7 +7608,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh52928
+  m_Name: pb_Mesh14944
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12993,7 +12999,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73190
+  m_Name: pb_Mesh14886
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13325,7 +13331,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh53042
+  m_Name: pb_Mesh15060
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
