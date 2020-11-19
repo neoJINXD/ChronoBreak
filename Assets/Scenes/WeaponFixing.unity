@@ -5080,6 +5080,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &225063479 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2069203677412642303, guid: 5017b2e0e92efdd47818b6830d7bd482,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069203677977177483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &277692738
 GameObject:
   m_ObjectHideFlags: 0
@@ -14977,6 +14983,26 @@ PrefabInstance:
       propertyPath: playerRb
       value: 
       objectReference: {fileID: 125192021}
+    - target: {fileID: 3652460592356078370, guid: ca83e912cc7864447ade15d0b3dd76d1,
+        type: 3}
+      propertyPath: offset.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652460592356078370, guid: ca83e912cc7864447ade15d0b3dd76d1,
+        type: 3}
+      propertyPath: offset.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652460592356078370, guid: ca83e912cc7864447ade15d0b3dd76d1,
+        type: 3}
+      propertyPath: offset.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652460592356078370, guid: ca83e912cc7864447ade15d0b3dd76d1,
+        type: 3}
+      propertyPath: orientation
+      value: 
+      objectReference: {fileID: 225063479}
     - target: {fileID: 3652460592356078373, guid: ca83e912cc7864447ade15d0b3dd76d1,
         type: 3}
       propertyPath: m_Name

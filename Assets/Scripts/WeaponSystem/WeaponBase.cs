@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public abstract class WeaponBase : MonoBehaviour
 {
 
@@ -11,10 +10,14 @@ public abstract class WeaponBase : MonoBehaviour
 
     [SerializeField] Rigidbody playerRb;
 
+    [SerializeField] Vector3 offset; //TODO need to set this per model cuz reeeeeee
+
     // References
     [SerializeField]protected Collider coll;
     [SerializeField]protected Rigidbody rb;
     [SerializeField]protected Transform cam;
+    [SerializeField]protected Transform orientation;
+
 
     private bool thrown = false;
     private Vector3 force;
@@ -29,16 +32,22 @@ public abstract class WeaponBase : MonoBehaviour
         anim = GetComponent<Animation>();
     }
 
-    virtual protected void FixedUpdate()
+    void FixedUpdate()
     {
+        // Debug.DrawRay(transform.position, rb.velocity * 1000f, Color.red);
+        // Debug.DrawLine(transform.position, transform.position + rb.velocity, Color.red);
+        // print(rb.velocity);
         if (thrown)
         {
             
-            // print("reeeeeeeeee");
+            //TODO it dont wanna work :c
             //TODO allign point of weapon towards velocity
             // Vector3.RotateTowards(transform.rotation.eulerAngles, rb.velocity, 6f, 2f);
-            // transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(rb.velocity.x, rb.velocity.y, rb.velocity.z), Time.deltaTime * 100f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(rb.velocity.x, rb.velocity.y, rb.velocity.z), Time.deltaTime * 10f);
+            // Vector3 temp = transform.position + rb.velocity + offset;
+            // print($"Velocity is {temp}");
+            // transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(rb.velocity.x, rb.velocity.y, rb.velocity.z), Time.deltaTime * 10000f);
+            // transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(temp.x, temp.y, temp.z), Time.deltaTime * 10000f);
+            // transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(temp.x, temp.y, temp.z), Time.deltaTime * 10f);
 
         }
     }
@@ -79,6 +88,8 @@ public abstract class WeaponBase : MonoBehaviour
         rb.isKinematic = false;
         coll.isTrigger = false;
 
+        
+        transform.localRotation = Quaternion.Euler(offset);
         rb.velocity = playerRb.GetComponent<Rigidbody>().velocity;
 
         //Add force
