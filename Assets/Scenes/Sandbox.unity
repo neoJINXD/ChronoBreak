@@ -5259,6 +5259,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Crouch
+    clip: {fileID: 8300000, guid: 872d7106e72278640ad1e731c129e32d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &340557649
 Transform:
   m_ObjectHideFlags: 0

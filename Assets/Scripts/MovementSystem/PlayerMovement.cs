@@ -93,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             StartCrouch();
+
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
@@ -112,6 +113,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(orientation.transform.forward * slideForce);
             }
         }
+
+        //Trigger crouch sound
+        FindObjectOfType<AudioManager>().Play("Crouch");
+
     }
 
     private void StopCrouch() 
