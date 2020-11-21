@@ -5,17 +5,16 @@ using UnityEngine;
 public class TriggerDash : MonoBehaviour
 {
     
-    [SerializeField] float smoothness;
+    [SerializeField] float speed;
     [SerializeField] GameObject camera;
 
     private Vector3 newPosition;
     private bool isDashing = false;
-
-    private LineRenderer[] lines;
+    private ParticleSystem particleSystem;
 
     private void Start()
     {
-        lines = camera.GetComponentsInChildren<LineRenderer>();
+        particleSystem = camera.GetComponent<ParticleSystem>();
     }
     private void FixedUpdate()
     {
@@ -26,15 +25,12 @@ public class TriggerDash : MonoBehaviour
     {
         if (isDashing)
         {
-            transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * smoothness);
+            transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * speed);
         }
         if (Vector3.Distance(transform.position, newPosition) < .7f)
         {
             isDashing = false;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                lines[i].enabled = false;
-            }
+  
         }
 
     }
@@ -43,10 +39,7 @@ public class TriggerDash : MonoBehaviour
     {
         isDashing = true;
         newPosition = destination;
-        for (int i=0; i< lines.Length; i++)
-        {
-            lines[i].enabled = true;
-        }
+        particleSystem.Play();
     }
 
 }

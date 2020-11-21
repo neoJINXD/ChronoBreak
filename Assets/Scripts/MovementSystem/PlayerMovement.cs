@@ -78,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
         orientationDirection = orientation.transform.forward;
-        Debug.DrawRay(transform.position, -(transform.up * 1.5f), Color.green);
     }
 
     // Handling user input
