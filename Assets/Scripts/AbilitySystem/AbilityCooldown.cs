@@ -84,6 +84,6 @@ public class AbilityCooldown : MonoBehaviour
         abilitySource.Play();
         ability.TriggerAbility();
 
-       // timer.CountEvent(abilityButtonAxisName);
+       timer.CountEvent(abilityButtonAxisName);
     }
 }
