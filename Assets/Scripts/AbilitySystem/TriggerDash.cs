@@ -6,17 +6,13 @@ public class TriggerDash : MonoBehaviour
 {
     
     [SerializeField] float speed;
-    [SerializeField] GameObject camera;
+    [SerializeField] ParticleSystem dashEffect;
 
     private Vector3 newPosition;
     private bool isDashing = false;
-    private ParticleSystem particleSystem;
 
-    private void Start()
-    {
-        particleSystem = camera.GetComponent<ParticleSystem>();
-    }
-    private void FixedUpdate()
+
+    void FixedUpdate()
     {
         PositionChanging();
     }
@@ -30,16 +26,14 @@ public class TriggerDash : MonoBehaviour
         if (Vector3.Distance(transform.position, newPosition) < .7f)
         {
             isDashing = false;
-  
         }
-
     }
 
     public void SetNewPosition( Vector3 destination)
     {
         isDashing = true;
         newPosition = destination;
-        particleSystem.Play();
+        dashEffect.Play();
     }
 
 }
