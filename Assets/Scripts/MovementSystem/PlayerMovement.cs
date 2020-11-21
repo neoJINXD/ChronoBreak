@@ -78,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
         orientationDirection = orientation.transform.forward;
-
     }
 
     // Handling user input
