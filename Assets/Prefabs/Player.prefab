@@ -475,8 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  camera: {fileID: 2069203677252986640}
-  particleSystem: {fileID: 8804163855412081617}
+  dashEffect: {fileID: 8804163855412081617}
 --- !u!1 &5227069312037318078
 GameObject:
   m_ObjectHideFlags: 0
