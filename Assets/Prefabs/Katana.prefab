@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &533956686714957113
 Transform:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 5062228241750373538}
   - component: {fileID: 1399763428999168478}
   m_Layer: 9
-  m_Name: Katana w_ Colliders
+  m_Name: Katana
   m_TagString: CanGrab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
