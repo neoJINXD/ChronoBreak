@@ -10,6 +10,7 @@ public class EnemyMoving : EnemyBase
     [SerializeField] ThirdPersonCharacter character;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] float runawayPointDistance = 15f;
+    [SerializeField] float bufferFromPlayer = 2.1f;
 
 
     //Referneces 
@@ -25,12 +26,12 @@ public class EnemyMoving : EnemyBase
     {
         print("Enemy2 distance: " + Vector3.Distance(this.transform.position, player.transform.position));
 
-        if ((Vector3.Distance(this.transform.position, player.transform.position) < followRadius)&& (Vector3.Distance(this.transform.position, player.transform.position) > agent.stoppingDistance -2.1)&&isFollowing)
+        if ((Vector3.Distance(this.transform.position, player.transform.position) < followRadius)&& (Vector3.Distance(this.transform.position, player.transform.position) > agent.stoppingDistance - bufferFromPlayer)&&isFollowing)
         {
             agent.SetDestination(player.transform.position);
         }
 
-        if((Vector3.Distance(this.transform.position, player.transform.position) < agent.stoppingDistance -2.1)&&isFollowing)
+        if((Vector3.Distance(this.transform.position, player.transform.position) < agent.stoppingDistance - bufferFromPlayer)&&isFollowing)
         {
             agent.SetDestination(RandomNavmeshLocation(runawayPointDistance));
             isFollowing = false;
@@ -42,7 +43,7 @@ public class EnemyMoving : EnemyBase
         }
         else
         {
-            character.Move(Vector3.zero, false, false);
+            character.Move(Vector3.zero, false, true);
             isFollowing = true;
         }
     }
