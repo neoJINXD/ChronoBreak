@@ -434,7 +434,7 @@ MonoBehaviour:
   playerCam: {fileID: 2069203678445703552}
   orientation: {fileID: 2069203677412642303}
   moveSpeed: 4500
-  maxSpeed: 20
+  maxSpeed: 15
   grounded: 0
   whatIsGround:
     serializedVersion: 2
