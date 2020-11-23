@@ -14852,10 +14852,6 @@ PrefabInstance:
       propertyPath: wallRunForce
       value: 500
       objectReference: {fileID: 0}
-    - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
-      propertyPath: wallRunUpForce
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 2069203678445703552, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
       propertyPath: m_LocalPosition.x

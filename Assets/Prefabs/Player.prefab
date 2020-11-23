@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f75a0075f8985b44a061b745949ea81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallRunUpForce: 10
+  wallRunUpForce: 9
   wallRunHoldForce: 500
   wallRunPushForce: 5
   maxWallRunCamTilt: 10
