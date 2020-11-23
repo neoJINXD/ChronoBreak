@@ -1,92 +1,67 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.AI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
-public class EnemyMoving : MonoBehaviour
+public class EnemyMoving : EnemyBase
 {
     // Assignables
     [SerializeField] GameObject player;
-    [SerializeField] float speed = 5f;
     [SerializeField] float followRadius = 15f;
-    [SerializeField] float angularSpeed = 1f;
-    [SerializeField] Timer timer;
+    [SerializeField] ThirdPersonCharacter character;
+    [SerializeField] NavMeshAgent agent;
+    [SerializeField] float runawayPointDistance = 15f;
+    [SerializeField] float bufferFromPlayer = 2.1f;
 
-    // References
-    private Rigidbody rb;
-    private bool freeMove = true;
-    private LinkedList<Vector3> positions;
-    private Vector3 pos;
 
-    void Start()
+    //Referneces 
+    bool isFollowing;
+
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        positions = new LinkedList<Vector3>();
+        isFollowing = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, player.transform.position);
-        if ((distance < followRadius))
+        print("Enemy2 distance: " + Vector3.Distance(this.transform.position, player.transform.position));
+
+        if ((Vector3.Distance(this.transform.position, player.transform.position) < followRadius)&& (Vector3.Distance(this.transform.position, player.transform.position) > agent.stoppingDistance - bufferFromPlayer)&&isFollowing)
         {
-            if(freeMove)
-            {
-                rb.constraints = RigidbodyConstraints.None;
+            agent.SetDestination(player.transform.position);
+        }
 
-                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        if((Vector3.Distance(this.transform.position, player.transform.position) < agent.stoppingDistance - bufferFromPlayer)&&isFollowing)
+        {
+            agent.SetDestination(RandomNavmeshLocation(runawayPointDistance));
+            isFollowing = false;
+        }
 
-                Vector3 rel = (player.transform.position - transform.position).normalized;
-                rel.y = 0;
-                Quaternion desiredRotation = Quaternion.LookRotation(rel, Vector3.up);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, angularSpeed); //TODO should use Time.deltaTime
-
-                positions.AddLast(transform.position);
-                if(positions.Count > 20)
-                {
-                    positions.RemoveFirst();
-                }
-            }
+        if (agent.remainingDistance > agent.stoppingDistance)
+        {
+            character.Move(agent.desiredVelocity, false, true);
         }
         else
         {
-           if(rb.velocity.magnitude < 6.5f)
-            {
-                rb.constraints = RigidbodyConstraints.FreezeAll;
-            }
-        }
-
-        if(rb.velocity.magnitude > 0f)
-        {
-            freeMove = true;
+            character.Move(Vector3.zero, false, true);
+            isFollowing = true;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public Vector3 RandomNavmeshLocation(float radius)
     {
-        if(collision.collider.tag =="Player")
-        {
-            //increase time
-            Debug.Log("Hit Player");
-        }
+        Vector3 directionOfTravel = this.transform.position - player.transform.position;
+        Vector3 finalDirection = directionOfTravel + directionOfTravel.normalized * radius;
+        Vector3 targetPosition = player.transform.position + finalDirection;
 
-        if (collision.collider.tag == "Wall")
+        Vector3 randomDirection = Random.insideUnitSphere * (radius/2f);
+        randomDirection = targetPosition + randomDirection;
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out hit, (radius/2f), 1))
         {
-            freeMove = false;
-            
-            pos = positions.First.Value;
-            positions = null;
-            positions = new LinkedList<Vector3>();
-            positions.AddLast(pos);
-            transform.position = pos;
+            finalPosition = hit.position;
         }
+        return finalPosition;
     }
-
-    private void OnTriggerEnter(Collider other) 
-    {
-        if (other.CompareTag("CanGrab")) // if is sword
-        {
-            Destroy(gameObject);
-            timer.CountEvent("shooting enemy kill");
-        }
-    }
-
 }
