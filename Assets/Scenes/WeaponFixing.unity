@@ -5392,6 +5392,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: standing enemy(type1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7892660494417101827, guid: a3ccbfdd3b7f7e145bd5fe95cbcc2319,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 125192020}
+    - target: {fileID: 7892660494417101827, guid: a3ccbfdd3b7f7e145bd5fe95cbcc2319,
+        type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 2084315756}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3ccbfdd3b7f7e145bd5fe95cbcc2319, type: 3}
 --- !u!43 &422333324
@@ -14841,6 +14851,10 @@ PrefabInstance:
     - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
       propertyPath: wallRunForce
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537961855, guid: 5017b2e0e92efdd47818b6830d7bd482, type: 3}
+      propertyPath: wallRunUpForce
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2069203678445703552, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
