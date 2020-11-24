@@ -11,6 +11,7 @@ TagManager:
   - Ramp
   - Enemy
   - Bullet
+  - Building
   layers:
   - Default
   - TransparentFX
