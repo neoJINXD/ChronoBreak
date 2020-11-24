@@ -23,8 +23,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969294052511319545}
-  m_LocalRotation: {x: -0.6952811, y: 0.7163208, z: -0.03568547, w: 0.04685455}
-  m_LocalPosition: {x: 0.716, y: -0.519, z: 1.173}
+  m_LocalRotation: {x: 0.033287972, y: 0.9966326, z: -0.059624366, w: 0.045390688}
+  m_LocalPosition: {x: 0.69, y: -0.4, z: 1.06}
   m_LocalScale: {x: 0.72172, y: 0.72172, z: 0.72172}
   m_Children: []
   m_Father: {fileID: 2069203678445703552}
@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 2069203678988874331}
   - component: {fileID: 1537961855}
   - component: {fileID: 4875067425480733512}
+  - component: {fileID: 6751700889464305539}
   m_Layer: 0
   m_Name: PLayer
   m_TagString: Player
@@ -433,7 +434,7 @@ MonoBehaviour:
   playerCam: {fileID: 2069203678445703552}
   orientation: {fileID: 2069203677412642303}
   moveSpeed: 4500
-  maxSpeed: 20
+  maxSpeed: 15
   grounded: 0
   whatIsGround:
     serializedVersion: 2
@@ -455,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f75a0075f8985b44a061b745949ea81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallRunUpForce: 10
+  wallRunUpForce: 9
   wallRunHoldForce: 500
   wallRunPushForce: 5
   maxWallRunCamTilt: 10
@@ -476,6 +477,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   dashEffect: {fileID: 8804163855412081617}
+--- !u!114 &6751700889464305539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069203678988874308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6db7196e79231949a9aeea7ac484d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swordContainer: {fileID: 3060010666921115697}
+  gunContainer: {fileID: 8233980553526343947}
+  pickupable:
+    serializedVersion: 2
+    m_Bits: 512
+  pickUpRange: 5
+  pickUpTime: 0
+  equipped: 0
 --- !u!1 &5227069312037318078
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3060010666921115697}
   m_Layer: 0
-  m_Name: EquipPosition
+  m_Name: SwordPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -562,7 +583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6643294748352682956}
   m_LocalRotation: {x: -0.042360757, y: 0.6996433, z: 0.09266925, w: -0.7071897}
-  m_LocalPosition: {x: 0.9399986, y: -0.87000084, z: 1.3999996}
+  m_LocalPosition: {x: 1.1, y: -0.7, z: 1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2069203678445703552}
@@ -680,7 +701,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

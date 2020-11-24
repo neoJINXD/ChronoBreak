@@ -21,6 +21,13 @@ public abstract class EnemyBase : MonoBehaviour
             Destroy(gameObject);
             timer.CountEvent(type + " kill");
         }
+
+        if (collision.collider.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+            timer.CountEvent(type + " kill");
+        }
     }
 
     private void OnTriggerEnter(Collider other) 
