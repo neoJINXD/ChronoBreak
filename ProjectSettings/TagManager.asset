@@ -10,6 +10,7 @@ TagManager:
   - Cube
   - Ramp
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
