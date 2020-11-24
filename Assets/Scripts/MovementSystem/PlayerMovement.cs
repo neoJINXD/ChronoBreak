@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
         Look();
         orientationDirection = orientation.transform.forward;
 
-        print(rb.velocity.magnitude);
+        // print(rb.velocity.magnitude);
     }
 
     // Handling user input
