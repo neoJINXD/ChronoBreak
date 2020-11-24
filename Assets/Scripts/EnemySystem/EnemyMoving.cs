@@ -26,7 +26,7 @@ public class EnemyMoving : EnemyBase
     // Update is called once per frame
     void Update()
     {
-        print("Enemy2 distance: " + Vector3.Distance(this.transform.position, player.transform.position));
+        // print("Enemy2 distance: " + Vector3.Distance(this.transform.position, player.transform.position));
 
         if ((Vector3.Distance(this.transform.position, player.transform.position) < followRadius)&& (Vector3.Distance(this.transform.position, player.transform.position) > agent.stoppingDistance - bufferFromPlayer)&&isFollowing)
         {
