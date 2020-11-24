@@ -198,7 +198,8 @@ public class Timer : MonoBehaviour
     // Shows a summary of the time penalties and bonus awarded during the level
     void ShowTimeSummaryPanel()
     {
-        string summary;
+        string summary, left, right;
+        int padRight = 65, padLeft = 8;
 
         // Show elapsed time
         int minutes = (int)(timeElapsed / 60);
@@ -209,28 +210,59 @@ public class Timer : MonoBehaviour
         string secondsText = seconds < 10 ? secondsText = "0" + seconds.ToString() : seconds.ToString();
         string msText = centiseconds < 10 ? msText = "0" + centiseconds.ToString() : centiseconds.ToString();
 
-        summary = "Elapsed time -----> " + minutesText + ":" + secondsText + '.' + msText + "\n\n";
+        //summary = "Elapsed time -----> " + minutesText + ":" + secondsText + '.' + msText + "\n\n";
+        left = "Elapsed time:";
+        right = minutesText + ":" + secondsText + '.' + msText;
+        summary = left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show dash stats
-        summary += "Dash: " + dashCounter.ToString() + " x " + dashTimePenalty.ToString() + " sec -----> " + (dashCounter * dashTimePenalty).ToString() + " sec\n\n";
+        //summary += "Dash: " + dashCounter.ToString() + " x " + dashTimePenalty.ToString() + " sec -----> " + (dashCounter * dashTimePenalty).ToString() + " sec\n\n";
+        left = "Dash: " + dashCounter.ToString() + " x " + dashTimePenalty.ToString() + " sec";
+        right = (dashCounter * dashTimePenalty).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show standing enemy stats
-        summary += "Standing enemies killed: " + enemy1KilledCounter.ToString() + " x " + enemy1KilledTimeBonus.ToString() + " sec -----> " + (enemy1KilledCounter * enemy1KilledTimeBonus).ToString() + " sec\n";
-        summary += "Standing enemies touched: " + enemy1TouchedCounter.ToString() + " x " + enemy1TouchedTimePenalty.ToString() + " sec -----> " + (enemy1TouchedCounter * enemy1TouchedTimePenalty).ToString() + " sec\n\n";
+        //summary += "Standing enemies killed: " + enemy1KilledCounter.ToString() + " x " + enemy1KilledTimeBonus.ToString() + " sec -----> " + (enemy1KilledCounter * enemy1KilledTimeBonus).ToString() + " sec\n";
+        //summary += "Standing enemies touched: " + enemy1TouchedCounter.ToString() + " x " + enemy1TouchedTimePenalty.ToString() + " sec -----> " + (enemy1TouchedCounter * enemy1TouchedTimePenalty).ToString() + " sec\n\n";
+        left = "Standing enemies killed: " + enemy1KilledCounter.ToString() + " x " + enemy1KilledTimeBonus.ToString() + " sec";
+        right = (enemy1KilledCounter * enemy1KilledTimeBonus).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n";
+
+        left = "Standing enemies touched: " + enemy1TouchedCounter.ToString() + " x " + enemy1TouchedTimePenalty.ToString() + " sec";
+        right = (enemy1TouchedCounter * enemy1TouchedTimePenalty).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show shooting enemy stats
-        summary += "Shooting enemies killed: " + enemy2KilledCounter.ToString() + " x " + enemy2KilledTimeBonus.ToString() + " sec -----> " + (enemy2KilledCounter * enemy2KilledTimeBonus).ToString() + " sec\n";
-        summary += "Shot by enemies: " + enemy2TouchedCounter.ToString() + " x " + enemy2TouchedTimePenalty.ToString() + " sec -----> " + (enemy2TouchedCounter * enemy2TouchedTimePenalty).ToString() + " sec\n\n";
+        //summary += "Shooting enemies killed: " + enemy2KilledCounter.ToString() + " x " + enemy2KilledTimeBonus.ToString() + " sec -----> " + (enemy2KilledCounter * enemy2KilledTimeBonus).ToString() + " sec\n";
+        //summary += "Shot by enemies: " + enemy2TouchedCounter.ToString() + " x " + enemy2TouchedTimePenalty.ToString() + " sec -----> " + (enemy2TouchedCounter * enemy2TouchedTimePenalty).ToString() + " sec\n\n";
+        left = "Shooting enemies killed: " + enemy2KilledCounter.ToString() + " x " + enemy2KilledTimeBonus.ToString() + " sec";
+        right = (enemy2KilledCounter * enemy2KilledTimeBonus).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n";
+
+        left = "Shot by enemies: " + enemy2TouchedCounter.ToString() + " x " + enemy2TouchedTimePenalty.ToString() + " sec";
+        right = (enemy2TouchedCounter * enemy2TouchedTimePenalty).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show chasing enemy stats
-        summary += "Chasing enemies killed: " + enemy3KilledCounter.ToString() + " x " + enemy3KilledTimeBonus.ToString() + " sec -----> " + (enemy3KilledCounter * enemy3KilledTimeBonus).ToString() + " sec\n";
-        summary += "Chasing enemies touched: " + enemy3TouchedCounter.ToString() + " x " + enemy3TouchedTimePenalty.ToString() + " sec -----> " + (enemy3TouchedCounter * enemy3TouchedTimePenalty).ToString() + " sec\n\n";
+        //summary += "Chasing enemies killed: " + enemy3KilledCounter.ToString() + " x " + enemy3KilledTimeBonus.ToString() + " sec -----> " + (enemy3KilledCounter * enemy3KilledTimeBonus).ToString() + " sec\n";
+        //summary += "Chasing enemies touched: " + enemy3TouchedCounter.ToString() + " x " + enemy3TouchedTimePenalty.ToString() + " sec -----> " + (enemy3TouchedCounter * enemy3TouchedTimePenalty).ToString() + " sec\n\n";
+        left = "Chasing enemies killed: " + enemy3KilledCounter.ToString() + " x " + enemy3KilledTimeBonus.ToString() + " sec";
+        right = (enemy3KilledCounter * enemy3KilledTimeBonus).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n";
+
+        left = "Chasing enemies touched: " + enemy3TouchedCounter.ToString() + " x " + enemy3TouchedTimePenalty.ToString() + " sec";
+        right = (enemy3TouchedCounter * enemy3TouchedTimePenalty).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show times the player fell off
-        summary += "Times fallen off: " + fallingOffCounter.ToString() + " x " + fallingOffPenalty.ToString() + " sec -----> " + (fallingOffCounter * fallingOffPenalty).ToString() + " sec\n\n";
+        //summary += "Times fallen off: " + fallingOffCounter.ToString() + " x " + fallingOffPenalty.ToString() + " sec -----> " + (fallingOffCounter * fallingOffPenalty).ToString() + " sec\n\n";
+        left = "Times fallen off: " + fallingOffCounter.ToString() + " x " + fallingOffPenalty.ToString() + " sec";
+        right = (fallingOffCounter * fallingOffPenalty).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show final time
-        summary += "Total time -----> " + timerText.text;
+        //summary += "Total time -----> " + timerText.text;
+        summary += "Total time:".PadRight(padRight) + timerText.text.PadLeft(padLeft);
 
         // Display in UI
         timeSummaryPanel.SetActive(true);

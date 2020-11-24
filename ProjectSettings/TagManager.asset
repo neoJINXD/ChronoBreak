@@ -9,6 +9,8 @@ TagManager:
   - Wall
   - Cube
   - Ramp
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
