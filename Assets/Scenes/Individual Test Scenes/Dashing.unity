@@ -617,6 +617,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2069203678988874335, guid: 5017b2e0e92efdd47818b6830d7bd482,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -52.45
+      objectReference: {fileID: 0}
     - target: {fileID: 5646445542102079940, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
       propertyPath: m_Name
@@ -625,17 +630,17 @@ PrefabInstance:
     - target: {fileID: 7168797366479703189, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 46.046474
+      value: 49.29
       objectReference: {fileID: 0}
     - target: {fileID: 7168797366479703189, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.868948
+      value: 22.9
       objectReference: {fileID: 0}
     - target: {fileID: 7168797366479703189, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 24.892313
+      value: 28.1
       objectReference: {fileID: 0}
     - target: {fileID: 7168797366479703189, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
@@ -1039,12 +1044,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb531781dfb49d043970efb6c8bf962d, type: 3}
---- !u!1 &1356218510 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5646445542102079940, guid: 5017b2e0e92efdd47818b6830d7bd482,
-    type: 3}
-  m_PrefabInstance: {fileID: 830265838}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1380600850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1522,6 +1521,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb531781dfb49d043970efb6c8bf962d, type: 3}
+--- !u!1 &1715794946 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2069203678988874308, guid: 5017b2e0e92efdd47818b6830d7bd482,
+    type: 3}
+  m_PrefabInstance: {fileID: 830265838}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1720779264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1711138507435578725, guid: cb531781dfb49d043970efb6c8bf962d,
@@ -1944,9 +1949,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityButtonAxisName: Dash
   darkMask: {fileID: 552197082}
-  coolDownTextDisplay: {fileID: 577728406}
+  cooldownTextDisplay: {fileID: 577728406}
   ability: {fileID: 11400000, guid: 1aecec77a6340b64d987c64b3972af24, type: 2}
-  player: {fileID: 1356218510}
+  player: {fileID: 1715794946}
   timer: {fileID: 0}
 --- !u!82 &1936850169
 AudioSource:

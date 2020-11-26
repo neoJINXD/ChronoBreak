@@ -14,6 +14,20 @@ public abstract class EnemyBase : MonoBehaviour
             // Debug.Log("Hit Player");
             timer.CountEvent(type + " touched");
         }
+
+        // For thrown weapon
+        if (collision.collider.CompareTag("CanGrab"))
+        {
+            Destroy(gameObject);
+            timer.CountEvent(type + " kill");
+        }
+
+        if (collision.collider.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+            timer.CountEvent(type + " kill");
+        }
     }
 
     private void OnTriggerEnter(Collider other) 
@@ -21,7 +35,7 @@ public abstract class EnemyBase : MonoBehaviour
         if (other.CompareTag("CanGrab")) // if is sword
         {
             //Trigger enemy death sound effect
-            FindObjectOfType<AudioManager>().Play("EnemyDying");
+            FindObjectOfType<AudioManager>().Play("EnemyDying"); //TODO change to singleton
             Destroy(gameObject);
             timer.CountEvent(type + " kill");
         }

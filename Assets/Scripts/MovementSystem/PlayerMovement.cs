@@ -79,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         Look();
         orientationDirection = orientation.transform.forward;
 
+        // print(rb.velocity.magnitude);
     }
 
     // Handling user input
@@ -115,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Trigger crouch sound
-        FindObjectOfType<AudioManager>().Play("Crouch");
+        FindObjectOfType<AudioManager>().Play("Crouch"); //TODO change to singleton
 
     }
 
@@ -129,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
     private void Movement() 
     {
         // Extra gravity
-        // rb.AddForce(Vector3.down * Time.deltaTime * 10);
+        rb.AddForce(Vector3.down * Time.deltaTime * 100);
         
         // Find actual velocity relative to where player is looking
         Vector2 mag = FindVelRelativeToLook();
@@ -198,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
             // rb.AddForce(normalVector * jumpForce * 0.5f);
 
             //Add jumo sound effect
-            FindObjectOfType<AudioManager>().Play("Jumping");
+            FindObjectOfType<AudioManager>().Play("Jumping"); //TODO change to singleton
 
             // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;

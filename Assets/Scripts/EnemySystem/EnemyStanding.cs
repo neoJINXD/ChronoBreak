@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class EnemyStanding : EnemyBase
 {
@@ -6,20 +7,12 @@ public class EnemyStanding : EnemyBase
     [SerializeField] GameObject player;
     [SerializeField] float followRadius = 15f;
     [SerializeField] float angularSpeed = 1f;
-    
-    // References
-    private Rigidbody rb;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+    [SerializeField] ThirdPersonCharacter character;
 
     void Update()
     {
         if (Vector3.Distance(transform.position, player.transform.position) < followRadius)
         {
-            rb.constraints = RigidbodyConstraints.None;
             //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed);
             Vector3 rel = (player.transform.position - transform.position).normalized;
             rel.y = 0;
@@ -30,10 +23,7 @@ public class EnemyStanding : EnemyBase
         }
         else
         {
-            if (rb.velocity.magnitude < 6.5f)
-            {
-                rb.constraints = RigidbodyConstraints.FreezeAll;
-            }
+            character.Move(Vector3.zero, false, true);
         }
     }
 }
