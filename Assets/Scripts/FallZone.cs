@@ -8,10 +8,11 @@ public class FallZone : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            col.GetComponent<PlayerMovement>().LoadSafePos();
+            col.GetComponent<PlayerMovement>().LoadSafePos(); //TODO keep track of this in a game manager
             timer.CountEvent("falling");
             //Trigger death sound effect
-            FindObjectOfType<AudioManager>().Play("Death"); //TODO use singleton
+            // FindObjectOfType<AudioManager>().Play("Death"); //TODO use singleton
+            AudioManager.instance.Play("Death");
         }
     }
 }   

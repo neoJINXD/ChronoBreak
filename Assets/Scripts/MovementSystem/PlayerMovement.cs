@@ -116,8 +116,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Trigger crouch sound
-        FindObjectOfType<AudioManager>().Play("Crouch"); //TODO change to singleton
-
+        //FindObjectOfType<AudioManager>().Play("Crouch"); //TODO change to singleton
+        AudioManager.instance.Play("Crouch");
     }
 
     private void StopCrouch() 
@@ -199,7 +199,8 @@ public class PlayerMovement : MonoBehaviour
             // rb.AddForce(normalVector * jumpForce * 0.5f);
 
             //Add jumo sound effect
-            FindObjectOfType<AudioManager>().Play("Jumping"); //TODO change to singleton
+            // FindObjectOfType<AudioManager>().Play("Jumping"); //TODO change to singleton
+            AudioManager.instance.Play("Jumping");
 
             // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;

@@ -35,7 +35,8 @@ public abstract class EnemyBase : MonoBehaviour
         if (other.CompareTag("CanGrab")) // if is sword
         {
             //Trigger enemy death sound effect
-            FindObjectOfType<AudioManager>().Play("EnemyDying"); //TODO change to singleton
+            // FindObjectOfType<AudioManager>().Play("EnemyDying"); //TODO change to singleton
+            AudioManager.instance.Play("EnemyDying");
             Destroy(gameObject);
             timer.CountEvent(type + " kill");
         }

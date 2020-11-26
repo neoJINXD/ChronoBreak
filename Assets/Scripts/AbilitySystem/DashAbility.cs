@@ -154,10 +154,10 @@ public class DashAbility : Ability
         }
 
         //Trigger Dash sound effect
-        FindObjectOfType<AudioManager>().Play("dash_sound"); //TODO change to singleton
+        // FindObjectOfType<AudioManager>().Play("dash_sound"); //TODO change to singleton
+        AudioManager.instance.Play("dash_sound");
 
-
-        player.GetComponent<Rigidbody>().velocity *= 0.15f;
+        player.GetComponent<Rigidbody>().velocity *= 0.15f; //TODO will prob be changed form ian's changes
     }
 
 }
