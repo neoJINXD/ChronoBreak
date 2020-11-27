@@ -152,7 +152,8 @@ public class DashAbility : Ability
 
             }
         }
-        player.GetComponent<Rigidbody>().velocity *= 0.15f;
+
+        player.GetComponent<Rigidbody>().velocity *= 0.15f; //TODO will prob be changed form ian's changes
     }
 
 }
