@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    // Start is called before the first frame update
     public Sound[] sounds;
-
     void Start()
     {
         foreach (Sound s in sounds)
@@ -25,11 +23,23 @@ public class AudioManager : Singleton<AudioManager>
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-
         if (s == null)
+        {
+            Debug.LogError("ERROR: INVALID SOUND");
             return;
-
+        }
+        // print($"Playing {name}");
         s.source.Play();
-        
+    }
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogError("ERROR: INVALID SOUND");
+            return;
+        }
+        // print($"Playing {name}");
+        s.source.Stop();
     }
 }
