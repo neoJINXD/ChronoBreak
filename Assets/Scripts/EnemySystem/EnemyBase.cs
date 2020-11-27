@@ -34,9 +34,12 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (other.CompareTag("CanGrab")) // if is sword
         {
-            AudioManager.instance.Play("EnemyDeath");
             Destroy(gameObject);
             timer.CountEvent(type + " kill");
         }
+    }
+
+    private void OnDestroy() {
+        AudioManager.instance.Play("EnemyDeath");
     }
 }
