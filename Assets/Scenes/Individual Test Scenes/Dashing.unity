@@ -122,6 +122,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &6163205 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2069203678445703552, guid: 5017b2e0e92efdd47818b6830d7bd482,
+    type: 3}
+  m_PrefabInstance: {fileID: 830265838}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &44440942
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +449,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -52.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875067425480733512, guid: 5017b2e0e92efdd47818b6830d7bd482,
+        type: 3}
+      propertyPath: playerCam
+      value: 
+      objectReference: {fileID: 6163205}
+    - target: {fileID: 4875067425480733512, guid: 5017b2e0e92efdd47818b6830d7bd482,
+        type: 3}
+      propertyPath: dashForce
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875067425480733512, guid: 5017b2e0e92efdd47818b6830d7bd482,
+        type: 3}
+      propertyPath: dashDuration
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5646445542102079940, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
