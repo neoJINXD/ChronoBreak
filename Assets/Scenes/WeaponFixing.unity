@@ -5586,6 +5586,7 @@ GameObject:
   - component: {fileID: 635859013}
   - component: {fileID: 635859012}
   - component: {fileID: 635859011}
+  - component: {fileID: 635859016}
   m_Layer: 8
   m_Name: Wall
   m_TagString: WallRunnable
@@ -5884,6 +5885,18 @@ Transform:
   m_Father: {fileID: 1345797241}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &635859016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635859010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b5b5c8ff766dc40b3abecb410c263a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &751927792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12004,7 +12017,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29066
+  m_Name: pb_Mesh16690
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14866,6 +14879,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -30.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069203678988874331, guid: 5017b2e0e92efdd47818b6830d7bd482,
+        type: 3}
+      propertyPath: forwardWallCheckDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2069203678988874331, guid: 5017b2e0e92efdd47818b6830d7bd482,
+        type: 3}
+      propertyPath: climbSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2069203678988874335, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}

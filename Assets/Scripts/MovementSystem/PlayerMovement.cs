@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -24,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float counterMovement = 0.175f;
     private float threshold = 0.01f;
     [SerializeField] float maxSlopeAngle = 35f;
+
+    [SerializeField] float climbSpeed;
+    [SerializeField] float forwardWallCheckDistance;
+    private bool isClimbing = false;
 
     //Crouch & Slide
     [Header("Sliding Settings")]
@@ -66,10 +71,13 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate() 
     {
-        Movement();
-        if (grounded) 
+        if (!isClimbing)
         {
-            SavePos();
+            Movement();
+            if (grounded) 
+            {
+                SavePos();
+            }
         }
     }
 
@@ -193,6 +201,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump() 
     {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, orientation.forward, out hit, forwardWallCheckDistance))
+        {
+            if (hit.collider.GetComponent<Climbable>() != null)
+            {
+                StartCoroutine(Climb(hit.collider));
+                return;
+            }
+        }
+
         if (grounded && readyToJump) 
         {
             readyToJump = false;
@@ -356,6 +374,36 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = lastSafePos;
         rb.velocity = Vector3.zero;
+    }
+
+    private IEnumerator Climb(Collider wall)
+    {
+        isClimbing = true;
+
+        while (jumping)
+        {
+            RaycastHit hit;
+            Debug.DrawRay(transform.position, orientation.forward * forwardWallCheckDistance, Color.yellow);
+            if (Physics.Raycast(transform.position, orientation.forward, out hit, forwardWallCheckDistance))
+            {
+                if (hit.collider == wall)
+                {
+                    //TODO move upwards and break gravity
+
+                    //TODO check video's Move method?
+                    transform.position = transform.position + new Vector3(0f, climbSpeed * Time.deltaTime, 0f);
+                    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+                    print("Moving up");
+                    yield return null;
+                }
+            }
+            else 
+            {
+                break;
+            }
+        }
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        isClimbing = false;
     }
 
 }
