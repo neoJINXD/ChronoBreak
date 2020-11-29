@@ -5,13 +5,28 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] float speed;
+    [SerializeField] float life;
+
+    private float timer;
 
     // private Vector3 _dir ;
     public Vector3 dir { get; set; }
 
+    void Start()
+    {
+        timer = 0;
+    }
+
+
     void FixedUpdate()
     {
+        timer += Time.deltaTime;
         transform.position += dir * speed * Time.deltaTime;
+
+        if (timer > life)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter(Collision other)
