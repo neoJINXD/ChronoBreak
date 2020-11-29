@@ -28,6 +28,8 @@ public class Timer : MonoBehaviour
 
     [SerializeField] GameObject crosshair;
 
+    [SerializeField] GameObject hitmarker;
+
     // Time bonus and penalties
     // TODO add more fields
     [Header("Time Penalties")]
@@ -356,5 +358,17 @@ public class Timer : MonoBehaviour
         timeSummaryPanel.SetActive(false);
         levelFinishedPanel.SetActive(true);
         finalTimeText.text = "Final Time: " + timerText.text;
+    }
+
+    public void EnemyHit()
+    {
+        hitmarker.SetActive(true);
+        AudioManager.instance.Play("Hitmarker");
+        Invoke("NoHitmarker", 0.1f);
+    }
+
+    private void NoHitmarker()
+    {
+        hitmarker.SetActive(false);
     }
 }
