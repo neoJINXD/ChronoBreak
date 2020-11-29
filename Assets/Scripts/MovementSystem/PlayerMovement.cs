@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject feet;
     private bool isClimbing = false;
 
+
     //Crouch & Slide
     [Header("Sliding Settings")]
     [SerializeField] float slideForce = 400;
@@ -60,6 +61,9 @@ public class PlayerMovement : MonoBehaviour
 
     //Resetting
     private Vector3 lastSafePos;
+
+
+    [SerializeField] ParticleSystem speedFX;
     
     void Start() 
     {
@@ -90,6 +94,15 @@ public class PlayerMovement : MonoBehaviour
         orientationDirection = orientation.transform.forward;
 
         // print(rb.velocity.magnitude);
+        if (rb.velocity.magnitude > 10f && !speedFX.isPlaying)
+        {
+            print("i iam speed");
+            speedFX.Play();
+        }
+        else if (rb.velocity.magnitude < 10f)
+        {
+            speedFX.Stop();
+        }
     }
 
     // Handling user input
@@ -141,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement() 
     {
+        
         // Extra gravity
         rb.AddForce(Vector3.down * Time.deltaTime * 100);
         
