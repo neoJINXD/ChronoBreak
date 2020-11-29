@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float climbSpeed;
     [SerializeField] float forwardWallCheckDistance;
+    [SerializeField] float edgeForce;
+    [SerializeField] GameObject feet;
     private bool isClimbing = false;
 
     //Crouch & Slide
@@ -204,13 +206,13 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, orientation.forward, out hit, forwardWallCheckDistance))
         {
+            // print(hit.collider.name);
             if (hit.collider.GetComponent<Climbable>() != null)
             {
                 StartCoroutine(Climb(hit.collider));
                 return;
             }
         }
-
         if (grounded && readyToJump) 
         {
             readyToJump = false;
@@ -384,16 +386,14 @@ public class PlayerMovement : MonoBehaviour
         {
             RaycastHit hit;
             Debug.DrawRay(transform.position, orientation.forward * forwardWallCheckDistance, Color.yellow);
-            if (Physics.Raycast(transform.position, orientation.forward, out hit, forwardWallCheckDistance))
+            if (Physics.Raycast(transform.position, orientation.forward, out hit, forwardWallCheckDistance) ||
+                Physics.Raycast(feet.transform.position, orientation.forward, out hit, forwardWallCheckDistance))
             {
                 if (hit.collider == wall)
                 {
-                    //TODO move upwards and break gravity
-
-                    //TODO check video's Move method?
                     transform.position = transform.position + new Vector3(0f, climbSpeed * Time.deltaTime, 0f);
-                    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-                    print("Moving up");
+                    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // resetting gravity
+                    // print("Moving up");
                     yield return null;
                 }
             }
@@ -402,8 +402,8 @@ public class PlayerMovement : MonoBehaviour
                 break;
             }
         }
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // resetting gravity
+        rb.AddForce(Vector3.up * edgeForce, ForceMode.Impulse);
         isClimbing = false;
     }
-
 }
