@@ -15413,8 +15413,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2069203678988874331, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}
-      propertyPath: edgeForce
-      value: 15
+      propertyPath: slideCounterMovement
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2069203678988874335, guid: 5017b2e0e92efdd47818b6830d7bd482,
         type: 3}

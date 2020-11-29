@@ -444,6 +444,7 @@ MonoBehaviour:
   maxSlopeAngle: 35
   climbSpeed: 5
   forwardWallCheckDistance: 1
+  edgeForce: 15
   feet: {fileID: 7070062311571798636}
   slideForce: 500
   slideCounterMovement: 0.2
