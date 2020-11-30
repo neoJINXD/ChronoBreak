@@ -482,8 +482,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af444e36a6cc9b44b83545a51a6134b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  dashForce: 50
+  dashDuration: 0.2
+  dashDamping: 0.5
   dashEffect: {fileID: 8804163855412081617}
+  playerCam: {fileID: 2069203678445703552}
 --- !u!114 &6751700889464305539
 MonoBehaviour:
   m_ObjectHideFlags: 0

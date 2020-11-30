@@ -7,6 +7,7 @@ public class TriggerDash : MonoBehaviour
     
     [SerializeField] float dashForce;
     [SerializeField] float dashDuration;
+    [Range(0,1)][SerializeField] float dashDamping;
     [SerializeField] ParticleSystem dashEffect;
     [SerializeField] Transform playerCam;
 
@@ -37,7 +38,7 @@ public class TriggerDash : MonoBehaviour
 
         yield return new WaitForSeconds(dashDuration);
 
-        rb.velocity *= 0.25f;
+        rb.velocity *= dashDamping;
         dashTriggered = false;
         isDashing = false;
     }

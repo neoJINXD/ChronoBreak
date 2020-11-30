@@ -13,7 +13,11 @@ public class EnemyNavMovement : EnemyBase
 
     [SerializeField] float followRadius = 100f;
 
-
+    private void Start()
+    {
+        agent.avoidancePriority = Random.Range(0,99);
+        NavMesh.avoidancePredictionTime = 10f;
+    }
     void Update()
     {
         if(Vector3.Distance(this.transform.position, player.transform.position) < followRadius)
