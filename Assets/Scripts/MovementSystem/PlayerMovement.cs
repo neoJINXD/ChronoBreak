@@ -92,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
         orientationDirection = orientation.transform.forward;
-
         // print(rb.velocity.magnitude);
         if (rb.velocity.magnitude > 10f && !speedFX.isPlaying)
         {
