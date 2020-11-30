@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 20589114}
   - component: {fileID: 3218725191882321835}
   - component: {fileID: 5118148305820586026}
+  - component: {fileID: 587054712110765162}
   m_Layer: 8
   m_Name: urb_bui_3_lod0
   m_TagString: Untagged
@@ -295,3 +296,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.599999, y: 3.0982769, z: 1.9993287}
   m_Center: {x: -2.7505764e-17, y: 1.5491384, z: -0.0028871377}
+--- !u!114 &587054712110765162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.2293532, y: 0.1645956, z: 0.20638633}
+  m_Center: {x: -0.54934263, y: 3.153678, z: -0.74178433}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
