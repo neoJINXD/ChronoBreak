@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Trigger crouch sound
-        AudioManager.instance.Play("Crouch"); // TODO make only play when moving and crouched
+        //AudioManager.instance.Play("Crouch"); // TODO make only play when moving and crouched
         // TODO change to continuous sliding noise
     }
 
@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
 
-        AudioManager.instance.Stop("Crouch");
+        //AudioManager.instance.Stop("Crouch");
     }
 
     private void Movement() 
@@ -200,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
             // rb.AddForce(normalVector * jumpForce * 0.5f);
 
             //Add jumo sound effect
-            AudioManager.instance.Play("Jumping");
+            //AudioManager.instance.Play("Jumping");
 
             // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
