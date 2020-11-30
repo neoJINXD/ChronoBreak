@@ -31,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float edgeForce;
     [SerializeField] GameObject feet;
     private bool isClimbing = false;
+    private float climbingTimer;
+    [SerializeField] float climbingTimeLimit; // WARNING this cant be live editted while in play mode
+    private bool doneClimbing = false;
 
 
     //Crouch & Slide
@@ -72,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         obj = GameObject.Find("test");
+        climbingTimer = climbingTimeLimit;
     }
 
     
@@ -95,13 +99,20 @@ public class PlayerMovement : MonoBehaviour
         // print(rb.velocity.magnitude);
         if (rb.velocity.magnitude > 10f && !speedFX.isPlaying)
         {
-            print("i iam speed");
+            // print("i iam speed");
             speedFX.Play();
         }
         else if (rb.velocity.magnitude < 10f)
         {
             speedFX.Stop();
         }
+
+        if (isClimbing)
+        {
+            climbingTimer -= Time.deltaTime;
+        }
+        
+        print(climbingTimer);
     }
 
     // Handling user input
@@ -220,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(transform.position, orientation.forward, out hit, forwardWallCheckDistance))
         {
             // print(hit.collider.name);
-            if (hit.collider.GetComponent<Climbable>() != null)
+            if (hit.collider.GetComponent<Climbable>() != null && !doneClimbing)
             {
                 StartCoroutine(Climb(hit.collider));
                 return;
@@ -345,6 +356,7 @@ public class PlayerMovement : MonoBehaviour
             if (IsFloor(normal)) 
             {
                 grounded = true;
+                doneClimbing = false;
                 cancellingGrounded = false;
                 normalVector = normal;
                 CancelInvoke(nameof(StopGrounded));
@@ -400,17 +412,26 @@ public class PlayerMovement : MonoBehaviour
 
         while (jumping)
         {
-            RaycastHit hit;
-            Debug.DrawRay(transform.position, orientation.forward * forwardWallCheckDistance, Color.yellow);
-            if (Physics.Raycast(transform.position, orientation.forward, out hit, forwardWallCheckDistance) ||
-                Physics.Raycast(feet.transform.position, orientation.forward, out hit, forwardWallCheckDistance))
+            RaycastHit hit1;
+            RaycastHit hit2;
+            // Debug.DrawRay(transform.position, orientation.forward * forwardWallCheckDistance, Color.yellow);
+            if (Physics.Raycast(transform.position, orientation.forward, out hit1, forwardWallCheckDistance) && hit1.collider == wall ||
+                Physics.Raycast(feet.transform.position, orientation.forward, out hit2, forwardWallCheckDistance) && hit2.collider == wall)
             {
-                if (hit.collider == wall)
+                transform.position = transform.position + new Vector3(0f, climbSpeed * Time.deltaTime, 0f);
+                rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // resetting gravity
+
+                    
+                yield return null;
+                if (climbingTimer <= 0f)
                 {
-                    transform.position = transform.position + new Vector3(0f, climbSpeed * Time.deltaTime, 0f);
+                    // StopCoroutine("Climb");
+                    isClimbing = false;
+                    doneClimbing = true;
+                    climbingTimer = climbingTimeLimit;
                     rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // resetting gravity
-                    // print("Moving up");
-                    yield return null;
+                    // rb.AddForce(Vector3.up * edgeForce, ForceMode.Impulse);
+                    yield break;
                 }
             }
             else 
