@@ -78,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
         orientationDirection = orientation.transform.forward;
-
         // print(rb.velocity.magnitude);
     }
 
@@ -94,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             StartCrouch();
+
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
@@ -113,6 +113,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(orientation.transform.forward * slideForce);
             }
         }
+
+        //Trigger crouch sound
+        AudioManager.instance.Play("Crouch"); // TODO make only play when moving and crouched
+        // TODO change to continuous sliding noise
     }
 
     private void StopCrouch() 
@@ -120,6 +124,8 @@ public class PlayerMovement : MonoBehaviour
         // Scales player back to normal
         transform.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+
+        AudioManager.instance.Stop("Crouch");
     }
 
     private void Movement() 
@@ -179,6 +185,9 @@ public class PlayerMovement : MonoBehaviour
         // Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
+ 
+
+
     }
 
     private void Jump() 
@@ -186,11 +195,13 @@ public class PlayerMovement : MonoBehaviour
         if (grounded && readyToJump) 
         {
             readyToJump = false;
-
             // Add jump forces
             rb.AddForce(Vector2.up * jumpForce * 1.5f);
             // rb.AddForce(normalVector * jumpForce * 0.5f);
-            
+
+            //Add jumo sound effect
+            AudioManager.instance.Play("Jumping");
+
             // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
             if (rb.velocity.y < 0.5f)
