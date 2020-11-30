@@ -21,7 +21,7 @@ public class TriggerDash : MonoBehaviour
         originalDashForce = dashForce;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (dashTriggered && !isDashing)
         {
@@ -37,11 +37,10 @@ public class TriggerDash : MonoBehaviour
 
         yield return new WaitForSeconds(dashDuration);
 
-        rb.velocity = Vector3.zero;
+        rb.velocity *= 0.25f;
         dashTriggered = false;
         isDashing = false;
     }
-
 
     private void PlayEffect()
     {

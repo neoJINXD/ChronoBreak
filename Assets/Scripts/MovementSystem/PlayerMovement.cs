@@ -78,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
         orientationDirection = orientation.transform.forward;
-        Debug.DrawRay(transform.position, playerCam.forward * 8, Color.green);
         // print(rb.velocity.magnitude);
     }
 
