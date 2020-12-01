@@ -59,8 +59,8 @@ public class Pickup : MonoBehaviour
                 }
                 //TODO playerpickup sound
             
-                weapon.transform.localPosition = Vector3.zero;
-                weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                // weapon.transform.localPosition = Vector3.zero;
+                // weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
             }
         }
 
@@ -94,7 +94,12 @@ public class Pickup : MonoBehaviour
         }
         
 
-        //TODO animate to the pickup position
+        // animate to the pickup position
+        if (equipped)
+        {
+            weapon.transform.localPosition = Vector3.Lerp(weapon.transform.localPosition, Vector3.zero, pickUpTime * Time.deltaTime);
+            weapon.transform.localRotation = Quaternion.Lerp(weapon.transform.localRotation, Quaternion.Euler(Vector3.zero), pickUpTime * Time.deltaTime);
+        }
     }
 
 }

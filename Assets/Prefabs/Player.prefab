@@ -507,7 +507,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   pickUpRange: 5
-  pickUpTime: 0
+  pickUpTime: 10
   equipped: 0
 --- !u!1 &2317443628848328093
 GameObject:
