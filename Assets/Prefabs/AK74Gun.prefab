@@ -343,6 +343,7 @@ MonoBehaviour:
   timeBetweenShot: 0.3
   muzzleFlash: {fileID: 2042674223800127626}
   muzzleLight: {fileID: 190883353834087175}
+  recoilAmount: 3
 --- !u!1 &1305577917954856766
 GameObject:
   m_ObjectHideFlags: 0
