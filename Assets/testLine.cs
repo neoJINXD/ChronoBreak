@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class testLine : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    // Just use this script to see where the forward is for any gameobject
     void Update()
     {
         Debug.DrawRay(transform.position, transform.forward * 1000f, Color.green);

@@ -19,7 +19,7 @@ public class Gun : WeaponBase
 
     void Update() 
     {
-        Debug.DrawRay(projectileLocation.position, -projectileLocation.forward * 100f, Color.red);    
+        Debug.DrawRay(projectileLocation.position, -projectileLocation.forward * 100f, Color.red); // TODO remove 
     }
 
     public override void Attack()
@@ -29,6 +29,7 @@ public class Gun : WeaponBase
         if (timer > timeBetweenShot)
         {
             GameObject bullet = Instantiate(projectile, projectileLocation.transform.position, Quaternion.identity);
+            bullet.transform.forward = -transform.forward;
             muzzleFlash.Play();
             muzzleLight.SetActive(true);
             Recoil();

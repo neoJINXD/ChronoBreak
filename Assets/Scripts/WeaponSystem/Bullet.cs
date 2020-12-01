@@ -10,7 +10,6 @@ public class Bullet : MonoBehaviour
 
     private float timer;
 
-    // private Vector3 _dir ;
     public Vector3 dir { get; set; }
 
     void Start()
@@ -28,6 +27,7 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        // Debug.DrawRay(transform.position, transform.forward * 1000f, Color.green);
     }
 
     void OnCollisionEnter(Collision other)
