@@ -4,11 +4,13 @@ public class Gun : WeaponBase
 {
     // Assignables
     [SerializeField] Transform projectileLocation;
-    [SerializeField] Transform orientation;
 
     [SerializeField] GameObject projectile;
 
     [SerializeField] float timeBetweenShot;
+
+    [SerializeField] ParticleSystem muzzleFlash;
+    [SerializeField] GameObject muzzleLight;
 
     // References
     private float timer = Mathf.Infinity;
@@ -25,8 +27,16 @@ public class Gun : WeaponBase
         if (timer > timeBetweenShot)
         {
             GameObject bullet = Instantiate(projectile, projectileLocation.transform.position, Quaternion.identity);
+            muzzleFlash.Play();
+            muzzleLight.SetActive(true);
+            Invoke("DisableFlash", muzzleFlash.main.duration);
             bullet.GetComponent<Bullet>().dir = -projectileLocation.forward;
             timer = 0;
         }
+    }
+
+    private void DisableFlash()
+    {
+        muzzleLight.SetActive(false);
     }
 }

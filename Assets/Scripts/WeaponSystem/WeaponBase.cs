@@ -125,7 +125,7 @@ public abstract class WeaponBase : MonoBehaviour
     private void SetLayer(int layer)
     {
         gameObject.layer = layer;
-        foreach(var child in gameObject.GetComponentsInChildren<WeaponBase>())
+        foreach(var child in gameObject.GetComponentsInChildren<Transform>())
         {
             child.gameObject.layer = layer;
         }
