@@ -19,14 +19,12 @@ public abstract class EnemyBase : MonoBehaviour
         if (collision.collider.CompareTag("CanGrab"))
         {
             Destroy(gameObject);
-            timer.CountEvent(type + " kill");
         }
 
         if (collision.collider.CompareTag("Bullet"))
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
-            timer.CountEvent(type + " kill");
         }
     }
 
@@ -35,11 +33,12 @@ public abstract class EnemyBase : MonoBehaviour
         if (other.CompareTag("CanGrab")) // if is sword
         {
             Destroy(gameObject);
-            timer.CountEvent(type + " kill");
         }
     }
 
     private void OnDestroy() {
         AudioManager.instance.Play("EnemyDeath");
+        timer.CountEvent(type + " kill");
+        timer.EnemyHit();
     }
 }
