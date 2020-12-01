@@ -97,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
         Look();
         orientationDirection = orientation.transform.forward;
         // print(rb.velocity.magnitude);
+        Debug.DrawRay(orientation.position, orientation.forward * 1000f, Color.red);
         if (rb.velocity.magnitude > 10f && !speedFX.isPlaying)
         {
             // print("i iam speed");
