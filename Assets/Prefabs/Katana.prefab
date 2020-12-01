@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 533956686714957113}
   - component: {fileID: 533956686720884669}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Guard Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 5062228241750373538}
   - component: {fileID: 1399763428999168478}
   - component: {fileID: 8497591726298099484}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Katana
   m_TagString: CanGrab
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 533956686714957117}
   - component: {fileID: 533956686721046813}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Handle Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 533956686714957119}
   - component: {fileID: 533956686721046815}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Blade Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

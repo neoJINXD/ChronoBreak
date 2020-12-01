@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
             climbingTimer -= Time.deltaTime;
         }
         
-        print(climbingTimer);
+        // print(climbingTimer);
     }
 
     // Handling user input

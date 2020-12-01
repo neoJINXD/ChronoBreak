@@ -6,7 +6,7 @@ public class AudioManager : Singleton<AudioManager>
     public Sound[] sounds;
     void Start()
     {
-        print(sounds);
+        // print(sounds);
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>(); //each component of the sound

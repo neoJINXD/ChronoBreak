@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1304760554701650134}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 1300095553401325574}
   - component: {fileID: 1325017406530294446}
   - component: {fileID: 1317681117268029662}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1304760554019657982}
   - component: {fileID: 1304760554019657980}
   - component: {fileID: 1304760554019657983}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AK74Gun
   m_TagString: CanGrab
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 1299920185664265682}
   - component: {fileID: 1327438860635947804}
   - component: {fileID: 1318045145278974134}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 1300134700993802982}
   - component: {fileID: 1325117584174057836}
   - component: {fileID: 1317825550876633740}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
