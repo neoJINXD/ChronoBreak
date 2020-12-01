@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] float life;
+    [SerializeField] ParticleSystem impact;
 
     private float timer;
 
@@ -35,8 +36,14 @@ public class Bullet : MonoBehaviour
         //TODO Add enemy tag to enemy prefabs   
         if (other.collider.CompareTag("Enemy"))
         {
-            Destroy(other.collider.gameObject);
-            
-        }   
+            Destroy(other.collider.gameObject); 
+        }
+    
+        else
+        {
+            ParticleSystem eff = Instantiate(impact, transform.position, Quaternion.identity);
+            eff.gameObject.transform.forward = other.contacts[0].normal;
+            Destroy(eff.gameObject, impact.main.duration);
+        }
     }
 }
