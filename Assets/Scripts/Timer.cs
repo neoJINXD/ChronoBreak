@@ -26,6 +26,10 @@ public class Timer : MonoBehaviour
 
     [SerializeField] GameObject pausePanel; // Panel shown when menu is paused
 
+    [SerializeField] GameObject crosshair;
+
+    [SerializeField] GameObject hitmarker;
+
     // Time bonus and penalties
     // TODO add more fields
     [Header("Time Penalties")]
@@ -40,6 +44,7 @@ public class Timer : MonoBehaviour
     [SerializeField] float enemy2TouchedTimePenalty = 5f;
     [SerializeField] float enemy3TouchedTimePenalty = 5f;
     [SerializeField] float fallingOffPenalty = 5f;
+    
 
     private int dashCounter = 0;
     private int enemy1KilledCounter = 0;
@@ -73,6 +78,7 @@ public class Timer : MonoBehaviour
         pausePanel.SetActive(false);
         timeSummaryPanel.SetActive(false);
         dashIcon.SetActive(true);
+        crosshair.SetActive(true);
     }
 
     void Update()
@@ -267,6 +273,9 @@ public class Timer : MonoBehaviour
         // Display in UI
         timeSummaryPanel.SetActive(true);
         summaryText.text = summary;
+
+        crosshair.SetActive(false);
+        GameManager.instance.gameDone = true;
     }
 
     // Increments the counter of a specified/passed event
@@ -349,5 +358,17 @@ public class Timer : MonoBehaviour
         timeSummaryPanel.SetActive(false);
         levelFinishedPanel.SetActive(true);
         finalTimeText.text = "Final Time: " + timerText.text;
+    }
+
+    public void EnemyHit()
+    {
+        hitmarker.SetActive(true);
+        AudioManager.instance.Play("Hitmarker");
+        Invoke("NoHitmarker", 0.1f);
+    }
+
+    private void NoHitmarker()
+    {
+        hitmarker.SetActive(false);
     }
 }
