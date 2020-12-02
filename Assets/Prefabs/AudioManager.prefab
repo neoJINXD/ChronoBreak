@@ -99,3 +99,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Hitmarker
+    clip: {fileID: 8300000, guid: add25f72f858e094b988f7a3de3aba92, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
