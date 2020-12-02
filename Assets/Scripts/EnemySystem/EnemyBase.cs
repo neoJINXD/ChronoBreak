@@ -5,6 +5,7 @@ public abstract class EnemyBase : MonoBehaviour
     // Assignables
     [SerializeField] string type;
     [SerializeField] Timer timer;
+    [SerializeField] int health = 2;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,7 +24,13 @@ public abstract class EnemyBase : MonoBehaviour
 
         if (collision.collider.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
+            health--;
+            //Debug.Log("Enemy hit");
+            if (health < 1)
+            {
+                Destroy(gameObject);
+            }
+
             Destroy(collision.gameObject);
         }
     }
@@ -32,7 +39,12 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (other.CompareTag("CanGrab")) // if is sword
         {
-            Destroy(gameObject);
+            health--;
+            Debug.Log("Enemy hit");
+            if (health < 1)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

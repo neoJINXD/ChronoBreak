@@ -34,12 +34,7 @@ public class Bullet : MonoBehaviour
     {
         Destroy(gameObject);
         //TODO Add enemy tag to enemy prefabs   
-        if (other.collider.CompareTag("Enemy"))
-        {
-            Destroy(other.collider.gameObject); 
-        }
-    
-        else
+        if (!other.collider.CompareTag("Enemy"))
         {
             ParticleSystem eff = Instantiate(impact, transform.position, Quaternion.identity);
             eff.gameObject.transform.forward = other.contacts[0].normal;
