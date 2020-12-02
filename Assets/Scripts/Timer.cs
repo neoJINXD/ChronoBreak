@@ -276,6 +276,7 @@ public class Timer : MonoBehaviour
 
         crosshair.SetActive(false);
         GameManager.instance.gameDone = true;
+        GameManager.instance.Score(totalTime);
     }
 
     // Increments the counter of a specified/passed event
