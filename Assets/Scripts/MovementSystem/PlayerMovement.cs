@@ -67,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     [SerializeField] ParticleSystem speedFX;
+    [SerializeField] Timer timer;
     
     void Start() 
     {
@@ -443,5 +444,14 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // resetting gravity
         rb.AddForce(Vector3.up * edgeForce, ForceMode.Impulse);
         isClimbing = false;
+    }
+
+
+    void OnCollisionEnter(Collision other) 
+    {
+        if (other.collider.CompareTag("EnemyBullet"))
+        {
+            timer.CountEvent("shot by enemy");
+        }
     }
 }
