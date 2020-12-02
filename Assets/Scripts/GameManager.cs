@@ -29,7 +29,8 @@ public class GameManager : Singleton<GameManager>
         // gameDone = false;
         username = "UnityTest";
         scores = new Dictionary<string, float>();
-        AddNewScore(10021);
+        // AddNewScore(10021);
+        StartCoroutine(DownloadScores(true, true));
 
         gameDone = false;
         hardcoreMode = false;
@@ -54,6 +55,7 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(UploadScore(score, true));
     }
 
+    // TODO add hardcore mode as seconds entry
     private IEnumerator UploadScore(float score, bool isNature)
     {
         string PRIVATE_KEY = isNature ? PRIVATE_KEY_NATURE : PRIVATE_KEY_CITY;
@@ -71,6 +73,26 @@ public class GameManager : Singleton<GameManager>
                 print("Upload Success");
             }
         }
+    }
 
+    // TODO add hardcore mode as get 'json-seconds'
+    private IEnumerator DownloadScores(bool isNature, bool isHardcore)
+    {
+        string PUBLIC_KEY = isNature ? PUBLIC_KEY_NATURE : PUBLIC_KEY_CITY;
+        using (UnityWebRequest req = UnityWebRequest.Get($"{URL}{PUBLIC_KEY}/json"))
+        {
+            yield return req.SendWebRequest();
+
+            if (req.isNetworkError)
+            {
+                Debug.LogError($"UPLOAD FAILED {req.error}");
+            }
+            else
+            {
+                print("Download Success");
+                print(req.downloadHandler.text);
+            }
+
+        }
     }
 }
