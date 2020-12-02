@@ -40,7 +40,7 @@ public abstract class EnemyBase : MonoBehaviour
         if (other.CompareTag("CanGrab")) // if is sword
         {
             health--;
-            Debug.Log("Enemy hit");
+            //Debug.Log("Enemy hit");
             if (health < 1)
             {
                 Destroy(gameObject);

@@ -19,7 +19,7 @@ public class EnemyStanding : EnemyBase
             Quaternion desiredRotation = Quaternion.LookRotation(rel, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, angularSpeed * Time.deltaTime);
 
-            Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+            //Debug.Log(Vector3.Distance(transform.position, player.transform.position));
         }
         else
         {
