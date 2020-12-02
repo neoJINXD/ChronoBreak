@@ -2,13 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 public class GameManager : Singleton<GameManager>
 {
+#region Inner Classes for JSON
+    
+    [System.Serializable] public class Entry
+    {
+        [SerializeField]public string name;
+        [SerializeField]public string score;
+        [SerializeField]public string seconds;
+        [SerializeField]public string text;
+        [SerializeField]public string date;
+    }
 
+    public class Leaderboard    
+    {
+        public List<Entry> entry { get; set; } 
+    }
+
+    public class Dreamlo    
+    {
+        public Leaderboard leaderboard { get; set; } 
+    }
+
+    public class Root    
+    {
+        public Dreamlo dreamlo { get; set; } 
+    }
+#endregion
+    
     // Game data - Needs to be saved
 
-
+    
     // Individual level data
     public bool gameDone;
     public bool hardcoreMode;
@@ -23,6 +50,11 @@ public class GameManager : Singleton<GameManager>
     private const string URL = "http://dreamlo.com/lb/";
 
     private Dictionary<string, float> scores;
+
+    // private List<Entry> LeaderboardTop { get; set; }
+    public List<Entry> LeaderboardTop;
+
+    public int siznine = 69;
 
     void Start() 
     {
@@ -79,7 +111,7 @@ public class GameManager : Singleton<GameManager>
     private IEnumerator DownloadScores(bool isNature, bool isHardcore)
     {
         string PUBLIC_KEY = isNature ? PUBLIC_KEY_NATURE : PUBLIC_KEY_CITY;
-        using (UnityWebRequest req = UnityWebRequest.Get($"{URL}{PUBLIC_KEY}/json"))
+        using (UnityWebRequest req = UnityWebRequest.Get($"{URL}{PUBLIC_KEY}/json/5"))
         {
             yield return req.SendWebRequest();
 
@@ -91,6 +123,10 @@ public class GameManager : Singleton<GameManager>
             {
                 print("Download Success");
                 print(req.downloadHandler.text);
+
+                var json = JsonConvert.DeserializeObject<Root>(req.downloadHandler.text);
+                // print(groot.dreamlo.leaderboard.entry[0].name);
+                LeaderboardTop = json.dreamlo.leaderboard.entry;
             }
 
         }
