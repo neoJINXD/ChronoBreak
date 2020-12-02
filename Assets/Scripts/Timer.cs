@@ -164,6 +164,9 @@ public class Timer : MonoBehaviour
         Cursor.visible = true;
         isPaused = true;
         pausePanel.SetActive(true);
+
+        crosshair.SetActive(false);
+        GameManager.instance.gameDone = true;
     }
 
     // Resume the game
@@ -174,6 +177,9 @@ public class Timer : MonoBehaviour
         Cursor.visible = false;
         isPaused = false;
         pausePanel.SetActive(false);
+
+        crosshair.SetActive(true);
+        GameManager.instance.gameDone = false;
     }
 
     // Set game state to completed
@@ -276,6 +282,7 @@ public class Timer : MonoBehaviour
 
         crosshair.SetActive(false);
         GameManager.instance.gameDone = true;
+
         GameManager.instance.Score(totalTime);
     }
 
