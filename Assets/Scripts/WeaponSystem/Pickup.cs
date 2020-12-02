@@ -36,7 +36,9 @@ public class Pickup : MonoBehaviour
         Physics.Raycast(cam.position, cam.forward, out hit, pickUpRange, pickupable);
         Physics.Raycast(cam.position, cam.forward, out hit2);
 
-        if (hit2.collider != null && !equipped && Input.GetKeyDown(KeyCode.E))
+        bool isInHardcoreMode = GameManager.instance.hardcoreMode;
+
+        if (!isInHardcoreMode && hit2.collider != null && !equipped && Input.GetKeyDown(KeyCode.E))
         {
             if (hit2.collider.CompareTag("CanGrab"))
             {

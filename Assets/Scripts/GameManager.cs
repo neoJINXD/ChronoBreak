@@ -7,11 +7,11 @@ public class GameManager : Singleton<GameManager>
 {
 
     // Game data - Needs to be saved
-    private string name;
 
 
     // Individual level data
     public bool gameDone;
+    public bool hardcoreMode;
 
     private string username;
 
@@ -27,9 +27,12 @@ public class GameManager : Singleton<GameManager>
     void Start() 
     {
         // gameDone = false;
-        name = "Test Player";
+        username = "UnityTest";
         scores = new Dictionary<string, float>();
-        AddNewScore("UnityTest", 10021);
+        AddNewScore(10021);
+
+        gameDone = false;
+        hardcoreMode = false;
     }
 
     public void Score(float time)
@@ -45,13 +48,13 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void AddNewScore(string username, float score)
+    public void AddNewScore(float score)
     {
         print($"Submitting score for {username}");
-        StartCoroutine(UploadScore(username, score, true));
+        StartCoroutine(UploadScore(score, true));
     }
 
-    private IEnumerator UploadScore(string username, float score, bool isNature)
+    private IEnumerator UploadScore(float score, bool isNature)
     {
         string PRIVATE_KEY = isNature ? PRIVATE_KEY_NATURE : PRIVATE_KEY_CITY;
         // string PUBLIC_KEY = isNature ? PUBLIC_KEY_NATURE : PUBLIC_KEY_CITY;
