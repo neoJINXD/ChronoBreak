@@ -5436,6 +5436,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keepAlive: 0
   gameDone: 0
+  hardcoreMode: 0
+  LeaderboardTop: []
+  username: 
+  sensitivity: 0
+  fov: 0
 --- !u!1001 &406725544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15262,6 +15267,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 125192020}
+    - target: {fileID: 3845197221393624966, guid: 87ebd8ae71ffe407bad47656314a49f6,
+        type: 3}
+      propertyPath: levelName
+      value: Nature1
+      objectReference: {fileID: 0}
     - target: {fileID: 3845197222541856826, guid: 87ebd8ae71ffe407bad47656314a49f6,
         type: 3}
       propertyPath: m_Name

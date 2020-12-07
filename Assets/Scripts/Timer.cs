@@ -44,6 +44,8 @@ public class Timer : MonoBehaviour
     [SerializeField] float enemy2TouchedTimePenalty = 5f;
     [SerializeField] float enemy3TouchedTimePenalty = 5f;
     [SerializeField] float fallingOffPenalty = 5f;
+
+    [SerializeField] string levelName;
     
 
     private int dashCounter = 0;
@@ -283,7 +285,8 @@ public class Timer : MonoBehaviour
         crosshair.SetActive(false);
         GameManager.instance.gameDone = true;
 
-        GameManager.instance.Score(totalTime);
+        GameManager.instance.Score(totalTime, levelName);
+        print($"Total timer is {totalTime}");
     }
 
     // Increments the counter of a specified/passed event
