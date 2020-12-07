@@ -60,6 +60,7 @@ public abstract class WeaponBase : MonoBehaviour
 
         coll.enabled = false;
         // anim.enabled = true;
+        SetLayer(9);
     }
 
     public void Drop(Vector3 vel)
@@ -79,6 +80,7 @@ public abstract class WeaponBase : MonoBehaviour
         rb.AddTorque(new Vector3(random, random, random) * randomForce);
         
         coll.enabled = true;
+        SetLayer(0);
     }
 
     public void Throw(Vector3 vel)
@@ -102,6 +104,7 @@ public abstract class WeaponBase : MonoBehaviour
         
         coll.enabled = true;
         Trajectory.instance.ResetLine();
+        SetLayer(0);
     }
 
 
@@ -116,5 +119,15 @@ public abstract class WeaponBase : MonoBehaviour
         // Instantiate(gameObject, transform.position, Quaternion.identity);
         // Trajectory.instance.Predict(gameObject, transform.position, force);
         Trajectory.instance.Predict(gameObject, pos, force);
+    }
+
+
+    private void SetLayer(int layer)
+    {
+        gameObject.layer = layer;
+        foreach(var child in gameObject.GetComponentsInChildren<Transform>())
+        {
+            child.gameObject.layer = layer;
+        }
     }
 }
