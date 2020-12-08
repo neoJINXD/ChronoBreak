@@ -60,6 +60,8 @@ public class GameManager : Singleton<GameManager>
     public float fov = 60f; // TODO load this into both cameras
 
 
+    public float[] scoress;
+
     void Start() 
     {
         username = "UniteeeyTest";
@@ -70,8 +72,8 @@ public class GameManager : Singleton<GameManager>
         //Default values
         scores = new Dictionary<string, float>();
         scores.Add("Nature1", 0);
-        scores.Add("Nature2", 2);
-        scores.Add("City1", 6);
+        scores.Add("Nature2", 0);
+        scores.Add("City1", 0);
         scores.Add("City2", 0);
         scores.Add("City3", 0);
 
@@ -100,6 +102,8 @@ public class GameManager : Singleton<GameManager>
             scores["City3"] = loadedData.scores[4];
         }
         print(Application.persistentDataPath);
+
+        scoress = new float[5];
     }
 
     public void Score(float time, string key)
@@ -107,7 +111,7 @@ public class GameManager : Singleton<GameManager>
         if (scores.ContainsKey(key))
         {
             float currentScore = scores[key];
-            if (time > currentScore)
+            if (time < currentScore || Mathf.Approximately(currentScore, 0f))
             {
                 scores[key] = time;
             }
@@ -166,6 +170,12 @@ public class GameManager : Singleton<GameManager>
         // {
         //     print($"My scores for {i.Key} is {i.Value}");
         // }
+        int i = 0;
+        foreach (var score in scores)
+        {
+            scoress[i] = score.Value;
+            i++;
+        }
     }
 
     // // TODO add hardcore submision
@@ -266,5 +276,10 @@ public class GameManager : Singleton<GameManager>
             return null;
         }
 
+    }
+
+    void OnDestroy() 
+    {
+        SaveData(new PlayerData(this));    
     }
 }

@@ -286,7 +286,7 @@ public class Timer : MonoBehaviour
         GameManager.instance.gameDone = true;
 
         GameManager.instance.Score(totalTime, levelName);
-        print($"Total timer is {totalTime}");
+        // print($"Total timer is {totalTime}");
     }
 
     // Increments the counter of a specified/passed event

@@ -120,14 +120,14 @@ public class WallRunning : MonoBehaviour
             {
                 rb.AddForce(Vector3.up * wallRunUpForce, ForceMode.Impulse);
                 rb.AddForce(orientation.transform.right * wallRunUpForce, ForceMode.Impulse);
-                print("Jumping off left wall");
+                // print("Jumping off left wall");
                 EndWallRun();
             }
             if (Input.GetKey(KeyCode.Space) && isRightWall)
             {
                 rb.AddForce(Vector3.up * wallRunUpForce, ForceMode.Impulse);
                 rb.AddForce(-orientation.transform.right * wallRunUpForce, ForceMode.Impulse);
-                print("Jumping off right wall");
+                // print("Jumping off right wall");
                 EndWallRun();   
             }
         }

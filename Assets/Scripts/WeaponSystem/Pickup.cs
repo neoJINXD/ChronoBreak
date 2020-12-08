@@ -42,7 +42,7 @@ public class Pickup : MonoBehaviour
         {
             if (hit2.collider.CompareTag("CanGrab"))
             {
-                print($"we looking at {hit2.collider.name}");
+                // print($"we looking at {hit2.collider.name}");
                 equipped = true;
                 // print($"yes {hit.collider.gameObject.name}");
                 
