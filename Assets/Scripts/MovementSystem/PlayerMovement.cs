@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 playerScale;
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
+    private Vector3 forwardDirection;
 
     //Jumping
     [Header("Jumping Settings")] 
@@ -59,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
     
 
     //Dashing
-    private static Vector3 orientationDirection;
     private GameObject obj;
 
     //Resetting
@@ -77,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         obj = GameObject.Find("test");
         climbingTimer = climbingTimeLimit;
+        forwardDirection = playerCam.transform.forward;
     }
 
     
@@ -96,7 +97,6 @@ public class PlayerMovement : MonoBehaviour
     {
         MyInput();
         Look();
-        orientationDirection = orientation.transform.forward;
         // print(rb.velocity.magnitude);
         Debug.DrawRay(orientation.position, orientation.forward * 1000f, Color.red);
         if (rb.velocity.magnitude > 10f && !speedFX.isPlaying)
@@ -379,12 +379,6 @@ public class PlayerMovement : MonoBehaviour
         grounded = false;
     }
 
-    public Vector3 getOrientationDirection()
-    {
-        //returns the orientation forward
-        return orientationDirection;
-    }
-
     //getPlayerCameraForward
     public Transform getPlayerCam()
     {
@@ -452,6 +446,14 @@ public class PlayerMovement : MonoBehaviour
         if (other.collider.CompareTag("EnemyBullet"))
         {
             timer.CountEvent("shot by enemy");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Bounce"))
+        {
+            rb.AddForce(forwardDirection * 70, ForceMode.Impulse);
         }
     }
 }
