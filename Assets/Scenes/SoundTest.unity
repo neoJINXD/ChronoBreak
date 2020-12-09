@@ -5469,7 +5469,7 @@ MonoBehaviour:
   sounds:
   - name: MainMusic
     clip: {fileID: 8300000, guid: 176d5e2d05fe12e41b2dfda742387cf3, type: 3}
-    volume: 0
+    volume: 0.02
     pitch: 1.58
     loop: 1
     source: {fileID: 0}
@@ -5505,8 +5505,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Slicing
     clip: {fileID: 8300000, guid: 9b0b9ca751b8d6c4f8f6d8ccf1461bdf, type: 3}
-    volume: 0.38
-    pitch: 1.25
+    volume: 1
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: GotHit
