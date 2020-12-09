@@ -21,10 +21,6 @@ public class MainMenu : MonoBehaviour
 
 
     // Button Methods
-    // public void PlayTestLevel()
-    // {
-    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    // }
 
     public void ToLevelSelect()
     {
@@ -117,10 +113,12 @@ public class MainMenu : MonoBehaviour
         if (fadingIn)
         {
             yield return StartCoroutine(FadeCanvas(holder.GetComponent<CanvasGroup>(), 0f, 1f, 0.5f));
+            holder.SetActive(true);
         }
         else
         {
             yield return StartCoroutine(FadeCanvas(holder.GetComponent<CanvasGroup>(), 1f, 0f, 0.5f));
+            holder.SetActive(false);
         }
         print("Done");
     }
