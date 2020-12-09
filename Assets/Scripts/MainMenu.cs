@@ -3,6 +3,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -21,6 +22,17 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Slider sensSlider;
     [SerializeField] InputField fovInputField;
     [SerializeField] InputField sensInputField;
+    [SerializeField] Toggle hcToggle;
+
+    
+    [SerializeField] TMP_Text natureTime;
+    [SerializeField] TMP_Text hcNatureTime;
+    [SerializeField] TMP_Text city1Time;
+    [SerializeField] TMP_Text hcCity1Time;
+    [SerializeField] TMP_Text city2Time;
+    [SerializeField] TMP_Text hcCity2Time;
+    [SerializeField] TMP_Text city3Time;
+    [SerializeField] TMP_Text hcCity3Time;
 
 
     void Start() 
@@ -29,8 +41,21 @@ public class MainMenu : MonoBehaviour
         sensSlider.value = GameManager.instance.sensitivity;
         UpdateFOVFromSlider();
         UpdateSensFromSlider();
+        
     }
 
+    void Update() 
+    {
+        // print(natureTime.text);
+        natureTime.text = ConvertTextToTime(GameManager.instance.scores["Nature1"]);    
+        hcNatureTime.text = ConvertTextToTime(GameManager.instance.scores["HCNature1"]);    
+        city1Time.text = ConvertTextToTime(GameManager.instance.scores["City1"]);    
+        hcCity1Time.text = ConvertTextToTime(GameManager.instance.scores["HCCity1"]);    
+        city2Time.text = ConvertTextToTime(GameManager.instance.scores["City2"]);    
+        hcCity2Time.text = ConvertTextToTime(GameManager.instance.scores["HCCity2"]);    
+        city3Time.text = ConvertTextToTime(GameManager.instance.scores["City3"]);    
+        hcCity3Time.text = ConvertTextToTime(GameManager.instance.scores["HCCity3"]);    
+    }
 
     // Button Methods
 
@@ -200,4 +225,25 @@ public class MainMenu : MonoBehaviour
         // sensSlider.value = val;;
         sensInputField.text = sensSlider.value.ToString();
     }
+
+    public void ToggleHardcore()
+    {
+        GameManager.instance.hardcoreMode = hcToggle.isOn;
+    }
+
+    private string ConvertTextToTime(float time)
+    {
+        float min = (int) (time / 60);
+        float sec = (int) (time - min * 60);
+        float ms = (int) ((time - min * 60 - sec) * 100);
+
+        // Formatting
+        string minutesText = min < 10 ? minutesText = "0" + min.ToString() : min.ToString();
+        string secondsText = sec < 10 ? secondsText = "0" + sec.ToString() : sec.ToString();
+        string msText = ms < 10 ? msText = "0" + ms.ToString() : ms.ToString();
+
+        // Update timer text label
+        return minutesText + ":" + secondsText + "." + msText;
+    }
+
 }
