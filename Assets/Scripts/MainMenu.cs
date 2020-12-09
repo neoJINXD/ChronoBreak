@@ -19,13 +19,18 @@ public class MainMenu : MonoBehaviour
     [SerializeField]private MenuState currentState;
     [SerializeField] Slider fovSlider;
     [SerializeField] Slider sensSlider;
+    [SerializeField] InputField fovInputField;
+    [SerializeField] InputField sensInputField;
 
 
     void Start() 
     {
         fovSlider.value = GameManager.instance.fov;
         sensSlider.value = GameManager.instance.sensitivity;
+        UpdateFOVFromSlider();
+        UpdateSensFromSlider();
     }
+
 
     // Button Methods
 
@@ -169,5 +174,30 @@ public class MainMenu : MonoBehaviour
     {
         GameManager.instance.sensitivity = sensitivity;
         print(sensitivity);
+    }
+
+    public void UpdateFOVFromValue() 
+    {
+        // fovInputField.text = val;
+        // fovSlider.value = float.Parse(val);
+        fovSlider.value = float.Parse(fovInputField.text);
+    }
+    public void UpdateSensFromValue() 
+    {
+        // sensInputField.text = val;
+        // sensSlider.value = float.Parse(val);
+        sensSlider.value = float.Parse(sensInputField.text);
+    }
+    public void UpdateFOVFromSlider() 
+    {
+        // fovInputField.text = val.ToString();
+        // fovSlider.value = val;
+        fovInputField.text = fovSlider.value.ToString();
+    }
+    public void UpdateSensFromSlider() 
+    {
+        // sensInputField.text = val.ToString();
+        // sensSlider.value = val;;
+        sensInputField.text = sensSlider.value.ToString();
     }
 }
