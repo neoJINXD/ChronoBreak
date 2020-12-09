@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f6de311a263374fa76adfae74be864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepAlive: 0
+  keepAlive: 1
   gameDone: 0
   hardcoreMode: 0
   username: 

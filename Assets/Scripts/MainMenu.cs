@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
@@ -16,9 +17,15 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject leaderboardMenu;
     [SerializeField] GameObject levelMenu;
     [SerializeField]private MenuState currentState;
+    [SerializeField] Slider fovSlider;
+    [SerializeField] Slider sensSlider;
 
 
-
+    void Start() 
+    {
+        fovSlider.value = GameManager.instance.fov;
+        sensSlider.value = GameManager.instance.sensitivity;
+    }
 
     // Button Methods
 
@@ -60,6 +67,7 @@ public class MainMenu : MonoBehaviour
         {
             case MenuState.SETTINGS:
                 StartCoroutine(Fade(settingsMenu, false));
+                GameManager.instance.SaveData(new PlayerData(GameManager.instance));
                 break;
             case MenuState.LEADERBOARDS:
                 StartCoroutine(Fade(leaderboardMenu, false));
@@ -150,5 +158,16 @@ public class MainMenu : MonoBehaviour
         canvas.alpha = endAlpha;
     }
 
+    // Settings Methods
 
+    public void FOVSlider(float fov)
+    {
+        GameManager.instance.fov = fov;
+        print(fov);
+    }
+    public void SensSlider(float sensitivity)
+    {
+        GameManager.instance.sensitivity = sensitivity;
+        print(sensitivity);
+    }
 }

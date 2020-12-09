@@ -351,6 +351,7 @@ public class Timer : MonoBehaviour
     // Button methods
     public void RestartLevel()
     {
+        GameManager.instance.gameDone = false;
         ResetLevel();
     }
 

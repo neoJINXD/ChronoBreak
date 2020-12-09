@@ -71,11 +71,16 @@ public class GameManager : Singleton<GameManager>
 
         //Default values
         scores = new Dictionary<string, float>();
-        scores.Add("Nature1", 0);
-        scores.Add("Nature2", 0);
-        scores.Add("City1", 0);
-        scores.Add("City2", 0);
-        scores.Add("City3", 0);
+        // scores.Add("Nature1", 0);
+        // scores.Add("Nature2", 0);
+        // scores.Add("City1", 0);
+        // scores.Add("City2", 0);
+        // scores.Add("City3", 0);
+        // scores.Add("HCNature1", 0);
+        // scores.Add("HCNature2", 0);
+        // scores.Add("HCCity1", 0);
+        // scores.Add("HCCity2", 0);
+        // scores.Add("HCCity3", 0);
 
         sensitivity = 50f;
         fov = 60f;
@@ -84,6 +89,17 @@ public class GameManager : Singleton<GameManager>
 
         if (loadedData == null)
         {
+            scores.Add("Nature1", 0);
+            scores.Add("Nature2", 0);
+            scores.Add("City1", 0);
+            scores.Add("City2", 0);
+            scores.Add("City3", 0);
+            scores.Add("HCNature1", 0);
+            scores.Add("HCNature2", 0);
+            scores.Add("HCCity1", 0);
+            scores.Add("HCCity2", 0);
+            scores.Add("HCCity3", 0);
+
             // save doesnt exist
             SaveData(new PlayerData(this));
             print("New Save Created"); // TODO scene to enter name
@@ -100,10 +116,15 @@ public class GameManager : Singleton<GameManager>
             scores["City1"] = loadedData.scores[2];
             scores["City2"] = loadedData.scores[3];
             scores["City3"] = loadedData.scores[4];
+            scores["HCNature1"] = loadedData.scores[5];
+            scores["HCNature2"] = loadedData.scores[6];
+            scores["HCCity1"] = loadedData.scores[7];
+            scores["HCCity2"] = loadedData.scores[8];
+            scores["HCCity3"] = loadedData.scores[9];
         }
         print(Application.persistentDataPath);
 
-        scoress = new float[5];
+        scoress = new float[10];
     }
 
     public void Score(float time, string key)
@@ -241,7 +262,7 @@ public class GameManager : Singleton<GameManager>
     //     }
     // }
 
-    private void SaveData(PlayerData data)
+    public void SaveData(PlayerData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/chronobreak_data.fuck";
