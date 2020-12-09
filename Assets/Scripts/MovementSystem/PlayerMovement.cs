@@ -453,7 +453,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Bounce"))
         {
-            rb.AddForce(forwardDirection * 70, ForceMode.Impulse);
+            rb.AddForce(forwardDirection * 85, ForceMode.Impulse);
         }
     }
 }
