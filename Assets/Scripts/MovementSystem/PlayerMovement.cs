@@ -246,9 +246,6 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce * 1.5f);
             // rb.AddForce(normalVector * jumpForce * 0.5f);
 
-            //Add jumo sound effect
-            AudioManager.instance.Play("Jumping");
-
             // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
             if (rb.velocity.y < 0.5f)
