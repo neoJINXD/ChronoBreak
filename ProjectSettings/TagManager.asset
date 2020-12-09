@@ -13,6 +13,7 @@ TagManager:
   - Bullet
   - Building
   - EnemyBullet
+  - Bounce
   layers:
   - Default
   - TransparentFX

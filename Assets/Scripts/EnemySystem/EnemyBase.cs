@@ -49,7 +49,7 @@ public abstract class EnemyBase : MonoBehaviour
     }
 
     private void OnDestroy() {
-        AudioManager.instance.Play("EnemyDeath");
+        // AudioManager.instance.Play("EnemyDeath");
         timer.CountEvent(type + " kill");
         timer.EnemyHit();
     }
