@@ -32,31 +32,36 @@ public class Pickup : MonoBehaviour
     {
         //Check if player is in range and "E" is pressed
         RaycastHit hit;
+        RaycastHit hit2;
         Physics.Raycast(cam.position, cam.forward, out hit, pickUpRange, pickupable);
-        
-        // if (hit.collider && !equipped && !slotFull && Input.GetKeyDown(KeyCode.E))
-        if (hit.collider && !equipped && Input.GetKeyDown(KeyCode.E))
-        {
-            equipped = true;
-            print($"yes {hit.collider.gameObject.name}");
-            
-            weapon = hit.collider.GetComponent<WeaponBase>();
-            weapon.Pickup();
+        Physics.Raycast(cam.position, cam.forward, out hit2);
 
-            // if (hit.collider.CompareTag(""))
-            if (hit.collider.gameObject.name.Contains("Gun"))
+        if (hit2.collider != null && !equipped && Input.GetKeyDown(KeyCode.E))
+        {
+            if (hit2.collider.CompareTag("CanGrab"))
             {
-                weapon.transform.SetParent(gunContainer);
+                print($"we looking at {hit2.collider.name}");
+                equipped = true;
+                // print($"yes {hit.collider.gameObject.name}");
+                
+                weapon = hit2.collider.GetComponent<WeaponBase>();
+                weapon.Pickup();
+
+                // if (hit2.collider.CompareTag(""))
+                if (hit2.collider.gameObject.name.Contains("Gun"))
+                {
+                    weapon.transform.SetParent(gunContainer);
+                }
+                else
+                {
+                    weapon.transform.SetParent(swordContainer);
+                    weapon.transform.localScale = Vector3.one;
+                }
+                //TODO playerpickup sound
+            
+                // weapon.transform.localPosition = Vector3.zero;
+                // weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
             }
-            else
-            {
-                weapon.transform.SetParent(swordContainer);
-                weapon.transform.localScale = Vector3.one;
-            }
-        
-            weapon.transform.localPosition = Vector3.zero;
-            weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
-            //PickUp();
         }
 
         //Drop if equipped and "Q" is pressed
@@ -89,7 +94,12 @@ public class Pickup : MonoBehaviour
         }
         
 
-        //TODO animate to the pickup position
+        // animate to the pickup position
+        if (equipped)
+        {
+            weapon.transform.localPosition = Vector3.Lerp(weapon.transform.localPosition, Vector3.zero, pickUpTime * Time.deltaTime);
+            weapon.transform.localRotation = Quaternion.Lerp(weapon.transform.localRotation, Quaternion.Euler(Vector3.zero), pickUpTime * Time.deltaTime);
+        }
     }
 
 }

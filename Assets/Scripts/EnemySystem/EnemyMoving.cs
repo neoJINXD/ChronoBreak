@@ -11,6 +11,8 @@ public class EnemyMoving : EnemyBase
     [SerializeField] NavMeshAgent agent;
     [SerializeField] float runawayPointDistance = 15f;
     [SerializeField] float bufferFromPlayer = 2.1f;
+    [SerializeField] float angularSpeed = 1f;
+    [SerializeField] Gun gun;
 
 
     //Referneces 
@@ -29,6 +31,7 @@ public class EnemyMoving : EnemyBase
         if ((Vector3.Distance(this.transform.position, player.transform.position) < followRadius)&& (Vector3.Distance(this.transform.position, player.transform.position) > agent.stoppingDistance - bufferFromPlayer)&&isFollowing)
         {
             agent.SetDestination(player.transform.position);
+            gun.Attack();
         }
 
         if((Vector3.Distance(this.transform.position, player.transform.position) < agent.stoppingDistance - bufferFromPlayer)&&isFollowing)
@@ -44,6 +47,10 @@ public class EnemyMoving : EnemyBase
         else
         {
             character.Move(Vector3.zero, false, true);
+            Vector3 rel = (player.transform.position - transform.position).normalized;
+            rel.y = 0;
+            Quaternion desiredRotation = Quaternion.LookRotation(rel, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, angularSpeed * Time.deltaTime);
             isFollowing = true;
         }
     }

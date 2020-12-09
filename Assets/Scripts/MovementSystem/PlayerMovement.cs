@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -24,6 +25,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float counterMovement = 0.175f;
     private float threshold = 0.01f;
     [SerializeField] float maxSlopeAngle = 35f;
+
+    [SerializeField] float climbSpeed;
+    [SerializeField] float forwardWallCheckDistance;
+    [SerializeField] float edgeForce;
+    [SerializeField] GameObject feet;
+    private bool isClimbing = false;
+    private float climbingTimer;
+    [SerializeField] float climbingTimeLimit; // WARNING this cant be live editted while in play mode
+    private bool doneClimbing = false;
+
 
     //Crouch & Slide
     [Header("Sliding Settings")]
@@ -53,6 +64,10 @@ public class PlayerMovement : MonoBehaviour
 
     //Resetting
     private Vector3 lastSafePos;
+
+
+    [SerializeField] ParticleSystem speedFX;
+    [SerializeField] Timer timer;
     
     void Start() 
     {
@@ -61,15 +76,19 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         obj = GameObject.Find("test");
+        climbingTimer = climbingTimeLimit;
     }
 
     
     void FixedUpdate() 
     {
-        Movement();
-        if (grounded) 
+        if (!isClimbing)
         {
-            SavePos();
+            Movement();
+            if (grounded) 
+            {
+                SavePos();
+            }
         }
     }
 
@@ -78,8 +97,24 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
         orientationDirection = orientation.transform.forward;
-
         // print(rb.velocity.magnitude);
+        Debug.DrawRay(orientation.position, orientation.forward * 1000f, Color.red);
+        if (rb.velocity.magnitude > 10f && !speedFX.isPlaying)
+        {
+            // print("i iam speed");
+            speedFX.Play();
+        }
+        else if (rb.velocity.magnitude < 10f)
+        {
+            speedFX.Stop();
+        }
+
+        if (isClimbing)
+        {
+            climbingTimer -= Time.deltaTime;
+        }
+        
+        // print(climbingTimer);
     }
 
     // Handling user input
@@ -94,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             StartCrouch();
+
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
@@ -113,6 +149,10 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(orientation.transform.forward * slideForce);
             }
         }
+
+        //Trigger crouch sound
+        AudioManager.instance.Play("Crouch"); // TODO make only play when moving and crouched
+        // TODO change to continuous sliding noise
     }
 
     private void StopCrouch() 
@@ -120,10 +160,13 @@ public class PlayerMovement : MonoBehaviour
         // Scales player back to normal
         transform.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+
+        AudioManager.instance.Stop("Crouch");
     }
 
     private void Movement() 
     {
+        
         // Extra gravity
         rb.AddForce(Vector3.down * Time.deltaTime * 100);
         
@@ -179,18 +222,33 @@ public class PlayerMovement : MonoBehaviour
         // Apply forces to move player
         rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
+ 
+
+
     }
 
     private void Jump() 
     {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, orientation.forward, out hit, forwardWallCheckDistance))
+        {
+            // print(hit.collider.name);
+            if (hit.collider.GetComponent<Climbable>() != null && !doneClimbing)
+            {
+                StartCoroutine(Climb(hit.collider));
+                return;
+            }
+        }
         if (grounded && readyToJump) 
         {
             readyToJump = false;
-
             // Add jump forces
             rb.AddForce(Vector2.up * jumpForce * 1.5f);
             // rb.AddForce(normalVector * jumpForce * 0.5f);
-            
+
+            //Add jumo sound effect
+            AudioManager.instance.Play("Jumping");
+
             // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
             if (rb.velocity.y < 0.5f)
@@ -214,20 +272,23 @@ public class PlayerMovement : MonoBehaviour
     private float desiredX;
     private void Look() 
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+        if (!GameManager.instance.gameDone)
+        {
+            float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+            float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 
-        // Find current look rotation
-        Vector3 rot = playerCam.transform.localRotation.eulerAngles;
-        desiredX = rot.y + mouseX;
-        
-        // Rotate, and also make sure we dont over- or under-rotate.
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            // Find current look rotation
+            Vector3 rot = playerCam.transform.localRotation.eulerAngles;
+            desiredX = rot.y + mouseX;
+            
+            // Rotate, and also make sure we dont over- or under-rotate.
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        // Perform the rotations
-        playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
-        orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+            // Perform the rotations
+            playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
+            orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+        }
     }
 
     private void CounterMovement(float x, float y, Vector2 mag) 
@@ -297,6 +358,7 @@ public class PlayerMovement : MonoBehaviour
             if (IsFloor(normal)) 
             {
                 grounded = true;
+                doneClimbing = false;
                 cancellingGrounded = false;
                 normalVector = normal;
                 CancelInvoke(nameof(StopGrounded));
@@ -346,4 +408,50 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector3.zero;
     }
 
+    private IEnumerator Climb(Collider wall)
+    {
+        isClimbing = true;
+
+        while (jumping)
+        {
+            RaycastHit hit1;
+            RaycastHit hit2;
+            // Debug.DrawRay(transform.position, orientation.forward * forwardWallCheckDistance, Color.yellow);
+            if (Physics.Raycast(transform.position, orientation.forward, out hit1, forwardWallCheckDistance) && hit1.collider == wall ||
+                Physics.Raycast(feet.transform.position, orientation.forward, out hit2, forwardWallCheckDistance) && hit2.collider == wall)
+            {
+                transform.position = transform.position + new Vector3(0f, climbSpeed * Time.deltaTime, 0f);
+                rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // resetting gravity
+
+                    
+                yield return null;
+                if (climbingTimer <= 0f)
+                {
+                    // StopCoroutine("Climb");
+                    isClimbing = false;
+                    doneClimbing = true;
+                    climbingTimer = climbingTimeLimit;
+                    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // resetting gravity
+                    // rb.AddForce(Vector3.up * edgeForce, ForceMode.Impulse);
+                    yield break;
+                }
+            }
+            else 
+            {
+                break;
+            }
+        }
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // resetting gravity
+        rb.AddForce(Vector3.up * edgeForce, ForceMode.Impulse);
+        isClimbing = false;
+    }
+
+
+    void OnCollisionEnter(Collision other) 
+    {
+        if (other.collider.CompareTag("EnemyBullet"))
+        {
+            timer.CountEvent("shot by enemy");
+        }
+    }
 }

@@ -5,35 +5,60 @@ using UnityEngine;
 public class TriggerDash : MonoBehaviour
 {
     
-    [SerializeField] float speed;
+    [SerializeField] float dashForce;
+    [SerializeField] float dashDuration;
+    [Range(0,1)][SerializeField] float dashDamping;
     [SerializeField] ParticleSystem dashEffect;
+    [SerializeField] Transform playerCam;
 
-    private Vector3 newPosition;
-    private bool isDashing = false;
-
-
-    void FixedUpdate()
+    private Rigidbody rb;
+    private bool dashTriggered, isDashing;
+    float originalDashForce;
+    private void Awake()
     {
-        PositionChanging();
+        rb = GetComponent<Rigidbody>();
+        dashTriggered = false;
+        isDashing = false;
+        originalDashForce = dashForce;
     }
 
-    void PositionChanging()
+    private void FixedUpdate()
     {
-        if (isDashing)
+        if (dashTriggered && !isDashing)
         {
-            transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * speed);
-        }
-        if (Vector3.Distance(transform.position, newPosition) < .7f)
-        {
-            isDashing = false;
+            PlayEffect();
+            StartCoroutine(Dash());
         }
     }
 
-    public void SetNewPosition( Vector3 destination)
+    private IEnumerator Dash()
     {
-        isDashing = true;
-        newPosition = destination;
+        isDashing = true; 
+        rb.AddForce(playerCam.transform.forward * dashForce, ForceMode.VelocityChange);
+
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.velocity *= dashDamping;
+        dashTriggered = false;
+        isDashing = false;
+    }
+
+    private void PlayEffect()
+    {
         dashEffect.Play();
+    }
+
+    public void beginDash()
+    {
+        dashTriggered = true;
+        if(Physics.Raycast(transform.position, playerCam.forward, 9))
+        {
+            dashForce /= 1.70f;
+        }
+        else
+        {
+            dashForce = originalDashForce;
+        }
     }
 
 }
