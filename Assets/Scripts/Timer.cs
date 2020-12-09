@@ -375,7 +375,7 @@ public class Timer : MonoBehaviour
     public void EnemyHit()
     {
         hitmarker.SetActive(true);
-        AudioManager.instance.Play("Hitmarker");
+        // AudioManager.instance.Play("Hitmarker");
         Invoke("NoHitmarker", 0.1f);
     }
 
