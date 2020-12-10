@@ -317,9 +317,9 @@ GameObject:
   - component: {fileID: 2069203678988874330}
   - component: {fileID: 2069203678988874334}
   - component: {fileID: 2069203678988874331}
-  - component: {fileID: 1537961855}
   - component: {fileID: 4875067425480733512}
   - component: {fileID: 6751700889464305539}
+  - component: {fileID: 1124876850635205220}
   m_Layer: 0
   m_Name: PLayer
   m_TagString: Player
@@ -453,25 +453,7 @@ MonoBehaviour:
   slideCounterMovement: 0
   jumpForce: 550
   speedFX: {fileID: 4700499269951244625}
---- !u!114 &1537961855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069203678988874308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f75a0075f8985b44a061b745949ea81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallRunUpForce: 9
-  wallRunHoldForce: 500
-  wallRunPushForce: 5
-  maxWallRunCamTilt: 10
-  mainCamera: {fileID: 2069203677252986645}
-  orientation: {fileID: 2069203677412642303}
-  wallDirection: {fileID: 5284086687246754648}
+  timer: {fileID: 0}
 --- !u!114 &4875067425480733512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +491,25 @@ MonoBehaviour:
   pickUpRange: 5
   pickUpTime: 10
   equipped: 0
+--- !u!114 &1124876850635205220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069203678988874308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44930f136eba9c94e959ddffc84d3220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallRunUpForce: 9
+  wallRunHoldForce: 500
+  wallRunPushForce: 5
+  maxWallRunCamTilt: 10
+  mainCamera: {fileID: 2069203677252986645}
+  orientation: {fileID: 2069203677412642303}
+  wallDirection: {fileID: 5284086687246754648}
 --- !u!1 &2317443628848328093
 GameObject:
   m_ObjectHideFlags: 0

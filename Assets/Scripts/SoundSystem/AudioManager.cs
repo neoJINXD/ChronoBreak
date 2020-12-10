@@ -17,7 +17,7 @@ public class AudioManager : Singleton<AudioManager>
            s.source.loop = s.loop;
        }
 
-       Play("MainMusic");
+    //    Play("MainMusic");
     }
 
     public void Play(string name)
@@ -43,4 +43,6 @@ public class AudioManager : Singleton<AudioManager>
        s.source.Stop();
     
     }
+
+
 }

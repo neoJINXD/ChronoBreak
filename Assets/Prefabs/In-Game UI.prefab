@@ -847,6 +847,7 @@ MonoBehaviour:
   enemy2TouchedTimePenalty: 5
   enemy3TouchedTimePenalty: 5
   fallingOffPenalty: 5
+  levelName: 
 --- !u!1 &3845197221400414673
 GameObject:
   m_ObjectHideFlags: 0
@@ -3224,7 +3225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1483158769026988269
 RectTransform:
   m_ObjectHideFlags: 0

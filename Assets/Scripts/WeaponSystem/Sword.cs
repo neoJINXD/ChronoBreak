@@ -11,6 +11,9 @@ public class Sword : WeaponBase
         anim.Play();
         // print("attacc");
         Invoke("DisableCollider", anim.clip.length);
+
+        //Slice sword sound
+        AudioManager.instance.Play("Slicing");
     }
 
     private void DisableCollider()

@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2952986267435667702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2952986267435667656}
+  - component: {fileID: 2952986267435667703}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2952986267435667656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952986267435667702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -74.32909, y: 2.8919854, z: -6.356842}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2952986267435667703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952986267435667702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e249bed8877db184b9026dec3dcafc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keepAlive: 1
+  sounds:
+  - name: PickupSoundGun
+    clip: {fileID: 8300000, guid: 47e3bc9c8fb60e647ae6c59760ce81fb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DropSound
+    clip: {fileID: 8300000, guid: eb3de01404cbcbd42a13d7d8d084de21, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Crouch
+    clip: {fileID: 8300000, guid: 872d7106e72278640ad1e731c129e32d, type: 3}
+    volume: 0.25
+    pitch: 1.25
+    loop: 0
+    source: {fileID: 0}
+  - name: ShootingBullet
+    clip: {fileID: 8300000, guid: ae0d4e1c488c4cd4eac8be170520982b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PickupSoundSword
+    clip: {fileID: 8300000, guid: 1a1b9fac8d53dae46900cb57e37a6f06, type: 3}
+    volume: 0.38
+    pitch: 1.25
+    loop: 0
+    source: {fileID: 0}
+  - name: Slicing
+    clip: {fileID: 8300000, guid: 9b0b9ca751b8d6c4f8f6d8ccf1461bdf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GotHit
+    clip: {fileID: 8300000, guid: 7c5a2292fd42fd24381c2fef6eedbe70, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DeathSound
+    clip: {fileID: 8300000, guid: 94632df56ba0e1645a09e99ec7836bff, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Jumping
+    clip: {fileID: 8300000, guid: 03c02789d54ccff4195dc4ecb650e218, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MainMusic
+    clip: {fileID: 8300000, guid: 7c6c5efdfdaa8f943bd11122b3fec2fe, type: 3}
+    volume: 0.01
+    pitch: 1.45
+    loop: 1
+    source: {fileID: 0}
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: 7c6c5efdfdaa8f943bd11122b3fec2fe, type: 3}
+    volume: 0.01
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}

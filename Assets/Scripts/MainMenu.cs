@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour
         sensSlider.value = GameManager.instance.sensitivity;
         UpdateFOVFromSlider();
         UpdateSensFromSlider();
-        
+        AudioManager.instance.Play("MainMenu");
     }
 
     void Update() 
