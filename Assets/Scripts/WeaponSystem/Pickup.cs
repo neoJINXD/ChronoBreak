@@ -92,6 +92,8 @@ public class Pickup : MonoBehaviour
             weapon.transform.SetParent(null);
             weapon = null;
             equipped = false;
+            //Activate throwing sound
+            AudioManager.instance.Play("Throwing");
         }
 
         if (equipped && Input.GetMouseButton(0))
