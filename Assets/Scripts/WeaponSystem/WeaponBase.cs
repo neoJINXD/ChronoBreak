@@ -7,7 +7,7 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField] float randomForce;
     [SerializeField] float dropForwardForce, dropUpwardForce;
     [SerializeField] float throwForwardForce, throwUpwardForce;
-    [SerializeField] Vector3 offset; //TODO need to set this per model cuz reeeeeee
+    [SerializeField] Vector3 offset; // // TODO need to set this per model cuz reeeeeee
     [SerializeField] Vector3 defaultSize;
 
     // References
@@ -37,8 +37,8 @@ public abstract class WeaponBase : MonoBehaviour
         if (thrown)
         {
             
-            //TODO it dont wanna work :c
-            //TODO allign point of weapon towards velocity
+            // // TODO it dont wanna work :c
+            // // TODO allign point of weapon towards velocity
             // Vector3.RotateTowards(transform.rotation.eulerAngles, rb.velocity, 6f, 2f);
             // Vector3 temp = transform.position + rb.velocity + offset;
             // print($"Velocity is {temp}");

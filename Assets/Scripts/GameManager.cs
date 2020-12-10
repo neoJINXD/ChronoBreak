@@ -54,7 +54,7 @@ public class GameManager : Singleton<GameManager>
     public bool hardcoreMode; // hardcore mode enabled, no weapon pickups
 
     // Game data - Needs to be saved
-    public string username; // name to use for leaderboards // TODO scene with prompt if no save detected
+    public string username; // name to use for leaderboards // // TODO scene with prompt if no save detected
     public Dictionary<string, float> scores; // Local saves of player's times
     public float sensitivity = 50f; // TODO load this into playermovement
     public float fov = 60f; // TODO load this into both cameras
@@ -64,7 +64,8 @@ public class GameManager : Singleton<GameManager>
 
     void Start() 
     {
-        username = "UniteeeyTest";
+        int r = (int)Random.Range(1,9999999);
+        username = $"Player{r}";
 
         gameDone = false;
         hardcoreMode = false;
@@ -102,7 +103,7 @@ public class GameManager : Singleton<GameManager>
 
             // save doesnt exist
             SaveData(new PlayerData(this));
-            print("New Save Created"); // TODO scene to enter name
+            print("New Save Created"); // // TODO scene to enter name
         }
         else
         {
@@ -292,7 +293,6 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            // TODO create new file with default data / ask palyer for username
             Debug.LogError("NO SAVE FILE EXISTS");
             return null;
         }

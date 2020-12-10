@@ -19,7 +19,7 @@ public class Gun : WeaponBase
 
     void Update() 
     {
-        Debug.DrawRay(projectileLocation.position, -projectileLocation.forward * 100f, Color.red); // TODO remove 
+        // Debug.DrawRay(projectileLocation.position, -projectileLocation.forward * 100f, Color.red);
     }
 
     public override void Attack()

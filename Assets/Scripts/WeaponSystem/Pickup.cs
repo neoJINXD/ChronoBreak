@@ -19,7 +19,6 @@ public class Pickup : MonoBehaviour
     private WeaponBase weapon;
     private Transform player, cam;
 
-    //TODO Might have to move the guard colider somehow
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -59,7 +58,6 @@ public class Pickup : MonoBehaviour
                     weapon.transform.SetParent(swordContainer);
                     weapon.transform.localScale = Vector3.one;
                 }
-                //TODO playerpickup sound
             
                 // weapon.transform.localPosition = Vector3.zero;
                 // weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);

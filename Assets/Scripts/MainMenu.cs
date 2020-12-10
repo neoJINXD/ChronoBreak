@@ -81,7 +81,7 @@ public class MainMenu : MonoBehaviour
 
     public void ToLeaderboards()
     {
-        // TODO soon tm
+        // // TODO soon tm
         // DisableCurrentScene();
         print("Going to leaderboards");
         currentState = MenuState.LEADERBOARDS;

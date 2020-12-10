@@ -3,10 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-// TODO Change controls and stuff 
-// TODO Add time features
-// TODO Split the code into files perhaps
-
 public class Timer : MonoBehaviour
 {
     [Header("UI")]
@@ -31,12 +27,11 @@ public class Timer : MonoBehaviour
     [SerializeField] GameObject hitmarker;
 
     // Time bonus and penalties
-    // TODO add more fields
     [Header("Time Penalties")]
-    //TODO should probably have these fields in the ability
+    // // TODO should probably have these fields in the ability
     [SerializeField] float dashTimePenalty = 3f;
 
-    //TODO should probably have these fields in the enemies
+    // // TODO should probably have these fields in the enemies
     [SerializeField] float enemy1KilledTimeBonus = -2f; // Enemies that are standing still
     [SerializeField] float enemy2KilledTimeBonus = -2f; // Enemies that are throw projectiles
     [SerializeField] float enemy3KilledTimeBonus = -2f; // Enemies that chases the player in a pre-defined radius 
@@ -87,7 +82,7 @@ public class Timer : MonoBehaviour
     {
 
         // Pause/resume controls
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T)) // TODO Change controls and stuff 
         {
             if (!isPaused)
                 Pause();
@@ -112,19 +107,12 @@ public class Timer : MonoBehaviour
             hasStopped = true;
         }
 
-        // Restart level if restart button is pressed
-        // TODO Change controls
-        // if (Input.GetKeyDown(KeyCode.R))
-        // {
-        //     ResetLevel();
-        // }
-
     }
 
     // Compute total time and transform in minutes, seconds and centiseconds 
     void ComputeTimer()
     {
-        // TODO Take into account time penalties and reductions
+        // // TODO Take into account time penalties and reductions
         totalTime = timeElapsed;
         // totalTime += ... (bunch of times)
         totalTime += dashCounter * dashTimePenalty;
@@ -294,7 +282,6 @@ public class Timer : MonoBehaviour
     {
         switch (ev)
         {
-            //TODO add falling off stage event
             case "Dash": 
                 dashCounter++;
                 PopUpEventPanel("Dash", dashTimePenalty);

@@ -152,7 +152,6 @@ public class PlayerMovement : MonoBehaviour
 
         //Trigger crouch sound
         //AudioManager.instance.Play("Crouch"); // TODO make only play when moving and crouched
-        // TODO change to continuous sliding noise
     }
 
     private void StopCrouch() 

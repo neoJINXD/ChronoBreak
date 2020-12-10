@@ -33,7 +33,6 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         Destroy(gameObject);
-        //TODO Add enemy tag to enemy prefabs   
         if (!other.collider.CompareTag("Enemy"))
         {
             ParticleSystem eff = Instantiate(impact, transform.position, Quaternion.identity);
