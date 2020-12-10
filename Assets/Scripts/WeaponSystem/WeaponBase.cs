@@ -18,7 +18,7 @@ public abstract class WeaponBase : MonoBehaviour
     private Vector3 force;
 
 
-    private bool thrown = false;
+    public bool thrown = false;
 
 
     virtual protected void Start()
@@ -110,7 +110,7 @@ public abstract class WeaponBase : MonoBehaviour
 
     void OnCollisionEnter(Collision other) 
     {
-        thrown = false;    
+        //thrown = false;    
     }
 
     public void Predict(Vector3 pos)

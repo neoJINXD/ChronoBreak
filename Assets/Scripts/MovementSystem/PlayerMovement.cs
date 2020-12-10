@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 playerScale;
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
+    private Vector3 forwardDirection;
 
     //Jumping
     [Header("Jumping Settings")] 
@@ -59,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
     
 
     //Dashing
-    private static Vector3 orientationDirection;
     private GameObject obj;
 
     //Resetting
@@ -77,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         obj = GameObject.Find("test");
         climbingTimer = climbingTimeLimit;
+        forwardDirection = playerCam.transform.forward;
     }
 
     
@@ -96,7 +97,6 @@ public class PlayerMovement : MonoBehaviour
     {
         MyInput();
         Look();
-        orientationDirection = orientation.transform.forward;
         // print(rb.velocity.magnitude);
         Debug.DrawRay(orientation.position, orientation.forward * 1000f, Color.red);
         if (rb.velocity.magnitude > 10f && !speedFX.isPlaying)
@@ -151,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Trigger crouch sound
-        AudioManager.instance.Play("Crouch"); // TODO make only play when moving and crouched
+        //AudioManager.instance.Play("Crouch"); // TODO make only play when moving and crouched
         // TODO change to continuous sliding noise
     }
 
@@ -161,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
 
-        AudioManager.instance.Stop("Crouch");
+        //AudioManager.instance.Stop("Crouch");
     }
 
     private void Movement() 
@@ -245,6 +245,9 @@ public class PlayerMovement : MonoBehaviour
             // Add jump forces
             rb.AddForce(Vector2.up * jumpForce * 1.5f);
             // rb.AddForce(normalVector * jumpForce * 0.5f);
+
+            //Add jumo sound effect
+            //AudioManager.instance.Play("Jumping");
 
             // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
@@ -376,12 +379,6 @@ public class PlayerMovement : MonoBehaviour
         grounded = false;
     }
 
-    public Vector3 getOrientationDirection()
-    {
-        //returns the orientation forward
-        return orientationDirection;
-    }
-
     //getPlayerCameraForward
     public Transform getPlayerCam()
     {
@@ -449,6 +446,14 @@ public class PlayerMovement : MonoBehaviour
         if (other.collider.CompareTag("EnemyBullet"))
         {
             timer.CountEvent("shot by enemy");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Bounce"))
+        {
+            rb.AddForce(forwardDirection * 85, ForceMode.Impulse);
         }
     }
 }
