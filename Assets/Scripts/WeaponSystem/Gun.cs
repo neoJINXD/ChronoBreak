@@ -37,6 +37,8 @@ public class Gun : WeaponBase
             bullet.GetComponent<Bullet>().dir = -projectileLocation.forward;
             timer = 0;
         }
+        // Shooting sound
+        AudioManager.instance.Play("ShootingBullet");
     }
 
     private void DisableFlash()

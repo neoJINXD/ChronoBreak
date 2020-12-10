@@ -181,6 +181,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumping) 
         {
             Jump();
+            AudioManager.instance.Play("Jumping"); //Jump sound
         }
 
         // Set max speed
@@ -262,6 +263,7 @@ public class PlayerMovement : MonoBehaviour
             
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+
     }
     
     private void ResetJump() 
@@ -288,6 +290,7 @@ public class PlayerMovement : MonoBehaviour
             // Perform the rotations
             playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
             orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+
         }
     }
 
@@ -372,6 +375,7 @@ public class PlayerMovement : MonoBehaviour
             cancellingGrounded = true;
             Invoke(nameof(StopGrounded), Time.deltaTime * delay);
         }
+        
     }
 
     private void StopGrounded() 
@@ -400,6 +404,7 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = lastSafePos;
         rb.velocity = Vector3.zero;
+        AudioManager.instance.Play("DeathSound"); //Death sound
     }
 
     private IEnumerator Climb(Collider wall)
@@ -446,6 +451,9 @@ public class PlayerMovement : MonoBehaviour
         if (other.collider.CompareTag("EnemyBullet"))
         {
             timer.CountEvent("shot by enemy");
+
+            //Hit by enemy sound 
+            AudioManager.instance.Play("GotHit");
         }
     }
 
