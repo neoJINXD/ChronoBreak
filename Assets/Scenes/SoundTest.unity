@@ -5467,12 +5467,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keepAlive: 1
   sounds:
-  - name: MainMusic
-    clip: {fileID: 8300000, guid: 176d5e2d05fe12e41b2dfda742387cf3, type: 3}
-    volume: 0.02
-    pitch: 1.58
-    loop: 1
-    source: {fileID: 0}
   - name: PickupSoundGun
     clip: {fileID: 8300000, guid: 47e3bc9c8fb60e647ae6c59760ce81fb, type: 3}
     volume: 1
@@ -5526,6 +5520,12 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+    source: {fileID: 0}
+  - name: MainMusic
+    clip: {fileID: 8300000, guid: 7c6c5efdfdaa8f943bd11122b3fec2fe, type: 3}
+    volume: 0.04
+    pitch: 1.52
+    loop: 1
     source: {fileID: 0}
 --- !u!4 &378305632
 Transform:
