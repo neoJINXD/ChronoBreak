@@ -19,7 +19,8 @@ public abstract class EnemyBase : MonoBehaviour
         // For thrown weapon
         if (collision.collider.CompareTag("CanGrab") && collision.gameObject.GetComponent<WeaponBase>().thrown)
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            Die();
             collision.gameObject.GetComponent<WeaponBase>().thrown = false;
 
 
@@ -31,7 +32,8 @@ public abstract class EnemyBase : MonoBehaviour
             //Debug.Log("Enemy hit");
             if (health < 1)
             {
-                Destroy(gameObject);
+                // Destroy(gameObject);
+                Die();
             }
 
             Destroy(collision.gameObject);
@@ -46,14 +48,22 @@ public abstract class EnemyBase : MonoBehaviour
             // Debug.Log("Enemy hit");
             if (health < 1)
             {
-                Destroy(gameObject);
+                // Destroy(gameObject);
+                Die();
             }
         }
     }
 
-    private void OnDestroy() {
+    private void Die()
+    {
         // AudioManager.instance.Play("EnemyDeath");
         timer.CountEvent(type + " kill");
         timer.EnemyHit();
+    }
+
+    private void OnDestroy() {
+        // AudioManager.instance.Play("EnemyDeath");
+        // timer.CountEvent(type + " kill");
+        // timer.EnemyHit();
     }
 }

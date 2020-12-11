@@ -305,8 +305,9 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    void OnDestroy() 
+    void OnApplicationQuit() 
     {
+        // print("Quiting");
         SaveData(new PlayerData(this));    
     }
 }
