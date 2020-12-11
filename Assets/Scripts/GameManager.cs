@@ -130,12 +130,18 @@ public class GameManager : Singleton<GameManager>
 
     public void Score(float time, string key)
     {
-        if (scores.ContainsKey(key))
+        string result = key;
+        if (hardcoreMode)
         {
-            float currentScore = scores[key];
+            result = $"HC{key}";
+        }
+
+        if (scores.ContainsKey(result))
+        {
+            float currentScore = scores[result];
             if (time < currentScore || Mathf.Approximately(currentScore, 0f))
             {
-                scores[key] = time;
+                scores[result] = time;
             }
             else 
             {
@@ -144,7 +150,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            scores.Add(key, time);
+            scores.Add(result, time);
         }
 
 #region icantcollapsethis😔
