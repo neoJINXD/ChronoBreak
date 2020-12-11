@@ -146,6 +146,11 @@ public class MainMenu : MonoBehaviour
 #endif
     }
 
+    public void GoTo(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
+
     private IEnumerator Fade(GameObject holder, bool fadingIn)
     {
         if (fadingIn)

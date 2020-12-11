@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 3132013926034847840}
   - component: {fileID: 4673403066977421281}
   - component: {fileID: 566349162419441905}
+  - component: {fileID: 9012807861835804441}
   m_Layer: 8
   m_Name: urb_bui_3_lod0_enemy
   m_TagString: Untagged
@@ -312,3 +313,15 @@ MonoBehaviour:
   m_Center: {x: -0.54934263, y: 3.153678, z: -0.74178433}
   m_Area: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &9012807861835804441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566349164475008851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b5b5c8ff766dc40b3abecb410c263a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

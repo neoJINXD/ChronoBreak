@@ -2122,6 +2122,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2130560726}
+    - target: {fileID: 3845197221393624966, guid: 87ebd8ae71ffe407bad47656314a49f6,
+        type: 3}
+      propertyPath: levelName
+      value: Nature1
+      objectReference: {fileID: 0}
     - target: {fileID: 3845197222541856826, guid: 87ebd8ae71ffe407bad47656314a49f6,
         type: 3}
       propertyPath: m_Name
