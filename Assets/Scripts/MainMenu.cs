@@ -62,7 +62,7 @@ public class MainMenu : MonoBehaviour
     public void ToLevelSelect()
     {
         // DisableCurrentScene();
-        print("Going to select");
+        // print("Going to select");
         currentState = MenuState.LEVEL_SELECT;
         // StartCoroutine(Fade(mainMenu, false));
         // StartCoroutine(Fade(levelMenu, true));
@@ -75,7 +75,7 @@ public class MainMenu : MonoBehaviour
     public void ToSettings()
     {
         // DisableCurrentScene();
-        print("Going to settings");
+        // print("Going to settings");
         currentState = MenuState.SETTINGS;
         // StartCoroutine(Fade(mainMenu, false));
         // StartCoroutine(Fade(settingsMenu, true));
@@ -89,7 +89,7 @@ public class MainMenu : MonoBehaviour
     {
         // // TODO soon tm
         // DisableCurrentScene();
-        print("Going to leaderboards");
+        // print("Going to leaderboards");
         currentState = MenuState.LEADERBOARDS;
         // leaderboardMenu.SetActive(true);
     }
@@ -97,7 +97,7 @@ public class MainMenu : MonoBehaviour
     public void ToMenu()
     {
         // DisableCurrentScene();
-        print("Going to menu");
+        // print("Going to menu");
 
         switch(currentState)
         {
@@ -176,7 +176,7 @@ public class MainMenu : MonoBehaviour
             yield return StartCoroutine(FadeCanvas(holder.GetComponent<CanvasGroup>(), 1f, 0f, 0.5f));
             // holder.SetActive(false);
         }
-        print("Done");
+        // print("Done");
     }
 
     private IEnumerator FadeCanvas(CanvasGroup canvas, float startAlpha, float endAlpha, float duration)
@@ -211,12 +211,12 @@ public class MainMenu : MonoBehaviour
     public void FOVSlider(float fov)
     {
         GameManager.instance.fov = fov;
-        print(fov);
+        // print(fov);
     }
     public void SensSlider(float sensitivity)
     {
         GameManager.instance.sensitivity = sensitivity;
-        print(sensitivity);
+        // print(sensitivity);
     }
 
     public void UpdateFOVFromValue() 

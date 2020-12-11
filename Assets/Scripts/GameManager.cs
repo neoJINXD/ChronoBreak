@@ -60,7 +60,7 @@ public class GameManager : Singleton<GameManager>
     public float fov = 60f; // TODO load this into both cameras
 
 
-    public float[] scoress;
+    // public float[] scoress;
 
     void Start() 
     {
@@ -103,7 +103,7 @@ public class GameManager : Singleton<GameManager>
 
             // save doesnt exist
             SaveData(new PlayerData(this));
-            print("New Save Created"); // // TODO scene to enter name
+            // print("New Save Created"); // // TODO scene to enter name
         }
         else
         {
@@ -123,9 +123,9 @@ public class GameManager : Singleton<GameManager>
             scores["HCCity2"] = loadedData.scores[8];
             scores["HCCity3"] = loadedData.scores[9];
         }
-        print(Application.persistentDataPath);
+        // print(Application.persistentDataPath);
 
-        scoress = new float[10];
+        // scoress = new float[10];
     }
 
     public void Score(float time, string key)
@@ -145,14 +145,13 @@ public class GameManager : Singleton<GameManager>
             }
             else 
             {
-                print($"this a worse score :pensive: {currentScore}");
+                // print($"this a worse score :pensive: {currentScore}");
             }
         }
         else
         {
             scores.Add(result, time);
         }
-
 #region icantcollapsethis😔
         /*
         // TODO upload score when both nature/ 3 city scores are reveived
@@ -192,18 +191,18 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
-        if (scores.ContainsKey("Test"))
-            print($"My scores for Test is {scores["Test"]}");
+        // if (scores.ContainsKey("Test"))
+        //     print($"My scores for Test is {scores["Test"]}");
         // foreach(var i in scores)
         // {
         //     print($"My scores for {i.Key} is {i.Value}");
         // }
-        int i = 0;
-        foreach (var score in scores)
-        {
-            scoress[i] = score.Value;
-            i++;
-        }
+        // int i = 0;
+        // foreach (var score in scores)
+        // {
+        //     scoress[i] = score.Value;
+        //     i++;
+        // }
     }
 
     // // TODO add hardcore submision

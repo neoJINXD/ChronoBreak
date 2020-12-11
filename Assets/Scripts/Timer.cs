@@ -358,6 +358,7 @@ public class Timer : MonoBehaviour
         AudioManager.instance.Play("MainMenu");
         // SceneManager.LoadScene(0);
         SceneManager.LoadScene("MainMenu");
+        GameManager.instance.gameDone = false;
     }
 
     public void ShowLevelEndMenu()
