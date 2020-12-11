@@ -85,7 +85,7 @@ public class Timer : MonoBehaviour
     {
 
         // Pause/resume controls
-        if (Input.GetKeyDown(KeyCode.T)) // TODO Change controls and stuff 
+        if (Input.GetKeyDown(KeyCode.Escape)) // TODO Change controls and stuff 
         {
             if (!isPaused)
                 Pause();
