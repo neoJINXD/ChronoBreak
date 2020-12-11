@@ -148,6 +148,8 @@ public class MainMenu : MonoBehaviour
 
     public void GoTo(int index)
     {
+        AudioManager.instance.Stop("MainMenu");
+        // AudioManager.instance.Play("MainMusic");
         SceneManager.LoadScene(index);
     }
 

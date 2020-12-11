@@ -76,6 +76,9 @@ public class Timer : MonoBehaviour
         timeSummaryPanel.SetActive(false);
         dashIcon.SetActive(true);
         crosshair.SetActive(true);
+
+        AudioManager.instance.Play("MainMusic");
+
     }
 
     void Update()
@@ -349,6 +352,8 @@ public class Timer : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        AudioManager.instance.Stop("MainMusic");
+        AudioManager.instance.Play("MainMenu");
         SceneManager.LoadScene(0);
     }
 
