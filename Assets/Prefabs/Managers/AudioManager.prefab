@@ -47,7 +47,7 @@ MonoBehaviour:
   sounds:
   - name: PickupSoundGun
     clip: {fileID: 8300000, guid: 47e3bc9c8fb60e647ae6c59760ce81fb, type: 3}
-    volume: 1
+    volume: 0.25
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -65,19 +65,19 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: ShootingBullet
     clip: {fileID: 8300000, guid: ae0d4e1c488c4cd4eac8be170520982b, type: 3}
-    volume: 1
+    volume: 0.01
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PickupSoundSword
     clip: {fileID: 8300000, guid: 1a1b9fac8d53dae46900cb57e37a6f06, type: 3}
-    volume: 0.38
+    volume: 0.2
     pitch: 1.25
     loop: 0
     source: {fileID: 0}
   - name: Slicing
     clip: {fileID: 8300000, guid: 9b0b9ca751b8d6c4f8f6d8ccf1461bdf, type: 3}
-    volume: 1
+    volume: 0.1
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -89,13 +89,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: DeathSound
     clip: {fileID: 8300000, guid: 94632df56ba0e1645a09e99ec7836bff, type: 3}
-    volume: 1
+    volume: 0.1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Jumping
     clip: {fileID: 8300000, guid: 03c02789d54ccff4195dc4ecb650e218, type: 3}
-    volume: 1
+    volume: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -110,4 +110,10 @@ MonoBehaviour:
     volume: 0.025
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: Hitmarker
+    clip: {fileID: 8300000, guid: add25f72f858e094b988f7a3de3aba92, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
     source: {fileID: 0}

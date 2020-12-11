@@ -36,9 +36,10 @@ public class Gun : WeaponBase
             Invoke("DisableFlash", muzzleFlash.main.duration);
             bullet.GetComponent<Bullet>().dir = -projectileLocation.forward;
             timer = 0;
+            // Shooting sound
+            AudioManager.instance.Play("ShootingBullet");
         }
-        // Shooting sound
-        AudioManager.instance.Play("ShootingBullet");
+        
     }
 
     private void DisableFlash()

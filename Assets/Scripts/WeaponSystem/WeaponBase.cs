@@ -111,6 +111,7 @@ public abstract class WeaponBase : MonoBehaviour
     void OnCollisionEnter(Collision other) 
     {
         //thrown = false;    
+        // AudioManager.instance.Play("DropWeapon");
     }
 
     public void Predict(Vector3 pos)
