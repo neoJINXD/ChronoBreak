@@ -505,9 +505,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44930f136eba9c94e959ddffc84d3220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallRunUpForce: 9
+  wallRunUpForce: 10
   wallRunHoldForce: 500
-  wallRunPushForce: 5
+  wallRunPushForce: 17
   maxWallRunCamTilt: 10
   mainCamera: {fileID: 2069203677252986645}
   orientation: {fileID: 2069203677412642303}
