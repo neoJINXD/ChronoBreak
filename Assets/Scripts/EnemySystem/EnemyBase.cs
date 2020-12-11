@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public abstract class EnemyBase : MonoBehaviour
         // For thrown weapon
         if (collision.collider.CompareTag("CanGrab") && collision.gameObject.GetComponent<WeaponBase>().thrown)
         {
+            timer.EnemyHit();
             // Destroy(gameObject);
             Die();
             collision.gameObject.GetComponent<WeaponBase>().thrown = false;
@@ -28,6 +30,7 @@ public abstract class EnemyBase : MonoBehaviour
 
         if (collision.collider.CompareTag("Bullet"))
         {
+            timer.EnemyHit();
             health--;
             //Debug.Log("Enemy hit");
             if (health < 1)
@@ -44,6 +47,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (other.CompareTag("CanGrab")) // if is sword
         {
+            timer.EnemyHit();
             health--;
             // Debug.Log("Enemy hit");
             if (health < 1)
@@ -58,8 +62,20 @@ public abstract class EnemyBase : MonoBehaviour
     {
         // AudioManager.instance.Play("EnemyDeath");
         timer.CountEvent(type + " kill");
-        timer.EnemyHit();
+        
+        // MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        // Material mat = new Material(meshRenderer.material);
+        // meshRenderer.material = mat;
+        // StartCoroutine(FadeOut(mat));
+        GetComponent<Animator>().SetTrigger("DeathTrigger");
+        Destroy(gameObject, 2.5f);
     }
+
+    // private IEnumerator FadeOut(Material mat)
+    // {
+    //     mat.SetColor("_Color", mat.GetColor("_Color") - 0.1f);
+    //     yield return null;
+    // }
 
     private void OnDestroy() {
         // AudioManager.instance.Play("EnemyDeath");
