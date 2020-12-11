@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Transform playerCam;
+    [SerializeField] Camera mainCam;
+    [SerializeField] Camera gunCam;
     [SerializeField] Transform orientation;
     private Rigidbody rb;
 
@@ -78,6 +80,10 @@ public class PlayerMovement : MonoBehaviour
         obj = GameObject.Find("test");
         climbingTimer = climbingTimeLimit;
         forwardDirection = playerCam.transform.forward;
+
+        sensitivity = GameManager.instance.sensitivity;
+        mainCam.fieldOfView = GameManager.instance.fov;
+        gunCam.fieldOfView = GameManager.instance.fov;
     }
 
     

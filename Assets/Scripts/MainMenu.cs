@@ -64,8 +64,11 @@ public class MainMenu : MonoBehaviour
         // DisableCurrentScene();
         print("Going to select");
         currentState = MenuState.LEVEL_SELECT;
-        StartCoroutine(Fade(mainMenu, false));
-        StartCoroutine(Fade(levelMenu, true));
+        // StartCoroutine(Fade(mainMenu, false));
+        // StartCoroutine(Fade(levelMenu, true));
+
+        mainMenu.SetActive(false);
+        levelMenu.SetActive(true);
         // levelMenu.SetActive(true);
     }
 
@@ -74,8 +77,11 @@ public class MainMenu : MonoBehaviour
         // DisableCurrentScene();
         print("Going to settings");
         currentState = MenuState.SETTINGS;
-        StartCoroutine(Fade(mainMenu, false));
-        StartCoroutine(Fade(settingsMenu, true));
+        // StartCoroutine(Fade(mainMenu, false));
+        // StartCoroutine(Fade(settingsMenu, true));
+
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
         // settingsMenu.SetActive(true);
     }
 
@@ -96,17 +102,22 @@ public class MainMenu : MonoBehaviour
         switch(currentState)
         {
             case MenuState.SETTINGS:
-                StartCoroutine(Fade(settingsMenu, false));
+                // StartCoroutine(Fade(settingsMenu, false));
                 GameManager.instance.SaveData(new PlayerData(GameManager.instance));
+                settingsMenu.SetActive(false);
                 break;
             case MenuState.LEADERBOARDS:
-                StartCoroutine(Fade(leaderboardMenu, false));
+                // StartCoroutine(Fade(leaderboardMenu, false));
+                leaderboardMenu.SetActive(false);
                 break;
             case MenuState.LEVEL_SELECT:
-                StartCoroutine(Fade(levelMenu, false));
+                // StartCoroutine(Fade(levelMenu, false));
+                levelMenu.SetActive(false);
                 break;
         }    
-        StartCoroutine(Fade(mainMenu, true));
+        // StartCoroutine(Fade(mainMenu, true));
+
+        mainMenu.SetActive(true);
         currentState = MenuState.MAIN_MENU;
         // mainMenu.SetActive(true);
     }
@@ -158,12 +169,12 @@ public class MainMenu : MonoBehaviour
         if (fadingIn)
         {
             yield return StartCoroutine(FadeCanvas(holder.GetComponent<CanvasGroup>(), 0f, 1f, 0.5f));
-            holder.SetActive(true);
+            // holder.SetActive(true);
         }
         else
         {
             yield return StartCoroutine(FadeCanvas(holder.GetComponent<CanvasGroup>(), 1f, 0f, 0.5f));
-            holder.SetActive(false);
+            // holder.SetActive(false);
         }
         print("Done");
     }

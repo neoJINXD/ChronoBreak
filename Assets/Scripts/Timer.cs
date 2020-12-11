@@ -79,6 +79,8 @@ public class Timer : MonoBehaviour
 
         AudioManager.instance.Play("MainMusic");
 
+        
+
     }
 
     void Update()
@@ -354,7 +356,8 @@ public class Timer : MonoBehaviour
     {
         AudioManager.instance.Stop("MainMusic");
         AudioManager.instance.Play("MainMenu");
-        SceneManager.LoadScene(0);
+        // SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void ShowLevelEndMenu()

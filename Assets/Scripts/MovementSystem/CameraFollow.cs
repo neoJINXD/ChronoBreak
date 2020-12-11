@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
     // Assignables
     [SerializeField] Transform player;

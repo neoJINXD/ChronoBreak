@@ -27,7 +27,7 @@ public class AbilityCooldown : MonoBehaviour
     void Update()
     {
         bool coolDownComplete = (Time.time > nextReadyTime);
-        if (coolDownComplete)
+        if (coolDownComplete && !GameManager.instance.hardcoreMode)
         {
             AbilityReady();
             if (Input.GetButtonDown(abilityButtonAxisName))
