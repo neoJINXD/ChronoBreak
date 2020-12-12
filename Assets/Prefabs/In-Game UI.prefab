@@ -840,12 +840,12 @@ MonoBehaviour:
   crosshair: {fileID: 5804953280413474165}
   hitmarker: {fileID: 9082498160974297430}
   dashTimePenalty: 3
-  enemy1KilledTimeBonus: -2
-  enemy2KilledTimeBonus: -2
+  enemy1KilledTimeBonus: -1
+  enemy2KilledTimeBonus: -1.5
   enemy3KilledTimeBonus: -2
-  enemy1TouchedTimePenalty: 5
-  enemy2TouchedTimePenalty: 5
-  enemy3TouchedTimePenalty: 5
+  enemy1TouchedTimePenalty: 4
+  enemy2TouchedTimePenalty: 2
+  enemy3TouchedTimePenalty: 3
   fallingOffPenalty: 5
   levelName: 
 --- !u!1 &3845197221400414673
