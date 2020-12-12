@@ -4,9 +4,6 @@ public abstract class Ability : ScriptableObject
 {
     // Assignables
     [SerializeField] protected string abilityName;
-
-    // TODO try to see if we can implement "getters" for serizlizefield variables
-
     [SerializeField] Sprite abilitySprite;
     [SerializeField] AudioClip abilitySound;
     [SerializeField] float abilityCoolDown;

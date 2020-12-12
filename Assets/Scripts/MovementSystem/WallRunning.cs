@@ -38,7 +38,7 @@ public class WallRunning : MonoBehaviour
             wallDirection.rotation = orientation.rotation;
         }
 
-        // TODO this way of sticking to wall doesnt allow free movement of cam while running
+        // // TODO this way of sticking to wall doesnt allow free movement of cam while running
 
         if(isRightWall && isWallRunning)
         {
@@ -113,21 +113,23 @@ public class WallRunning : MonoBehaviour
     }
     void OnCollisionStay(Collision collision)
     {
-        //TODO might be able to optimize the if's here, dont wanna end up like YandereDev
+        // // TODO might be able to optimize the if's here, dont wanna end up like YandereDev
         if (collision.transform.CompareTag("WallRunnable"))
         {
             if (Input.GetKey(KeyCode.Space) && isLeftWall)
             {
                 rb.AddForce(Vector3.up * wallRunUpForce, ForceMode.Impulse);
-                rb.AddForce(orientation.transform.right * wallRunUpForce, ForceMode.Impulse);
-                print("Jumping off left wall");
+                // rb.AddForce(orientation.transform.right * wallRunUpForce, ForceMode.Impulse);
+                rb.AddForce(orientation.transform.right * wallRunPushForce, ForceMode.Impulse);
+                // print("Jumping off left wall");
                 EndWallRun();
             }
             if (Input.GetKey(KeyCode.Space) && isRightWall)
             {
                 rb.AddForce(Vector3.up * wallRunUpForce, ForceMode.Impulse);
-                rb.AddForce(-orientation.transform.right * wallRunUpForce, ForceMode.Impulse);
-                print("Jumping off right wall");
+                // rb.AddForce(-orientation.transform.right * wallRunUpForce, ForceMode.Impulse);
+                rb.AddForce(-orientation.transform.right * wallRunPushForce, ForceMode.Impulse);
+                // print("Jumping off right wall");
                 EndWallRun();   
             }
         }

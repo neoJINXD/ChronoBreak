@@ -3,10 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-// TODO Change controls and stuff 
-// TODO Add time features
-// TODO Split the code into files perhaps
-
 public class Timer : MonoBehaviour
 {
     [Header("UI")]
@@ -31,12 +27,11 @@ public class Timer : MonoBehaviour
     [SerializeField] GameObject hitmarker;
 
     // Time bonus and penalties
-    // TODO add more fields
     [Header("Time Penalties")]
-    //TODO should probably have these fields in the ability
+    // // TODO should probably have these fields in the ability
     [SerializeField] float dashTimePenalty = 3f;
 
-    //TODO should probably have these fields in the enemies
+    // // TODO should probably have these fields in the enemies
     [SerializeField] float enemy1KilledTimeBonus = -2f; // Enemies that are standing still
     [SerializeField] float enemy2KilledTimeBonus = -2f; // Enemies that are throw projectiles
     [SerializeField] float enemy3KilledTimeBonus = -2f; // Enemies that chases the player in a pre-defined radius 
@@ -44,6 +39,8 @@ public class Timer : MonoBehaviour
     [SerializeField] float enemy2TouchedTimePenalty = 5f;
     [SerializeField] float enemy3TouchedTimePenalty = 5f;
     [SerializeField] float fallingOffPenalty = 5f;
+
+    [SerializeField] string levelName;
     
 
     private int dashCounter = 0;
@@ -79,13 +76,18 @@ public class Timer : MonoBehaviour
         timeSummaryPanel.SetActive(false);
         dashIcon.SetActive(true);
         crosshair.SetActive(true);
+
+        AudioManager.instance.Play("MainMusic");
+
+        
+
     }
 
     void Update()
     {
 
         // Pause/resume controls
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Escape)) // TODO Change controls and stuff 
         {
             if (!isPaused)
                 Pause();
@@ -110,19 +112,12 @@ public class Timer : MonoBehaviour
             hasStopped = true;
         }
 
-        // Restart level if restart button is pressed
-        // TODO Change controls
-        // if (Input.GetKeyDown(KeyCode.R))
-        // {
-        //     ResetLevel();
-        // }
-
     }
 
     // Compute total time and transform in minutes, seconds and centiseconds 
     void ComputeTimer()
     {
-        // TODO Take into account time penalties and reductions
+        // // TODO Take into account time penalties and reductions
         totalTime = timeElapsed;
         // totalTime += ... (bunch of times)
         totalTime += dashCounter * dashTimePenalty;
@@ -139,9 +134,18 @@ public class Timer : MonoBehaviour
         totalTime += fallingOffCounter * fallingOffPenalty;
 
         // Transform total time in to minutes, seconds and ms (2 digits)
-        min = (int) (totalTime / 60);
-        sec = (int) (totalTime - min * 60);
-        ms = (int) ((totalTime - min * 60 - sec) * 100);
+        if (totalTime < 0)
+        {
+            min = 0;
+            sec = 0;
+            ms = 0;
+        }
+        else
+        {
+            min = (int)(totalTime / 60);
+            sec = (int)(totalTime - min * 60);
+            ms = (int)((totalTime - min * 60 - sec) * 100);
+        }
     }
 
     // Formats the time as "MM:SS.CC" and updates the timer label in UI
@@ -164,6 +168,9 @@ public class Timer : MonoBehaviour
         Cursor.visible = true;
         isPaused = true;
         pausePanel.SetActive(true);
+
+        crosshair.SetActive(false);
+        GameManager.instance.gameDone = true;
     }
 
     // Resume the game
@@ -174,6 +181,9 @@ public class Timer : MonoBehaviour
         Cursor.visible = false;
         isPaused = false;
         pausePanel.SetActive(false);
+
+        crosshair.SetActive(true);
+        GameManager.instance.gameDone = false;
     }
 
     // Set game state to completed
@@ -276,6 +286,9 @@ public class Timer : MonoBehaviour
 
         crosshair.SetActive(false);
         GameManager.instance.gameDone = true;
+
+        GameManager.instance.Score(totalTime, levelName);
+        // print($"Total timer is {totalTime}");
     }
 
     // Increments the counter of a specified/passed event
@@ -283,7 +296,6 @@ public class Timer : MonoBehaviour
     {
         switch (ev)
         {
-            //TODO add falling off stage event
             case "Dash": 
                 dashCounter++;
                 PopUpEventPanel("Dash", dashTimePenalty);
@@ -340,6 +352,7 @@ public class Timer : MonoBehaviour
     // Button methods
     public void RestartLevel()
     {
+        GameManager.instance.gameDone = false;
         ResetLevel();
     }
 
@@ -350,7 +363,11 @@ public class Timer : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        AudioManager.instance.Stop("MainMusic");
+        AudioManager.instance.Play("MainMenu");
+        // SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainMenu");
+        GameManager.instance.gameDone = false;
     }
 
     public void ShowLevelEndMenu()
@@ -363,7 +380,7 @@ public class Timer : MonoBehaviour
     public void EnemyHit()
     {
         hitmarker.SetActive(true);
-        // AudioManager.instance.Play("Hitmarker");
+        AudioManager.instance.Play("Hitmarker");
         Invoke("NoHitmarker", 0.1f);
     }
 

@@ -8,7 +8,7 @@ public class EnemyMoving : EnemyBase
     [SerializeField] GameObject player;
     [SerializeField] float followRadius = 15f;
     [SerializeField] ThirdPersonCharacter character;
-    [SerializeField] NavMeshAgent agent;
+    //[SerializeField] NavMeshAgent agent;
     [SerializeField] float runawayPointDistance = 15f;
     [SerializeField] float bufferFromPlayer = 2.1f;
     [SerializeField] float angularSpeed = 1f;
@@ -30,13 +30,19 @@ public class EnemyMoving : EnemyBase
 
         if ((Vector3.Distance(this.transform.position, player.transform.position) < followRadius)&& (Vector3.Distance(this.transform.position, player.transform.position) > agent.stoppingDistance - bufferFromPlayer)&&isFollowing)
         {
-            agent.SetDestination(player.transform.position);
-            gun.Attack();
+            if(!death)
+            {
+                agent.SetDestination(player.transform.position);
+                gun.Attack();
+            }
         }
 
         if((Vector3.Distance(this.transform.position, player.transform.position) < agent.stoppingDistance - bufferFromPlayer)&&isFollowing)
         {
-            agent.SetDestination(RandomNavmeshLocation(runawayPointDistance));
+            if(!death)
+            {
+                agent.SetDestination(RandomNavmeshLocation(runawayPointDistance));
+            }
             isFollowing = false;
         }
 

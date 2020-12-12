@@ -18,8 +18,8 @@ public class Pickup : MonoBehaviour
     private BoxCollider coll;
     private WeaponBase weapon;
     private Transform player, cam;
+    private bool isSword;
 
-    //TODO Might have to move the guard colider somehow
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -36,11 +36,13 @@ public class Pickup : MonoBehaviour
         Physics.Raycast(cam.position, cam.forward, out hit, pickUpRange, pickupable);
         Physics.Raycast(cam.position, cam.forward, out hit2);
 
-        if (hit2.collider != null && !equipped && Input.GetKeyDown(KeyCode.E))
+        bool isInHardcoreMode = GameManager.instance.hardcoreMode;
+
+        if (!isInHardcoreMode && hit2.collider != null && !equipped && Input.GetKeyDown(KeyCode.E))
         {
             if (hit2.collider.CompareTag("CanGrab"))
             {
-                print($"we looking at {hit2.collider.name}");
+                // print($"we looking at {hit2.collider.name}");
                 equipped = true;
                 // print($"yes {hit.collider.gameObject.name}");
                 
@@ -50,18 +52,17 @@ public class Pickup : MonoBehaviour
                 // if (hit2.collider.CompareTag(""))
                 if (hit2.collider.gameObject.name.Contains("Gun"))
                 {
+                    isSword = false;
                     weapon.transform.SetParent(gunContainer);
                     AudioManager.instance.Play("PickupSoundGun"); //pickup gun sound
                 }
                 else
                 {
+                    isSword = true;
                     weapon.transform.SetParent(swordContainer);
                     weapon.transform.localScale = Vector3.one;
                     AudioManager.instance.Play("PickupSoundSword"); //pickup sword sound
                 }
-                //TODO playerpickup sound
-
-               
             
                 // weapon.transform.localPosition = Vector3.zero;
                 // weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
@@ -76,8 +77,6 @@ public class Pickup : MonoBehaviour
             weapon.transform.SetParent(null);
             weapon = null;
             equipped = false;
-            AudioManager.instance.Play("DropSound");
-
         } 
 
         //Throw if equipped and "R" is pressed
@@ -92,14 +91,17 @@ public class Pickup : MonoBehaviour
             weapon.transform.SetParent(null);
             weapon = null;
             equipped = false;
-            //Activate throwing sound
-            AudioManager.instance.Play("Throwing");
         }
 
-        if (equipped && Input.GetMouseButton(0))
+        if (equipped && isSword && Input.GetMouseButtonDown(0))
+        {
+
+            AudioManager.instance.Play("Slicing");
+            weapon.Attack();
+        }
+        else if (equipped && !isSword && Input.GetMouseButton(0))
         {
             weapon.Attack();
-            
         }
         
 

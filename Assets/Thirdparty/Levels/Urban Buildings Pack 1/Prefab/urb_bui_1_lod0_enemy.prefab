@@ -94,6 +94,8 @@ GameObject:
   - component: {fileID: 6157415814047436350}
   - component: {fileID: 3364343984148516398}
   - component: {fileID: 8832671588727024063}
+  - component: {fileID: 2700211269921996118}
+  - component: {fileID: 3603649361732088308}
   m_Layer: 8
   m_Name: urb_bui_1_lod0_enemy
   m_TagString: Untagged
@@ -233,6 +235,30 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2.922, z: -0.54}
   m_Area: 1
   m_AffectedAgents: ffffffff
+--- !u!114 &2700211269921996118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832671589584476564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b5b5c8ff766dc40b3abecb410c263a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3603649361732088308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8832671589584476564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b5b5c8ff766dc40b3abecb410c263a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8832671589584512616
 GameObject:
   m_ObjectHideFlags: 0

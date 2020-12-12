@@ -19,7 +19,7 @@ public class Gun : WeaponBase
 
     void Update() 
     {
-        Debug.DrawRay(projectileLocation.position, -projectileLocation.forward * 100f, Color.red); // TODO remove 
+        // Debug.DrawRay(projectileLocation.position, -projectileLocation.forward * 100f, Color.red);
     }
 
     public override void Attack()
@@ -36,9 +36,10 @@ public class Gun : WeaponBase
             Invoke("DisableFlash", muzzleFlash.main.duration);
             bullet.GetComponent<Bullet>().dir = -projectileLocation.forward;
             timer = 0;
+            // Shooting sound
+            AudioManager.instance.Play("ShootingBullet");
         }
-        // Shooting sound
-        AudioManager.instance.Play("ShootingBullet");
+        
     }
 
     private void DisableFlash()

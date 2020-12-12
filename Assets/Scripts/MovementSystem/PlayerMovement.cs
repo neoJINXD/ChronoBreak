@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Transform playerCam;
+    [SerializeField] Camera mainCam;
+    [SerializeField] Camera gunCam;
     [SerializeField] Transform orientation;
     private Rigidbody rb;
 
@@ -78,6 +80,10 @@ public class PlayerMovement : MonoBehaviour
         obj = GameObject.Find("test");
         climbingTimer = climbingTimeLimit;
         forwardDirection = playerCam.transform.forward;
+
+        sensitivity = GameManager.instance.sensitivity;
+        mainCam.fieldOfView = GameManager.instance.fov;
+        gunCam.fieldOfView = GameManager.instance.fov;
     }
 
     
@@ -98,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
         // print(rb.velocity.magnitude);
-        Debug.DrawRay(orientation.position, orientation.forward * 1000f, Color.red);
+        // Debug.DrawRay(orientation.position, orientation.forward * 1000f, Color.red);
         if (rb.velocity.magnitude > 10f && !speedFX.isPlaying)
         {
             // print("i iam speed");
@@ -151,8 +157,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Trigger crouch sound
-        //AudioManager.instance.Play("Crouch"); // TODO make only play when moving and crouched
-        // TODO change to continuous sliding noise
+        AudioManager.instance.Play("Crouch"); // // TODO make only play when moving and crouched
     }
 
     private void StopCrouch() 
@@ -181,7 +186,6 @@ public class PlayerMovement : MonoBehaviour
         if (jumping) 
         {
             Jump();
-            AudioManager.instance.Play("Jumping"); //Jump sound
         }
 
         // Set max speed
@@ -248,7 +252,7 @@ public class PlayerMovement : MonoBehaviour
             // rb.AddForce(normalVector * jumpForce * 0.5f);
 
             //Add jumo sound effect
-            //AudioManager.instance.Play("Jumping");
+            AudioManager.instance.Play("Jumping"); //Jump sound
 
             // If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;
@@ -404,7 +408,6 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = lastSafePos;
         rb.velocity = Vector3.zero;
-        AudioManager.instance.Play("DeathSound"); //Death sound
     }
 
     private IEnumerator Climb(Collider wall)
@@ -453,7 +456,7 @@ public class PlayerMovement : MonoBehaviour
             timer.CountEvent("shot by enemy");
 
             //Hit by enemy sound 
-            AudioManager.instance.Play("GotHit");
+            // AudioManager.instance.Play("GotHit");
         }
     }
 
