@@ -25,7 +25,10 @@ public abstract class EnemyBase : MonoBehaviour
         if (collision.collider.CompareTag("CanGrab") && collision.gameObject.GetComponent<WeaponBase>().thrown)
         {
             timer.EnemyHit();
-            agent.SetDestination(transform.position);
+            if(agent != null)
+            {
+                agent.SetDestination(transform.position);
+            }
             death = true;
             // Destroy(gameObject);
             Die();
@@ -42,7 +45,10 @@ public abstract class EnemyBase : MonoBehaviour
             if (health < 1)
             {
                 // Destroy(gameObject);
-                agent.SetDestination(transform.position);
+                if (agent != null)
+                {
+                    agent.SetDestination(transform.position);
+                }
                 death = true;
                 Die();
             }
