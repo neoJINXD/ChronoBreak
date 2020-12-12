@@ -1161,10 +1161,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: shooting enemy
   timer: {fileID: 0}
+  health: 2
+  agent: {fileID: 7867450100628279449}
   player: {fileID: 0}
   followRadius: 15
   character: {fileID: 7867450100628279445}
-  agent: {fileID: 7867450100628279449}
   runawayPointDistance: 12
   bufferFromPlayer: 2.1
   angularSpeed: 300
@@ -1628,6 +1629,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2198261734863606039, guid: 793dd7b942056dd45bd0313974ab411f,
         type: 3}
+    - target: {fileID: 1304760554701650134, guid: cdf4984892989984ab532623479213a1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.445
+      objectReference: {fileID: 0}
+    - target: {fileID: 1304760554701650134, guid: cdf4984892989984ab532623479213a1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 1305544510372868384, guid: cdf4984892989984ab532623479213a1,
         type: 3}
       propertyPath: m_Name
