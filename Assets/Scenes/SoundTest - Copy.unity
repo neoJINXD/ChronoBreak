@@ -11679,7 +11679,9 @@ MonoBehaviour:
     around to begin
 
 
-    WASD - Movement'
+    WASD - Movement
+
+    LShift - Dash'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2da09bcc2ed9a6b4a8e8881132ad92de, type: 2}
   m_sharedMaterial: {fileID: 6057784785195861938, guid: 2da09bcc2ed9a6b4a8e8881132ad92de,
