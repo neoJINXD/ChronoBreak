@@ -134,9 +134,18 @@ public class Timer : MonoBehaviour
         totalTime += fallingOffCounter * fallingOffPenalty;
 
         // Transform total time in to minutes, seconds and ms (2 digits)
-        min = (int) (totalTime / 60);
-        sec = (int) (totalTime - min * 60);
-        ms = (int) ((totalTime - min * 60 - sec) * 100);
+        if (totalTime < 0)
+        {
+            min = 0;
+            sec = 0;
+            ms = 0;
+        }
+        else
+        {
+            min = (int)(totalTime / 60);
+            sec = (int)(totalTime - min * 60);
+            ms = (int)((totalTime - min * 60 - sec) * 100);
+        }
     }
 
     // Formats the time as "MM:SS.CC" and updates the timer label in UI
