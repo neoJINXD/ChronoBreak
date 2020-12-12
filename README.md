@@ -8,9 +8,13 @@ https://github.com/neoJINXD/ChronoBreak
 ## Team
 
 Anik Patel - 40091908
+
 Gregory Alexis John - 40041536
+
 Gia-Khang Nguyen - 40091426
+
 Ian Lopez - 27296126
+
 Trung Hieu Doan - 40082488
 
 ## Controls
