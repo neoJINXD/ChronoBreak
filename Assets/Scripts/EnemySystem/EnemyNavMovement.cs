@@ -5,7 +5,7 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class EnemyNavMovement : EnemyBase
 {
     // Assignables
-    [SerializeField] NavMeshAgent agent;
+    //[SerializeField] NavMeshAgent agent;
 
     [SerializeField] GameObject player;
 
@@ -22,7 +22,10 @@ public class EnemyNavMovement : EnemyBase
     {
         if(Vector3.Distance(this.transform.position, player.transform.position) < followRadius)
         {
-            agent.SetDestination(player.transform.position);
+            if(!death)
+            {
+                agent.SetDestination(player.transform.position);
+            }
         }
 
         if (agent.remainingDistance > agent.stoppingDistance)

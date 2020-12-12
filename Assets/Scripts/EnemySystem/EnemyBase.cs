@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class EnemyBase : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] string type;
     [SerializeField] Timer timer;
     [SerializeField] int health = 2;
+    [SerializeField] protected NavMeshAgent agent;
+
+    protected bool death = false;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -21,6 +25,8 @@ public abstract class EnemyBase : MonoBehaviour
         if (collision.collider.CompareTag("CanGrab") && collision.gameObject.GetComponent<WeaponBase>().thrown)
         {
             timer.EnemyHit();
+            agent.SetDestination(transform.position);
+            death = true;
             // Destroy(gameObject);
             Die();
             collision.gameObject.GetComponent<WeaponBase>().thrown = false;
@@ -36,6 +42,8 @@ public abstract class EnemyBase : MonoBehaviour
             if (health < 1)
             {
                 // Destroy(gameObject);
+                agent.SetDestination(transform.position);
+                death = true;
                 Die();
             }
 
