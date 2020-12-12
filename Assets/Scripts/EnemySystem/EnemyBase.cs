@@ -42,7 +42,7 @@ public abstract class EnemyBase : MonoBehaviour
             timer.EnemyHit();
             health--;
             //Debug.Log("Enemy hit");
-            if (health < 1)
+            if (health == 1)
             {
                 // Destroy(gameObject);
                 if (agent != null)
