@@ -9,6 +9,11 @@ TagManager:
   - Wall
   - Cube
   - Ramp
+  - Enemy
+  - Bullet
+  - Building
+  - EnemyBullet
+  - Bounce
   layers:
   - Default
   - TransparentFX

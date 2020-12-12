@@ -1,16 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-// TODO Change controls and stuff 
-// TODO Add time features
-// TODO Split the code into files perhaps
-
 public class Timer : MonoBehaviour
 {
+    [Header("UI")]
     [SerializeField] GameObject timerPanel; // Panel showing any UI elements related to the timer 
     [SerializeField] Text timerText; // Timer label shown in UI
 
@@ -27,37 +22,48 @@ public class Timer : MonoBehaviour
 
     [SerializeField] GameObject pausePanel; // Panel shown when menu is paused
 
+    [SerializeField] GameObject crosshair;
+
+    [SerializeField] GameObject hitmarker;
+
     // Time bonus and penalties
-    // TODO add more fields
+    [Header("Time Penalties")]
+    // // TODO should probably have these fields in the ability
     [SerializeField] float dashTimePenalty = 3f;
+
+    // // TODO should probably have these fields in the enemies
     [SerializeField] float enemy1KilledTimeBonus = -2f; // Enemies that are standing still
     [SerializeField] float enemy2KilledTimeBonus = -2f; // Enemies that are throw projectiles
     [SerializeField] float enemy3KilledTimeBonus = -2f; // Enemies that chases the player in a pre-defined radius 
     [SerializeField] float enemy1TouchedTimePenalty = 5f;
     [SerializeField] float enemy2TouchedTimePenalty = 5f;
     [SerializeField] float enemy3TouchedTimePenalty = 5f;
+    [SerializeField] float fallingOffPenalty = 5f;
 
-    int dashCounter = 0;
-    int enemy1KilledCounter = 0;
-    int enemy1TouchedCounter = 0;
-    int enemy2KilledCounter = 0;
-    int enemy2TouchedCounter = 0; 
-    int enemy3KilledCounter = 0;
-    int enemy3TouchedCounter = 0;
+    [SerializeField] string levelName;
+    
 
-    float timeElapsed; // Actual time elapsed since the level has started
-    float totalTime; // Cumulative time since level has started
-    int ms = 0; // Centiseconds
-    int sec = 0; // Seconds
-    int min = 0; // Minutes
+    private int dashCounter = 0;
+    private int enemy1KilledCounter = 0;
+    private int enemy1TouchedCounter = 0;
+    private int enemy2KilledCounter = 0;
+    private int enemy2TouchedCounter = 0; 
+    private int enemy3KilledCounter = 0;
+    private int enemy3TouchedCounter = 0;
+    private int fallingOffCounter = 0;
+
+    private float timeElapsed; // Actual time elapsed since the level has started
+    private float totalTime; // Cumulative time since level has started
+    private int ms = 0; // Centiseconds
+    private int sec = 0; // Seconds
+    private int min = 0; // Minutes
 
     // Booleans for checking current state of the game
-    bool isCompleted = false;
-    bool hasStarted = false;
-    bool isPaused = false;
-    bool hasStopped = false;
+    private bool isCompleted = false;
+    private bool hasStarted = false;
+    private bool isPaused = false;
+    private bool hasStopped = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
@@ -69,14 +75,19 @@ public class Timer : MonoBehaviour
         pausePanel.SetActive(false);
         timeSummaryPanel.SetActive(false);
         dashIcon.SetActive(true);
+        crosshair.SetActive(true);
+
+        AudioManager.instance.Play("MainMusic");
+
+        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
 
         // Pause/resume controls
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Escape)) // TODO Change controls and stuff 
         {
             if (!isPaused)
                 Pause();
@@ -101,19 +112,12 @@ public class Timer : MonoBehaviour
             hasStopped = true;
         }
 
-        // Restart level if restart button is pressed
-        // TODO Change controls
-        // if (Input.GetKeyDown(KeyCode.R))
-        // {
-        //     ResetLevel();
-        // }
-
     }
 
     // Compute total time and transform in minutes, seconds and centiseconds 
     void ComputeTimer()
     {
-        // TODO Take into account time penalties and reductions
+        // // TODO Take into account time penalties and reductions
         totalTime = timeElapsed;
         // totalTime += ... (bunch of times)
         totalTime += dashCounter * dashTimePenalty;
@@ -127,10 +131,21 @@ public class Timer : MonoBehaviour
         totalTime += enemy3KilledCounter * enemy3KilledTimeBonus;
         totalTime += enemy3TouchedCounter * enemy3TouchedTimePenalty;
 
+        totalTime += fallingOffCounter * fallingOffPenalty;
+
         // Transform total time in to minutes, seconds and ms (2 digits)
-        min = (int) (totalTime / 60);
-        sec = (int) (totalTime - min * 60);
-        ms = (int) ((totalTime - min * 60 - sec) * 100);
+        if (totalTime < 0)
+        {
+            min = 0;
+            sec = 0;
+            ms = 0;
+        }
+        else
+        {
+            min = (int)(totalTime / 60);
+            sec = (int)(totalTime - min * 60);
+            ms = (int)((totalTime - min * 60 - sec) * 100);
+        }
     }
 
     // Formats the time as "MM:SS.CC" and updates the timer label in UI
@@ -153,6 +168,9 @@ public class Timer : MonoBehaviour
         Cursor.visible = true;
         isPaused = true;
         pausePanel.SetActive(true);
+
+        crosshair.SetActive(false);
+        GameManager.instance.gameDone = true;
     }
 
     // Resume the game
@@ -163,6 +181,9 @@ public class Timer : MonoBehaviour
         Cursor.visible = false;
         isPaused = false;
         pausePanel.SetActive(false);
+
+        crosshair.SetActive(true);
+        GameManager.instance.gameDone = false;
     }
 
     // Set game state to completed
@@ -193,7 +214,8 @@ public class Timer : MonoBehaviour
     // Shows a summary of the time penalties and bonus awarded during the level
     void ShowTimeSummaryPanel()
     {
-        string summary;
+        string summary, left, right;
+        int padRight = 65, padLeft = 8;
 
         // Show elapsed time
         int minutes = (int)(timeElapsed / 60);
@@ -204,30 +226,69 @@ public class Timer : MonoBehaviour
         string secondsText = seconds < 10 ? secondsText = "0" + seconds.ToString() : seconds.ToString();
         string msText = centiseconds < 10 ? msText = "0" + centiseconds.ToString() : centiseconds.ToString();
 
-        summary = "Elapsed time -----> " + minutesText + ":" + secondsText + '.' + msText + "\n\n";
+        //summary = "Elapsed time -----> " + minutesText + ":" + secondsText + '.' + msText + "\n\n";
+        left = "Elapsed time:";
+        right = minutesText + ":" + secondsText + '.' + msText;
+        summary = left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show dash stats
-        summary += "Dash: " + dashCounter.ToString() + " x " + dashTimePenalty.ToString() + " sec -----> " + (dashCounter * dashTimePenalty).ToString() + " sec\n\n";
+        //summary += "Dash: " + dashCounter.ToString() + " x " + dashTimePenalty.ToString() + " sec -----> " + (dashCounter * dashTimePenalty).ToString() + " sec\n\n";
+        left = "Dash: " + dashCounter.ToString() + " x " + dashTimePenalty.ToString() + " sec";
+        right = (dashCounter * dashTimePenalty).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show standing enemy stats
-        summary += "Standing enemies killed: " + enemy1KilledCounter.ToString() + " x " + enemy1KilledTimeBonus.ToString() + " sec -----> " + (enemy1KilledCounter * enemy1KilledTimeBonus).ToString() + " sec\n";
-        summary += "Standing enemies touched: " + enemy1TouchedCounter.ToString() + " x " + enemy1TouchedTimePenalty.ToString() + " sec -----> " + (enemy1TouchedCounter * enemy1TouchedTimePenalty).ToString() + " sec\n\n";
+        //summary += "Standing enemies killed: " + enemy1KilledCounter.ToString() + " x " + enemy1KilledTimeBonus.ToString() + " sec -----> " + (enemy1KilledCounter * enemy1KilledTimeBonus).ToString() + " sec\n";
+        //summary += "Standing enemies touched: " + enemy1TouchedCounter.ToString() + " x " + enemy1TouchedTimePenalty.ToString() + " sec -----> " + (enemy1TouchedCounter * enemy1TouchedTimePenalty).ToString() + " sec\n\n";
+        left = "Standing enemies killed: " + enemy1KilledCounter.ToString() + " x " + enemy1KilledTimeBonus.ToString() + " sec";
+        right = (enemy1KilledCounter * enemy1KilledTimeBonus).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n";
+
+        left = "Standing enemies touched: " + enemy1TouchedCounter.ToString() + " x " + enemy1TouchedTimePenalty.ToString() + " sec";
+        right = (enemy1TouchedCounter * enemy1TouchedTimePenalty).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show shooting enemy stats
-        summary += "Shooting enemies killed: " + enemy2KilledCounter.ToString() + " x " + enemy2KilledTimeBonus.ToString() + " sec -----> " + (enemy2KilledCounter * enemy2KilledTimeBonus).ToString() + " sec\n";
-        summary += "Shot by enemies: " + enemy2TouchedCounter.ToString() + " x " + enemy2TouchedTimePenalty.ToString() + " sec -----> " + (enemy2TouchedCounter * enemy2TouchedTimePenalty).ToString() + " sec\n\n";
+        //summary += "Shooting enemies killed: " + enemy2KilledCounter.ToString() + " x " + enemy2KilledTimeBonus.ToString() + " sec -----> " + (enemy2KilledCounter * enemy2KilledTimeBonus).ToString() + " sec\n";
+        //summary += "Shot by enemies: " + enemy2TouchedCounter.ToString() + " x " + enemy2TouchedTimePenalty.ToString() + " sec -----> " + (enemy2TouchedCounter * enemy2TouchedTimePenalty).ToString() + " sec\n\n";
+        left = "Shooting enemies killed: " + enemy2KilledCounter.ToString() + " x " + enemy2KilledTimeBonus.ToString() + " sec";
+        right = (enemy2KilledCounter * enemy2KilledTimeBonus).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n";
+
+        left = "Shot by enemies: " + enemy2TouchedCounter.ToString() + " x " + enemy2TouchedTimePenalty.ToString() + " sec";
+        right = (enemy2TouchedCounter * enemy2TouchedTimePenalty).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show chasing enemy stats
-        summary += "Chasing enemies killed: " + enemy3KilledCounter.ToString() + " x " + enemy3KilledTimeBonus.ToString() + " sec -----> " + (enemy3KilledCounter * enemy3KilledTimeBonus).ToString() + " sec\n";
-        summary += "Chasing enemies touched: " + enemy3TouchedCounter.ToString() + " x " + enemy3TouchedTimePenalty.ToString() + " sec -----> " + (enemy3TouchedCounter * enemy3TouchedTimePenalty).ToString() + " sec\n\n";
+        //summary += "Chasing enemies killed: " + enemy3KilledCounter.ToString() + " x " + enemy3KilledTimeBonus.ToString() + " sec -----> " + (enemy3KilledCounter * enemy3KilledTimeBonus).ToString() + " sec\n";
+        //summary += "Chasing enemies touched: " + enemy3TouchedCounter.ToString() + " x " + enemy3TouchedTimePenalty.ToString() + " sec -----> " + (enemy3TouchedCounter * enemy3TouchedTimePenalty).ToString() + " sec\n\n";
+        left = "Chasing enemies killed: " + enemy3KilledCounter.ToString() + " x " + enemy3KilledTimeBonus.ToString() + " sec";
+        right = (enemy3KilledCounter * enemy3KilledTimeBonus).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n";
 
+        left = "Chasing enemies touched: " + enemy3TouchedCounter.ToString() + " x " + enemy3TouchedTimePenalty.ToString() + " sec";
+        right = (enemy3TouchedCounter * enemy3TouchedTimePenalty).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
+
+        // Show times the player fell off
+        //summary += "Times fallen off: " + fallingOffCounter.ToString() + " x " + fallingOffPenalty.ToString() + " sec -----> " + (fallingOffCounter * fallingOffPenalty).ToString() + " sec\n\n";
+        left = "Times fallen off: " + fallingOffCounter.ToString() + " x " + fallingOffPenalty.ToString() + " sec";
+        right = (fallingOffCounter * fallingOffPenalty).ToString() + " sec";
+        summary += left.PadRight(padRight) + right.PadLeft(padLeft) + "\n\n";
 
         // Show final time
-        summary += "Total time -----> " + timerText.text;
+        //summary += "Total time -----> " + timerText.text;
+        summary += "Total time:".PadRight(padRight) + timerText.text.PadLeft(padLeft);
 
         // Display in UI
         timeSummaryPanel.SetActive(true);
         summaryText.text = summary;
+
+        crosshair.SetActive(false);
+        GameManager.instance.gameDone = true;
+
+        GameManager.instance.Score(totalTime, levelName);
+        // print($"Total timer is {totalTime}");
     }
 
     // Increments the counter of a specified/passed event
@@ -235,7 +296,6 @@ public class Timer : MonoBehaviour
     {
         switch (ev)
         {
-            //TODO add falling off stage event
             case "Dash": 
                 dashCounter++;
                 PopUpEventPanel("Dash", dashTimePenalty);
@@ -264,6 +324,10 @@ public class Timer : MonoBehaviour
                 enemy3TouchedCounter++;
                 PopUpEventPanel("Chasing enemy touched", enemy3TouchedTimePenalty);
                 break;
+            case "falling":
+                fallingOffCounter++;
+                PopUpEventPanel("Resetting position", fallingOffPenalty);
+                break;
 
         }
     }
@@ -288,6 +352,7 @@ public class Timer : MonoBehaviour
     // Button methods
     public void RestartLevel()
     {
+        GameManager.instance.gameDone = false;
         ResetLevel();
     }
 
@@ -298,7 +363,11 @@ public class Timer : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        AudioManager.instance.Stop("MainMusic");
+        AudioManager.instance.Play("MainMenu");
+        // SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainMenu");
+        GameManager.instance.gameDone = false;
     }
 
     public void ShowLevelEndMenu()
@@ -306,5 +375,17 @@ public class Timer : MonoBehaviour
         timeSummaryPanel.SetActive(false);
         levelFinishedPanel.SetActive(true);
         finalTimeText.text = "Final Time: " + timerText.text;
+    }
+
+    public void EnemyHit()
+    {
+        hitmarker.SetActive(true);
+        AudioManager.instance.Play("Hitmarker");
+        Invoke("NoHitmarker", 0.1f);
+    }
+
+    private void NoHitmarker()
+    {
+        hitmarker.SetActive(false);
     }
 }

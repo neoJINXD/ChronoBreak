@@ -9,6 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: aafd62ddaee5d44928d5e50ad28d3ba8
   - enabled: 1
-    path: Assets/Scenes/Sandbox.unity
-    guid: 7e91274adee64374b90efacd592dd4e2
+    path: Assets/Scenes/SoundTest - Copy.unity
+    guid: 7f05e938fba738a4390add55898a7853
+  - enabled: 1
+    path: Assets/Scenes/Nature Levels/Nature-1.unity
+    guid: e9d184ead827641bb9d7b893cdd1ceac
+  - enabled: 1
+    path: Assets/Scenes/Individual Test Scenes/FloorLevelDesign.unity
+    guid: 1b9e96000f2d26c4cb25ac6abca5b7e2
+  - enabled: 1
+    path: Assets/Scenes/Greg-City-WIP.unity
+    guid: 5c99340e526dc2143ac45d90e4a3bf8d
+  - enabled: 1
+    path: Assets/Scenes/City Levels/Ian - City draft 1.unity
+    guid: 6d6efa63af0906d41b3f09f0ed49c6c1
   m_configObjects: {}
